@@ -1,0 +1,30 @@
+﻿@using LibrarySystem.Models
+@model TitleViewModel
+@{
+    <h1>Add title:</h1>
+    <form method="post">
+        <div>
+            <p>Name</p>
+            <input type="text" asp-for="Name" />
+        </div>
+        <div>
+            <p>Description</p>
+            <input type="text" asp-for="Description" />
+        </div>
+        <div>
+            <label for="SectionId">Section</label>
+            <select asp-for="SectionId" class="form-control" asp-items="Model.Sections">
+                <option value="">Select section</option>
+            </select>
+        </div>
+        <div>
+            <label for="AuthorId">Author</label>
+            <select asp-for="AuthorId" class="form-control" asp-items="Model.Authors">
+                <option value="">Select author</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary">
+        </div>
+    </form>
+}

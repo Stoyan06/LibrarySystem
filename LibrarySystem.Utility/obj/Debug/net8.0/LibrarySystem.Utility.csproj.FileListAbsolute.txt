@@ -1,0 +1,11 @@
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\bin\Debug\net8.0\LibrarySystem.Utility.deps.json
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\bin\Debug\net8.0\LibrarySystem.Utility.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\bin\Debug\net8.0\LibrarySystem.Utility.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.GeneratedMSBuildEditorConfig.editorconfig
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.AssemblyInfoInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.AssemblyInfo.cs
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.csproj.CoreCompileInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\refint\LibrarySystem.Utility.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\ref\LibrarySystem.Utility.dll

@@ -1,0 +1,34 @@
+﻿@using LibrarySystem.Models
+@model TitleViewModel
+
+@{
+    ViewData["Title"] = "Добавяне на заглавие";
+}
+
+@{
+    <head>
+        <title>@ViewData["Title"] - Библиотечна система</title>
+    </head>
+
+    <h1 class="mb-4 text-center">Добавяне на заглавие</h1>
+
+    <form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+        <!-- Name Field -->
+        <div class="mb-3">
+            <label for="nameInput" class="form-label fw-bold">Име</label>
+            <input type="text" id="nameInput" asp-for="Name" class="form-control" placeholder="Въведи име на заглавие">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Description Field -->
+        <div class="mb-3">
+            <label for="descriptionInput" class="form-label fw-bold">Описание(Анотация)</label>
+            <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <input type="submit" value="Добави заглавие" class="btn btn-primary btn-lg px-4">
+        </div>
+    </form>
+}

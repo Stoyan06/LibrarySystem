@@ -1,0 +1,14 @@
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\bin\Debug\net8.0\LibrarySystem.Models.deps.json
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\bin\Debug\net8.0\LibrarySystem.Models.runtimeconfig.json
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\bin\Debug\net8.0\LibrarySystem.Models.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\bin\Debug\net8.0\LibrarySystem.Models.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.csproj.AssemblyReference.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.AssemblyInfoInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.AssemblyInfo.cs
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.csproj.CoreCompileInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\refint\LibrarySystem.Models.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\LibrarySystem.Models.genruntimeconfig.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Models\obj\Debug\net8.0\ref\LibrarySystem.Models.dll

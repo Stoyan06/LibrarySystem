@@ -1,0 +1,28 @@
+﻿@using LibrarySystem.Models
+@model Author
+
+@{
+    ViewData["Title"] = "Добавяне на автор";
+}
+
+@{
+    <head>
+        <title>@ViewData["Title"] - Библиотечна система</title>
+    </head>
+
+    <h1 class="mb-4 text-center">Добавяне на автор</h1>
+
+    <form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+        <!-- Name Field -->
+        <div class="mb-3">
+            <label for="nameInput" class="form-label fw-bold">Име</label>
+            <input type="text" id="nameInput" asp-for="FullName" class="form-control" placeholder="Въведи пълното име на автор">
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <input type="submit" value="Добави автор" class="btn btn-primary btn-lg px-4">
+        </div>
+    </form>
+}
