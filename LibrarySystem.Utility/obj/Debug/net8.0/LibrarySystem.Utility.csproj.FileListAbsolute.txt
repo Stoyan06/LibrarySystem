@@ -9,3 +9,7 @@ D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\ne
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\refint\LibrarySystem.Utility.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.pdb
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\ref\LibrarySystem.Utility.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\bin\Debug\net8.0\LibrarySystem.Models.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\bin\Debug\net8.0\LibrarySystem.Models.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibrarySystem.Utility.csproj.AssemblyReference.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Utility\obj\Debug\net8.0\LibraryS.84FF956A.Up2Date

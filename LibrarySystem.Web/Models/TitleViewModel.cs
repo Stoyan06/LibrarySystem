@@ -18,5 +18,7 @@ namespace LibrarySystem.Web.Models
 
         public int AuthorId {  get; set; }
         public IEnumerable<SelectListItem> Authors { get; set; }
+
+        public List<string> SelectedAuthors { get; set; } = new List<string>();
     }
 }

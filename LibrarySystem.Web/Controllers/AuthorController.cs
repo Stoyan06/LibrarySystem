@@ -6,9 +6,9 @@ namespace LibrarySystem.Web.Controllers
 {
     public class AuthorController:Controller
     {
-        private IService<Author> _authorService;
+        private IAuthorService _authorService;
 
-        public AuthorController(IService<Author> authorService)
+        public AuthorController(IAuthorService authorService)
         {
             _authorService = authorService;
         }
@@ -28,8 +28,17 @@ namespace LibrarySystem.Web.Controllers
         {
             if(author.FullName == null || author.FullName == string.Empty)
                 return View(author);
-            await _authorService.AddAsync(author);
-            return RedirectToAction("AllAuthors");
+            if(await _authorService.ExistsAuthor(author.FullName) == false)
+            {
+                await _authorService.AddAsync(author);
+                TempData["success"] = "Успешно добавен автор";
+                return RedirectToAction("AllAuthors");
+            }
+            else
+            {
+                TempData["error"] = "Вече съществува автор с това име";
+                return RedirectToAction("AddAuthor");
+            }
         }
 
         public async Task<IActionResult> UpdateAuthor(int id)
@@ -40,16 +49,43 @@ namespace LibrarySystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAuthor(Author author)
         {
+            Author getAuthor = await _authorService.GetByIdAsync(author.Id);
+
             if (author.FullName == null || author.FullName == string.Empty)
                 return View(author);
-            await _authorService.UpdateAsync(author);
-            return RedirectToAction("AllAuthors");
+            if(await _authorService.ExistsAuthor(author.FullName) == false || getAuthor.FullName == author.FullName)
+            {
+                await _authorService.UpdateAsync(author);
+                TempData["success"] = "Успешно редактиран автор";
+                return RedirectToAction("AllAuthors");
+            }
+            else
+            {
+                TempData["error"] = "Вече съществува автор с тези имена";
+                return RedirectToAction("UpdateAuthor", author.Id);
+            }
         }
 
         public async Task<IActionResult> RemoveAuthor(int id)
         {
-            await _authorService.DeleteAsync(id);
-            return RedirectToAction("AllAuthors");
+            Author aut = await _authorService.GetByIdAsync(id);
+            return View("ConfirmDelete",aut);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveAuthor(Author author)
+        {
+            try
+            {
+                await _authorService.DeleteAsync(author.Id);
+                TempData["success"] = "Успешно премахнат автор";
+                return RedirectToAction("AllAuthors");
+            }
+            catch(Exception ex)
+            {
+                TempData["error"] = "Има обвързани заглавия с този автор";
+                return RedirectToAction("AllAuthors");
+            }
         }
     }
 }

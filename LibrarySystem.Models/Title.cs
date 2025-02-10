@@ -12,10 +12,10 @@ namespace LibrarySystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage ="Полето за име е задължително")]
         public string Name {  get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Полето за описание е задължително")]
         public string Description { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Section))]

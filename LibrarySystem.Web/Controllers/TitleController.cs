@@ -53,16 +53,19 @@ namespace LibrarySystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTitle(TitleViewModel model)
         {
-            var title = new Title
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                Description = model.Description,
-                SectionId = model.SectionId
-            };
-
-            await _titleService.AddAsync(title);
-            await _title_author_service.AddAsync(new TitleAuthor { AuthorId = model.AuthorId, TitleId = title.Id });
-            return RedirectToAction("AllTitles");
+                var title = new Title
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    SectionId = model.SectionId
+                };
+                await _titleService.AddAsync(title);
+                return RedirectToAction("AllTitles");
+            }
+            else return View(model);
+            //await _title_author_service.AddAsync(new TitleAuthor { AuthorId = model.AuthorId, TitleId = title.Id });
         }
 
         public async Task<IActionResult> UpdateTitle(int id)

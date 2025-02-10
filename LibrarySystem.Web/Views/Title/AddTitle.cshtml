@@ -26,8 +26,25 @@
             <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
         </div>
 
+        <div>
+            <label for="SectionId" class="form-label fw-bold">Раздел</label>
+            <select asp-for="SectionId" class="form-control" asp-items="Model.Sections">
+                <option value="">Избери раздел</option>
+            </select>
+
+            <div>
+                <label for="AuthorId" class="form-label fw-bold">Автор(и)</label>
+                <select asp-for="AuthorId" class="form-select" asp-items="Model.Authors" multiple>
+                    <option value="">Избери автор(и)</option>
+                </select>
+            </div>
+
+
+        </div>
+
         <!-- Submit Button -->
-        <div class="text-center">
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="AllTitles" class="btn btn-secondary btn-lg px-4">Откажи</a>
             <input type="submit" value="Добави заглавие" class="btn btn-primary btn-lg px-4">
         </div>
     </form>

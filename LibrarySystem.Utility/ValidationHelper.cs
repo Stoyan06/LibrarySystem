@@ -1,4 +1,6 @@
-﻿namespace LibrarySystem.Utility
+﻿using LibrarySystem.Models;
+
+namespace LibrarySystem.Utility
 {
     public static class ValidationHelper
     {
@@ -7,6 +9,11 @@
             if (value == null) return false;
             if (value.Count() == 13) return true;
             else return false;
+        }
+
+        public static bool SectionExists(int id)
+        {
+            return false;
         }
     }
 }

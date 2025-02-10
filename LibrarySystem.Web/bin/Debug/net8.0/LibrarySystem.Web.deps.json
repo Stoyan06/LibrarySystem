@@ -1112,6 +1112,9 @@
         }
       },
       "LibrarySystem.Utility/1.0.0": {
+        "dependencies": {
+          "LibrarySystem.Models": "1.0.0"
+        },
         "runtime": {
           "LibrarySystem.Utility.dll": {
             "assemblyVersion": "1.0.0",

@@ -27,7 +27,7 @@
             <thead class="table-dark">
                 <tr>
                     <th style="width: 10%; text-align: left;">Име</th>
-                    <th style="width: 40%; text-align: left;">Година</th>
+                    <th style="width: 40%; text-align: left;">Описание</th>
                     <th style="width: 30%; text-align: center;">Операции</th>
                 </tr>
             </thead>
@@ -39,7 +39,7 @@
                 <tbody>
                     <tr>
                         <td style="width: 10%; text-align: left; vertical-align: middle;">@tit.Name</td> 
-                        <td style="width: 40%; text-align: left; vertical-align: middle;"></td>
+                        <td style="width: 40%; text-align: left; vertical-align: middle;">@tit.Description</td>
                         <td style="width: 30%; text-align: center; vertical-align: middle;">
                             <div class="btn-group" role="group">
                                 <a asp-controller="Title" asp-action="UpdateTitle" asp-route-id="@tit.Id" class="btn btn-outline-primary btn-sm">

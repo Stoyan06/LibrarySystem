@@ -1705,6 +1705,9 @@
       "LibrarySystem.Utility/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "LibrarySystem.Models": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/LibrarySystem.Utility.dll": {}
         },

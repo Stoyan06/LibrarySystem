@@ -275,7 +275,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\LibrarySystem.Models.csproj": {
+                "projectPath": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\LibrarySystem.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

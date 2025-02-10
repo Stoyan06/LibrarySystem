@@ -6,7 +6,6 @@ namespace LibrarySystem.Data
 {
     public class ApplicationDbContext:DbContext
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Author> Authors { get; set; }
 
@@ -28,6 +27,11 @@ namespace LibrarySystem.Data
 
         public DbSet<TitleAuthor> TitlesAuthors { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Conventions.Remove(typeof(CascadeDeleteConvention));
