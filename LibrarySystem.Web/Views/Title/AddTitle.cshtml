@@ -24,20 +24,37 @@
         <div class="mb-3">
             <label for="descriptionInput" class="form-label fw-bold">Описание(Анотация)</label>
             <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div>
             <label for="SectionId" class="form-label fw-bold">Раздел</label>
             <select asp-for="SectionId" class="form-control" asp-items="Model.Sections">
-                <option value="">Избери раздел</option>
+                <!-- <option value="null">Избери раздел</option> -->
+                <!-- <span asp-validation-for="SectionId" class="text-danger"></span> -->
             </select>
 
             <div>
                 <label for="AuthorId" class="form-label fw-bold">Автор(и)</label>
-                <select asp-for="AuthorId" class="form-select" asp-items="Model.Authors" multiple>
-                    <option value="">Избери автор(и)</option>
+                <select asp-for="SelectedAuthors" class="form-select select2" asp-items="Model.Authors" multiple>
                 </select>
             </div>
+
+            <!-- Include jQuery & Select2 -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    $('#AuthorId').select2({
+                        placeholder: "Избери автор(и)",
+                        allowClear: true,
+                        width: '100%'
+                    });
+                });
+            </script>
+
 
 
         </div>

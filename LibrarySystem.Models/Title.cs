@@ -19,6 +19,7 @@ namespace LibrarySystem.Models
         public string Description { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Section))]
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Изберете раздел")]
         public int SectionId { get; set; }
         public Section Section { get; set; }
 
