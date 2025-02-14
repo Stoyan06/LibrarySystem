@@ -47,5 +47,10 @@ namespace LibrarySystem.Services
         {
             await _repository.DeleteWhere(predicate);
         }
+
+        public IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate)
+        {
+            return _repository.GetWhere(predicate);
+        }
     }
 }

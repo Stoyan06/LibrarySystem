@@ -20,5 +20,9 @@ namespace LibrarySystem.Web.Models
         public IEnumerable<SelectListItem> Authors { get; set; }
 
         public List<int> SelectedAuthors { get; set; } = new List<int>();
+
+        public string SectionName {  get; set; }
+
+        public List<string> SelectedAuthorsNames { get; set; }
     }
 }

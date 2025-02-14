@@ -11,5 +11,7 @@ namespace LibrarySystem.Data.Repository
         Task DeleteAsync(int id);
 
         Task DeleteWhere(Expression<Func<T, bool>> predicate);
+
+        IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate);
     }
 }

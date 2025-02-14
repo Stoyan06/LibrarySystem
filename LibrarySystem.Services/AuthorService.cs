@@ -47,6 +47,11 @@ namespace LibrarySystem.Services
             return await _repository.GetByIdAsync(id);
         }
 
+        public IEnumerable<Author> GetWhere(Expression<Func<Author, bool>> predicate)
+        {
+            return _repository.GetWhere(predicate);
+        }
+
         public async Task UpdateAsync(Author entity)
         {
             await _repository.UpdateAsync(entity);

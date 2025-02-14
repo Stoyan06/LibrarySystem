@@ -56,5 +56,10 @@ namespace LibrarySystem.Services
             if (sec != null) return true;
             else return false;
         }
+
+        public IEnumerable<Section> GetWhere(Expression<Func<Section, bool>> predicate)
+        {
+            return _repository.GetWhere(predicate);
+        }
     }
 }

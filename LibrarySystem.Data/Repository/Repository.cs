@@ -55,5 +55,10 @@ namespace LibrarySystem.Data.Repository
             _dbSet.RemoveRange(_dbSet.Where(predicate));
             await _context.SaveChangesAsync();
         }
+
+        public IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate)
+        {
+            return _dbSet.Where(predicate);
+        }
     }
     }

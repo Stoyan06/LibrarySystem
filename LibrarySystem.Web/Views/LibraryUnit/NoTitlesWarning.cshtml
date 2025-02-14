@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Предупреждение";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center text-warning">Невалидна операция</h1>
+
+<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light text-center">
+    <p class="fw-bold text-danger">
+        В системата няма въведени заглавия. Моля, добавате заглавия преди да добавите библиотечни единици!
+    </p>
+
+    <div class="d-flex justify-content-center">
+        <!-- Go Back Button -->
+        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+    </div>
+</div>

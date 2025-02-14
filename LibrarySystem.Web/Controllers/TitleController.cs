@@ -220,11 +220,49 @@ namespace LibrarySystem.Web.Controllers
 
         public async Task<IActionResult> RemoveTitle(int id)
         {
-            await _title_author_service.DeleteWhere(x => x.TitleId == id);
-            await _titleService.DeleteAsync(id);
+            return View("ConfirmDelete", await _titleService.GetByIdAsync(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveTitle(Title title)
+        {
+            await _title_author_service.DeleteWhere(x => x.TitleId == title.Id);
+            await _titleService.DeleteAsync(title.Id);
+            TempData["success"] = "Успешно премахнато заглавие";
             return RedirectToAction("AllTitles");
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            Title title = await _titleService.GetByIdAsync(id);
+            Section section = await _sectionService.GetByIdAsync(title.SectionId);
+
+            IEnumerable<TitleAuthor> titleAuthors = await _title_author_service.GetAllAsync();
+            IEnumerable<TitleAuthor> newTitleAuthors = titleAuthors.Where(x => x.TitleId == id);
+
+            List<Author> authors = new List<Author>();
+            List<string> authorsNames = new List<string>();
+
+            foreach (TitleAuthor titleAuthor in newTitleAuthors)
+            {
+                authors.Add(await _authorService.GetByIdAsync(titleAuthor.AuthorId));
+            }
+
+            foreach (Author author in authors)
+            {
+                authorsNames.Add(author.FullName);
+            }
+
+            TitleViewModel model = new TitleViewModel
+            {
+                Description = title.Description,
+                Name = title.Name,
+                SectionName = section.Name,
+                SelectedAuthorsNames = authorsNames
+            };
+
+            return View(model);
+        }
         public async Task<IActionResult> GetBySection(string? section)
         {
             if(section == string.Empty || section == null)

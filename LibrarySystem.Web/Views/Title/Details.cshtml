@@ -1,0 +1,48 @@
+﻿@using LibrarySystem.Models
+@model TitleViewModel
+
+@{
+    ViewData["Title"] = "Детайли за заглавие";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center">Детайли за заглавие</h1>
+
+<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+    <!-- Name Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Име</label>
+        <p class="form-control bg-light">@Model.Name</p>
+    </div>
+
+    <!-- Description Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Описание(Анотация)</label>
+        <p class="form-control bg-light">@Model.Description</p>
+    </div>
+
+    <!-- Section Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Раздел</label>
+        <p class="form-control bg-light">@Model.SectionName</p>
+    </div>
+
+    <!-- Authors Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Автор(и)</label>
+        <ul class="list-group">
+            @foreach (var author in Model.SelectedAuthorsNames)
+            {
+                <li class="list-group-item">@author</li>
+            }
+        </ul>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <a asp-action="AllTitles" class="btn btn-secondary btn-lg px-4">Назад</a>
+    </div>
+</div>
