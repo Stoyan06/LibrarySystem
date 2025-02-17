@@ -1,0 +1,26 @@
+﻿@using LibrarySystem.Models
+@model LibraryUnitViewModel
+
+@{
+    ViewData["Title"] = "Потвърждение за бракуване на библиотечна единица";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center text-danger">Потвърждение за бракуване на библиотечна единица</h1>
+
+<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+    <p class="text-center fw-bold">
+        Сигурни ли сте, че искате да бракувате библиотечна единица с инвентарен номер <span class="text-danger">"@Model.InventoryNumber"</span>, принадлежаща към заглавие <span>"@Model.TitleName"</span>?
+        Това е необратима операция!
+    </p>
+
+    <form method="post" class="d-flex justify-content-between">
+        <!-- Cancel Button -->
+        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Откажи</a>
+        <!-- Confirm Delete Button -->
+        <button type="submit" class="btn btn-danger btn-lg px-4">Бракувай</button>
+    </form>
+</div>

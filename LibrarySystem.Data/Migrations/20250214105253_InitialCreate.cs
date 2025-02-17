@@ -108,10 +108,10 @@ namespace LibrarySystem.Data.Migrations
                     Medium = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsScrapped = table.Column<bool>(type: "bit", nullable: false),
                     TitleId = table.Column<int>(type: "int", nullable: false),
-                    Isbn = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Isbn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TypeLibraryUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Year = table.Column<int>(type: "int", nullable: true),
+                    PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

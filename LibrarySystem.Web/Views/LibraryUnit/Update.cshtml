@@ -1,0 +1,77 @@
+﻿@using LibrarySystem.Models
+@model LibraryUnitViewModel
+
+@{
+    ViewData["Title"] = "Редактиране на библиотечна единица";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center">Редактиране на библиотечна единица</h1>
+
+<form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+    <!-- Inventory Number Field -->
+    <div class="mb-3">
+        <label for="inventoryNumber" class="form-label fw-bold">Инвентарен номер</label>
+        <input type="text" id="inventoryNumber" asp-for="InventoryNumber" class="form-control" placeholder="Въведи инвентарен номер">
+        <span asp-validation-for="InventoryNumber" class="text-danger"></span>
+    </div>
+
+    <!-- Condition Field -->
+    <div class="mb-3">
+        <label for="condition" class="form-label fw-bold">Състояние</label>
+        <input type="text" id="condition" asp-for="Condition" class="form-control" placeholder="Въведи състояние">
+        <span asp-validation-for="Condition" class="text-danger"></span>
+    </div>
+
+    <!-- Medium Field -->
+    <div class="mb-3">
+        <label for="medium" class="form-label fw-bold">Носител</label>
+        <input type="text" id="medium" asp-for="Medium" class="form-control" placeholder="Въведи тип носител">
+        <span asp-validation-for="Medium" class="text-danger"></span>
+    </div>
+
+    <!-- Title Selection -->
+    <div class="mb-3">
+        <label for="titleId" class="form-label fw-bold">Заглавие</label>
+        <select asp-for="TitleId" class="form-select" asp-items="@Model.Titles">
+        </select>
+        <span asp-validation-for="TitleId" class="text-danger"></span>
+    </div>
+
+    <!-- ISBN Field -->
+    <div class="mb-3">
+        <label for="isbn" class="form-label fw-bold">ISBN</label>
+        <input type="text" id="isbn" asp-for="Isbn" class="form-control" placeholder="Въведи ISBN">
+        <span asp-validation-for="Isbn" class="text-danger"></span>
+    </div>
+
+    <!-- Type of Library Unit Field -->
+    <div class="mb-3">
+        <label for="typeLibraryUnit" class="form-label fw-bold">Вид на библиотечната единица</label>
+        <input type="text" id="typeLibraryUnit" asp-for="TypeLibraryUnit" class="form-control" placeholder="Въведи вид библиотечна единица">
+        <span asp-validation-for="TypeLibraryUnit" class="text-danger"></span>
+    </div>
+
+    <!-- Year Field -->
+    <div class="mb-3">
+        <label for="year" class="form-label fw-bold">Година</label>
+        <input type="number" id="year" asp-for="Year" class="form-control" placeholder="Въведи година">
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <!-- Publishing House Field -->
+    <div class="mb-3">
+        <label for="publishingHouse" class="form-label fw-bold">Издателство</label>
+        <input type="text" id="publishingHouse" asp-for="PublishingHouse" class="form-control" placeholder="Въведи издателство">
+        <span asp-validation-for="PublishingHouse" class="text-danger"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-flex justify-content-between mt-4">
+        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Откажи</a>
+        <input type="submit" value="Редактирай библиотечна единица" class="btn btn-primary btn-lg px-4">
+    </div>
+</form>

@@ -1,0 +1,74 @@
+﻿@using LibrarySystem.Models
+@model LibraryUnitViewModel
+
+@{
+    ViewData["Title"] = "Детайли за библиотечна единица";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center">Детайли за библиотечна единица</h1>
+
+<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+    <!-- Inventory Number -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Инвентарен номер</label>
+        <p class="form-control bg-light">@Model.InventoryNumber</p>
+    </div>
+
+    <!-- Condition -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Състояние</label>
+        <p class="form-control bg-light">@Model.Condition</p>
+    </div>
+
+    <!-- Medium -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Носител</label>
+        <p class="form-control bg-light">@Model.Medium</p>
+    </div>
+
+    <!-- Title -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Заглавие</label>
+        <p class="form-control bg-light">@Model.TitleName</p>
+    </div>
+
+    <!-- ISBN -->
+    @if(@Model.Isbn != null){
+    <div class="mb-3">
+        <label class="form-label fw-bold">ISBN</label>
+        <p class="form-control bg-light">@Model.Isbn</p>
+    </div>
+    }
+
+    <!-- Type Library Unit -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Тип</label>
+        <p class="form-control bg-light">@Model.TypeLibraryUnit</p>
+    </div>
+
+    <!-- Year -->
+    @if(@Model.Year != null)
+    {
+    <div class="mb-3">
+        <label class="form-label fw-bold">Година</label>
+        <p class="form-control bg-light">@Model.Year</p>
+    </div>
+    }
+
+    <!-- Publishing House -->
+    @if(@Model.PublishingHouse != null){
+    <div class="mb-3">
+        <label class="form-label fw-bold">Издателство</label>
+        <p class="form-control bg-light">@Model.PublishingHouse</p>
+    </div>
+    }
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+    </div>
+</div>

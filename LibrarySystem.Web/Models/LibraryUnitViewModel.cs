@@ -31,10 +31,8 @@ public class LibraryUnitViewModel
     [Required(ErrorMessage="Полето за вид библиотечна единица е задължително")]
     public string TypeLibraryUnit {  get; set; }
 
-    [Required(ErrorMessage = "Полето за вид библиотечна единица е задължително")]
-
     [Range(1, int.MaxValue, ErrorMessage = "Годината трябва да бъде положително число, по-голямо от 0")]
-    public int Year { get; set; }
+    public int? Year { get; set; }
 
     public IEnumerable<SelectListItem>? Titles { get; set; }
 

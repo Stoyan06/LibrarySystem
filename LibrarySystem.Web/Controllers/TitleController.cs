@@ -14,16 +14,19 @@ namespace LibrarySystem.Web.Controllers
         private IService<Section> _sectionService;
         private IService<Author> _authorService;
         private IService<TitleAuthor> _title_author_service;
+        private IService<LibraryUnit> _libraryUnitService;
 
         public TitleController(IService<Title> titleService,
             IService<Section> sectionService,
             IService<Author> authorService,
-            IService<TitleAuthor> titleAuthorService)
+            IService<TitleAuthor> titleAuthorService,
+            IService<LibraryUnit> libraryUnitService)
         {
             _titleService = titleService;
             _sectionService = sectionService;
             _authorService = authorService;
             _title_author_service = titleAuthorService;
+            _libraryUnitService = libraryUnitService;
         }
 
         public async Task<IActionResult> AllTitles()
@@ -226,6 +229,14 @@ namespace LibrarySystem.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveTitle(Title title)
         {
+            LibraryUnit unit =  _libraryUnitService.GetWhere(x => x.TitleId == title.Id).FirstOrDefault();
+
+            if(unit != null)
+            {
+                TempData["error"] = "Има обвързани библиотечни единици с това заглавие";
+                return RedirectToAction("AllTitles");
+            }
+
             await _title_author_service.DeleteWhere(x => x.TitleId == title.Id);
             await _titleService.DeleteAsync(title.Id);
             TempData["success"] = "Успешно премахнато заглавие";
