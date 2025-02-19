@@ -11,64 +11,91 @@
 
 <h1 class="mb-4 text-center">Детайли за библиотечна единица</h1>
 
-<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
-    <!-- Inventory Number -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Инвентарен номер</label>
-        <p class="form-control bg-light">@Model.InventoryNumber</p>
+<div class="d-flex justify-content-center">
+    <!-- Image Preview (Left Side) -->
+    <div class="me-4">
+        @if (!string.IsNullOrEmpty(Model.Image.DestinationLink))
+        {
+            <div class="position-relative text-center">
+                <img src="@Model.Image.DestinationLink" id="imagePreview" class="img-thumbnail" alt="Изображение на библиотечната единица" style="max-width: 250px; cursor: pointer;" onclick="zoomImage()">
+                <small class="d-block mt-1">Изображение на библиотечната единица</small>
+            </div>
+        }
     </div>
 
-    <!-- Condition -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Състояние</label>
-        <p class="form-control bg-light">@Model.Condition</p>
-    </div>
+    <!-- Details (Right Side) -->
+    <div class="w-50 p-4 border rounded shadow-sm bg-light">
+        <!-- Inventory Number -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Инвентарен номер</label>
+            <p class="form-control bg-light">@Model.InventoryNumber</p>
+        </div>
 
-    <!-- Medium -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Носител</label>
-        <p class="form-control bg-light">@Model.Medium</p>
-    </div>
+        <!-- Condition -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Състояние</label>
+            <p class="form-control bg-light">@Model.Condition</p>
+        </div>
 
-    <!-- Title -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Заглавие</label>
-        <p class="form-control bg-light">@Model.TitleName</p>
-    </div>
+        <!-- Medium -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Носител</label>
+            <p class="form-control bg-light">@Model.Medium</p>
+        </div>
 
-    <!-- ISBN -->
-    @if(@Model.Isbn != null){
-    <div class="mb-3">
-        <label class="form-label fw-bold">ISBN</label>
-        <p class="form-control bg-light">@Model.Isbn</p>
-    </div>
-    }
+        <!-- Title -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Заглавие</label>
+            <p class="form-control bg-light">@Model.TitleName</p>
+        </div>
 
-    <!-- Type Library Unit -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Тип</label>
-        <p class="form-control bg-light">@Model.TypeLibraryUnit</p>
-    </div>
+        <!-- ISBN -->
+        @if (!string.IsNullOrEmpty(Model.Isbn))
+        {
+            <div class="mb-3">
+                <label class="form-label fw-bold">ISBN</label>
+                <p class="form-control bg-light">@Model.Isbn</p>
+            </div>
+        }
 
-    <!-- Year -->
-    @if(@Model.Year != null)
-    {
-    <div class="mb-3">
-        <label class="form-label fw-bold">Година</label>
-        <p class="form-control bg-light">@Model.Year</p>
-    </div>
-    }
+        <!-- Type Library Unit -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Тип</label>
+            <p class="form-control bg-light">@Model.TypeLibraryUnit</p>
+        </div>
 
-    <!-- Publishing House -->
-    @if(@Model.PublishingHouse != null){
-    <div class="mb-3">
-        <label class="form-label fw-bold">Издателство</label>
-        <p class="form-control bg-light">@Model.PublishingHouse</p>
-    </div>
-    }
+        <!-- Year -->
+        @if (Model.Year.HasValue)
+        {
+            <div class="mb-3">
+                <label class="form-label fw-bold">Година</label>
+                <p class="form-control bg-light">@Model.Year</p>
+            </div>
+        }
 
-    <!-- Buttons -->
-    <div class="d-flex justify-content-between mt-4">
-        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+        <!-- Publishing House -->
+        @if (!string.IsNullOrEmpty(Model.PublishingHouse))
+        {
+            <div class="mb-3">
+                <label class="form-label fw-bold">Издателство</label>
+                <p class="form-control bg-light">@Model.PublishingHouse</p>
+            </div>
+        }
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+        </div>
     </div>
 </div>
+
+<!-- JavaScript for Zoom Feature -->
+<script>
+    function zoomImage() {
+        var imgSrc = document.getElementById("imagePreview").src;
+        if (imgSrc) {
+            var zoomWindow = window.open("", "_blank");
+            zoomWindow.document.write('<img src="' + imgSrc + '" style="width: 100%; height: auto;">');
+        }
+    }
+</script>

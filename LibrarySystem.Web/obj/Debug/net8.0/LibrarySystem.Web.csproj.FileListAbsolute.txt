@@ -178,3 +178,5 @@ D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\xunit.abstractions.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\xunit.core.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\xunit.execution.dotnet.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\Newtonsoft.Json.dll

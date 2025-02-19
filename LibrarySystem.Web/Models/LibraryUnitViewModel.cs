@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using LibrarySystem.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ServiceStack;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
@@ -37,4 +38,10 @@ public class LibraryUnitViewModel
     public IEnumerable<SelectListItem>? Titles { get; set; }
 
     public string? PublishingHouse {  get; set; }
+
+    public int? ImageId { get; set; }
+    public Image? Image { get; set; }
+
+    [Required(ErrorMessage="Моля, добавете изображение")]
+    public IFormFile UploadedImage { get; set; }
 }

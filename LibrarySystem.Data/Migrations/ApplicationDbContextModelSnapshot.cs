@@ -70,15 +70,7 @@ namespace LibrarySystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LibraryUnitId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("LibraryUnitId");
 
                     b.ToTable("images", (string)null);
                 });
@@ -94,6 +86,9 @@ namespace LibrarySystem.Data.Migrations
                     b.Property<string>("Condition")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("InventoryNumber")
                         .IsRequired()
@@ -123,6 +118,8 @@ namespace LibrarySystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("TitleId");
 
@@ -374,22 +371,19 @@ namespace LibrarySystem.Data.Migrations
                     b.Navigation("Reader");
                 });
 
-            modelBuilder.Entity("LibrarySystem.Models.Image", b =>
-                {
-                    b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
-                        .WithMany()
-                        .HasForeignKey("LibraryUnitId")
-                        .IsRequired();
-
-                    b.Navigation("LibraryUnit");
-                });
-
             modelBuilder.Entity("LibrarySystem.Models.LibraryUnit", b =>
                 {
+                    b.HasOne("LibrarySystem.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .IsRequired();
+
                     b.HasOne("LibrarySystem.Models.Title", "Title")
                         .WithMany()
                         .HasForeignKey("TitleId")
                         .IsRequired();
+
+                    b.Navigation("Image");
 
                     b.Navigation("Title");
                 });

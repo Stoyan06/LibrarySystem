@@ -11,7 +11,7 @@
 
 <h1 class="mb-4 text-center">Добавяне на библиотечна единица</h1>
 
-<form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+<form method="post" enctype="multipart/form-data" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
     <!-- Inventory Number Field -->
     <div class="mb-3">
         <label for="inventoryNumber" class="form-label fw-bold">Инвентарен номер</label>
@@ -36,8 +36,7 @@
     <!-- Title Selection -->
     <div class="mb-3">
         <label for="titleId" class="form-label fw-bold">Заглавие</label>
-        <select asp-for="TitleId" class="form-select" asp-items="@Model.Titles">
-        </select>
+        <select asp-for="TitleId" class="form-select" asp-items="@Model.Titles"></select>
         <span asp-validation-for="TitleId" class="text-danger"></span>
     </div>
 
@@ -69,9 +68,64 @@
         <span asp-validation-for="PublishingHouse" class="text-danger"></span>
     </div>
 
+    <!-- Image Upload Field -->
+    <div class="mb-3">
+        <label for="UploadedImage" class="form-label fw-bold">Качи изображение</label>
+        <input type="file" asp-for="UploadedImage" id="UploadedImage" name="UploadedImage" class="form-control" accept="image/*" onchange="previewImage(event)">
+        <span asp-validation-for="UploadedImage" class="text-danger"></span>
+    </div>
+
+    <!-- Image Preview + Zoom & Remove Options -->
+    <div class="mb-3 text-center">
+        <div id="imagePreviewContainer" class="d-none position-relative">
+            <img id="imagePreview" src="#" alt="Преглед на изображението" class="img-fluid" style="max-width: 200px; border: 1px solid #ddd; padding: 5px; cursor: pointer;" onclick="zoomImage()">
+            <!-- Remove Image Button -->
+            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" onclick="removeImage()">✖</button>
+        </div>
+    </div>
+
     <!-- Submit Button -->
     <div class="d-flex justify-content-between mt-4">
         <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Откажи</a>
         <input type="submit" value="Добави библиотечна единица" class="btn btn-primary btn-lg px-4">
     </div>
 </form>
+
+<!-- JavaScript for Image Preview, Zoom & Remove -->
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var preview = document.getElementById("imagePreview");
+        var previewContainer = document.getElementById("imagePreviewContainer");
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                previewContainer.classList.remove("d-none"); // Show the image preview
+            };
+
+            reader.readAsDataURL(input.files[0]); // Convert to base64
+        }
+    }
+
+    function zoomImage() {
+        var imgSrc = document.getElementById("imagePreview").src;
+        if (imgSrc && imgSrc !== "#") {
+            var zoomWindow = window.open("", "_blank");
+            zoomWindow.document.write('<img src="' + imgSrc + '" style="width: 100%; height: auto;">');
+        }
+    }
+
+    function removeImage() {
+        document.getElementById("UploadedImage").value = ""; // Clear file input
+        document.getElementById("imagePreview").src = "#";
+        document.getElementById("imagePreviewContainer").classList.add("d-none"); // Hide preview
+    }
+
+    // Reset image preview on form reset
+    document.querySelector("form").addEventListener("reset", function () {
+        removeImage();
+    });
+</script>

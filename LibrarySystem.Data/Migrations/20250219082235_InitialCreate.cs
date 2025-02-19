@@ -27,6 +27,19 @@ namespace LibrarySystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DestinationLink = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_images", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "roles",
                 columns: table => new
                 {
@@ -111,11 +124,17 @@ namespace LibrarySystem.Data.Migrations
                     Isbn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TypeLibraryUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: true),
-                    PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_library_units", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_library_units_images_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "images",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_library_units_titles_TitleId",
                         column: x => x.TitleId,
@@ -165,26 +184,6 @@ namespace LibrarySystem.Data.Migrations
                         name: "FK_favorites_users_ReaderId",
                         column: x => x.ReaderId,
                         principalTable: "users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "images",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsMain = table.Column<bool>(type: "bit", nullable: false),
-                    LibraryUnitId = table.Column<int>(type: "int", nullable: false),
-                    DestinationLink = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_images_library_units_LibraryUnitId",
-                        column: x => x.LibraryUnitId,
-                        principalTable: "library_units",
                         principalColumn: "Id");
                 });
 
@@ -275,9 +274,9 @@ namespace LibrarySystem.Data.Migrations
                 column: "ReaderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_images_LibraryUnitId",
-                table: "images",
-                column: "LibraryUnitId");
+                name: "IX_library_units_ImageId",
+                table: "library_units",
+                column: "ImageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_library_units_TitleId",
@@ -337,9 +336,6 @@ namespace LibrarySystem.Data.Migrations
                 name: "favorites");
 
             migrationBuilder.DropTable(
-                name: "images");
-
-            migrationBuilder.DropTable(
                 name: "movements_of_library_units");
 
             migrationBuilder.DropTable(
@@ -356,6 +352,9 @@ namespace LibrarySystem.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "authors");
+
+            migrationBuilder.DropTable(
+                name: "images");
 
             migrationBuilder.DropTable(
                 name: "titles");

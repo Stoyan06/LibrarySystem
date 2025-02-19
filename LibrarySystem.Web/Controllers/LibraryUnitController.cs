@@ -12,11 +12,15 @@ namespace LibrarySystem.Web.Controllers
     {
         private IService<LibraryUnit> _libraryUnitService;
         private IService<Title> _titleService;
+        private CloudinaryService _cloudinaryService;
+        private IService<Image> _imageService;
 
-        public LibraryUnitController(IService<LibraryUnit> libraryUnitService, IService<Title> titleService)
+        public LibraryUnitController(IService<LibraryUnit> libraryUnitService, IService<Title> titleService, CloudinaryService cloudinaryService, IService<Image> imageService)
         {
             _libraryUnitService = libraryUnitService;
             _titleService = titleService;
+            _cloudinaryService = cloudinaryService;
+            _imageService = imageService;
         }
 
         public async Task<IActionResult> AllLibraryUnits()
@@ -98,6 +102,10 @@ namespace LibrarySystem.Web.Controllers
                 }
                 else
                 {
+                    var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
+                    await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
+                    Image image = _imageService.GetWhere(x => x.DestinationLink == ImageLink).First();
+
                     LibraryUnit newUnit = new LibraryUnit
                     {
                         InventoryNumber = model.InventoryNumber,
@@ -108,7 +116,8 @@ namespace LibrarySystem.Web.Controllers
                         Isbn = model.Isbn,
                         TypeLibraryUnit = model.TypeLibraryUnit,
                         Year = model.Year,
-                        PublishingHouse = model.PublishingHouse
+                        PublishingHouse = model.PublishingHouse,
+                        ImageId = image.Id
                     };
                     await _libraryUnitService.AddAsync(newUnit);
                     TempData["success"] = "Успешно добавена библиотечна единица";
@@ -146,6 +155,7 @@ namespace LibrarySystem.Web.Controllers
                 TypeLibraryUnit = unit.TypeLibraryUnit,
                 //Year = (int)libraryUnit.Year,
                 //PublishingHouse = libraryUnit.PublishingHouse
+                Image = await _imageService.GetByIdAsync(unit.ImageId)
             };
 
             if (unit.Isbn == null) model.Isbn = null;
@@ -163,14 +173,14 @@ namespace LibrarySystem.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> UpdateLibraryUnit(int id)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
             Title title = _titleService.GetWhere(x => x.Id == unit.TitleId).FirstOrDefault();
 
             IEnumerable<Title> allTitles = await _titleService.GetAllAsync();
 
-            LibraryUnitViewModel model = new LibraryUnitViewModel
+            LibraryUnitUpdateViewModel model = new LibraryUnitUpdateViewModel
             {
                 Titles = _titleService.GetAllAsync().Result.Select(e => new SelectListItem
                 {
@@ -188,6 +198,7 @@ namespace LibrarySystem.Web.Controllers
                 TypeLibraryUnit = unit.TypeLibraryUnit,
                 //Year = (int)libraryUnit.Year,
                 //PublishingHouse = libraryUnit.PublishingHouse
+                Image = await _imageService.GetByIdAsync(unit.ImageId)
             };
 
             if (unit.Isbn == null) model.Isbn = null;
@@ -206,7 +217,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(LibraryUnitViewModel model)
+        public async Task<IActionResult> UpdateLibraryUnit(LibraryUnitUpdateViewModel model)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(model.Id);
             IEnumerable<LibraryUnit> libraryUnits = _libraryUnitService.GetWhere(x => x.InventoryNumber == model.InventoryNumber);
@@ -221,6 +232,7 @@ namespace LibrarySystem.Web.Controllers
                         Value = e.Id.ToString(),
                         Text = e.Name
                     });
+                    model.Image = await _imageService.GetByIdAsync(unit.ImageId);
 
                     return View(model);
                 }
@@ -235,7 +247,16 @@ namespace LibrarySystem.Web.Controllers
                     unit.TypeLibraryUnit = model.TypeLibraryUnit;
                     unit.Year = model.Year;
                     unit.PublishingHouse = model.PublishingHouse;
-                   
+                    
+                    if(model.UploadedImage != null)
+                    {
+                        var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
+                        await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
+                        Image image = _imageService.GetWhere(x => x.DestinationLink == ImageLink).First();
+                        //to upload the pic successfully
+                        image.DestinationLink = model.Image.DestinationLink;
+                        await _imageService.UpdateAsync(image);
+                    }
                     await _libraryUnitService.UpdateAsync(unit);
                     TempData["success"] = "Успешно редактирана библиотечна единица";
                     return RedirectToAction("AllLibraryUnits");

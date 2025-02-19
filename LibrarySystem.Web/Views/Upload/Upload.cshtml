@@ -1,0 +1,41 @@
+﻿@{ 
+
+    ViewData["Title"] = "Качи изображение"; 
+
+} 
+
+  
+
+<h2>Качи изображение</h2> 
+
+  
+
+@if (ViewBag.Error != null) 
+
+{ 
+
+    <p style="color: red;">@ViewBag.Error</p> 
+
+} 
+
+  
+
+<form method="post" enctype="multipart/form-data" asp-action="UploadFile"> 
+
+    <input type="image" name="image" required /> 
+
+    <button type="submit">Качи</button> 
+
+</form> 
+
+  
+@{
+    @if (ViewBag.ImageUrl != null)
+
+    {
+
+                    <p>Изображението беше успешно качено!</p>
+
+                    <img src ="@ViewBag.ImageUrl"  width="300"   />
+    }
+}

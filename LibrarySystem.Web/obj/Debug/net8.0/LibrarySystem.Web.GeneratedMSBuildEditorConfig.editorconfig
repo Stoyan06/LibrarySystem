@@ -66,8 +66,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVVuaXRcTm9UaXRsZXNXYXJuaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/LibraryUnit/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVVuaXRcVXBkYXRlLmNzaHRtbA==
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/LibraryUnit/UpdateLibraryUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVVuaXRcVXBkYXRlTGlicmFyeVVuaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Section/AddSection.cshtml]
@@ -120,6 +120,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Title/UpdateTitle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGl0bGVcVXBkYXRlVGl0bGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Upload/Upload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXBsb2FkXFVwbG9hZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/_ViewImports.cshtml]

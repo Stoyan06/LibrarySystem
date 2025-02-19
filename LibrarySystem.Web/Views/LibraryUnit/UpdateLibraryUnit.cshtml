@@ -1,0 +1,124 @@
+﻿@using LibrarySystem.Models
+@model LibraryUnitUpdateViewModel
+
+@{
+    ViewData["Title"] = "Редактиране на библиотечна единица";
+}
+
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
+
+<h1 class="mb-4 text-center">Редактиране на библиотечна единица</h1>
+
+<div class="d-flex justify-content-center">
+    <!-- Current Image Preview (Left Side) -->
+    <div class="me-4 text-center">
+        @if (!string.IsNullOrEmpty(Model.Image.DestinationLink))
+        {
+            <div class="position-relative">
+                <img src="@Model.Image.DestinationLink" id="currentImage" class="img-thumbnail" alt="Текущо изображение" style="max-width: 250px; cursor: pointer;" onclick="zoomImage()">
+                <small class="d-block mt-1">Текущо изображение</small>
+            </div>
+        }
+    </div>
+
+    <!-- Form (Right Side) -->
+    <form asp-action="UpdateLibraryUnit" method="post" enctype="multipart/form-data" class="w-50 p-4 border rounded shadow-sm bg-light">
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Inventory Number -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Инвентарен номер</label>
+            <input asp-for="InventoryNumber" class="form-control" />
+            <span asp-validation-for="InventoryNumber" class="text-danger"></span>
+        </div>
+
+        <!-- Condition -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Състояние</label>
+            <input asp-for="Condition" class="form-control" />
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
+
+        <!-- Medium -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Носител</label>
+            <input asp-for="Medium" class="form-control" />
+            <span asp-validation-for="Medium" class="text-danger"></span>
+        </div>
+
+        <!-- Title -->
+        <div class="mb-3">
+            <label for="titleId" class="form-label fw-bold">Заглавие</label>
+            <select asp-for="TitleId" class="form-select" asp-items="@Model.Titles"></select>
+            <span asp-validation-for="TitleId" class="text-danger"></span>
+        </div>
+
+        <!-- ISBN -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">ISBN</label>
+            <input asp-for="Isbn" class="form-control" />
+            <span asp-validation-for="Isbn" class="text-danger"></span>
+        </div>
+
+        <!-- Type Library Unit -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Тип</label>
+            <input asp-for="TypeLibraryUnit" class="form-control" />
+            <span asp-validation-for="TypeLibraryUnit" class="text-danger"></span>
+        </div>
+
+        <!-- Year -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Година</label>
+            <input asp-for="Year" class="form-control" type="number" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+
+        <!-- Publishing House -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Издателство</label>
+            <input asp-for="PublishingHouse" class="form-control" />
+            <span asp-validation-for="PublishingHouse" class="text-danger"></span>
+        </div>
+
+        <!-- New Image Upload & Preview -->
+        <div class="mb-3 text-center">
+            <label for="UploadedImage" class="form-label fw-bold">Качи ново изображение</label>
+            <input asp-for="UploadedImage" type="file" class="form-control" id="UploadedImage" name="UploadedImage" accept="image/*" onchange="previewNewImage(event)">
+
+            <!-- New Image Preview -->
+            <div class="mt-3">
+                <img id="newImagePreview" class="img-thumbnail d-none" alt="Ново изображение" style="max-width: 250px;">
+                <small class="d-block mt-1">Преглед на новото изображение</small>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+            <button type="submit" class="btn btn-primary btn-lg px-4">Запази промените</button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript for Image Zoom and Preview -->
+<script>
+    function zoomImage() {
+        var imgSrc = document.getElementById("currentImage").src;
+        if (imgSrc) {
+            var zoomWindow = window.open("", "_blank");
+            zoomWindow.document.write('<img src="' + imgSrc + '" style="width: 100%; height: auto;">');
+        }
+    }
+
+    function previewNewImage(event) {
+        var output = document.getElementById('newImagePreview');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.classList.remove("d-none"); // Show the preview
+        output.onload = function () {
+            URL.revokeObjectURL(output.src); // Free memory
+        }
+    }
+</script>

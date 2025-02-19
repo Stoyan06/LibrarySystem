@@ -1,7 +1,9 @@
+using CloudinaryDotNet;
 using LibrarySystem.Data;
 using LibrarySystem.Data.Repository;
 using LibrarySystem.Services;
 using LibrarySystem.Services.IService;
+using LibrarySystem.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -23,6 +25,26 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+
+builder.Services.AddScoped<CloudinaryService>();
+
+var cloudinarySettings = builder.Configuration
+
+                        .GetSection("Cloudinary")
+
+                        .Get<CloudinarySettings>();
+
+
+
+var account = new Account(cloudinarySettings.CloudName,
+
+cloudinarySettings.ApiKey, cloudinarySettings.ApiSecret);
+
+
+
+var cloudinary = new Cloudinary(account);
+
+builder.Services.AddSingleton(cloudinary);
 
 var app = builder.Build();
 
