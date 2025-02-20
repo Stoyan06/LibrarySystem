@@ -251,10 +251,10 @@ namespace LibrarySystem.Web.Controllers
                     if(model.UploadedImage != null)
                     {
                         var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
-                        await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
-                        Image image = _imageService.GetWhere(x => x.DestinationLink == ImageLink).First();
+                        //await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
+                        Image image = await _imageService.GetByIdAsync(unit.ImageId);
                         //to upload the pic successfully
-                        image.DestinationLink = model.Image.DestinationLink;
+                        image.DestinationLink = ImageLink;
                         await _imageService.UpdateAsync(image);
                     }
                     await _libraryUnitService.UpdateAsync(unit);
