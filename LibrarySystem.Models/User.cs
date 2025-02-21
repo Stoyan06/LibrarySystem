@@ -1,4 +1,5 @@
-﻿using ServiceStack.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using ServiceStack.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibrarySystem.Models
@@ -35,5 +36,9 @@ namespace LibrarySystem.Models
         public List<Favorite> Favorites { get; set; }
 
         public List<MovementOfLibraryUnit> MovementsOfLibraryUnits { get; set; }
+
+        public IdentityUser? IdentityUser { get;set; }
+
+        public string? IdentityUserId {  get; set; }
     }
 }

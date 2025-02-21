@@ -1,70 +1,119 @@
-using CloudinaryDotNet;
-using LibrarySystem.Data;
-using LibrarySystem.Data.Repository;
-using LibrarySystem.Services;
-using LibrarySystem.Services.IService;
-using LibrarySystem.Utility;
-using Microsoft.EntityFrameworkCore;
-using System;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-//builder.Services.AddDbContext<ApplicationDbContext>
-    //(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+﻿namespace LibrarySystem.Web
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-});
+    using CloudinaryDotNet;
+    using LibrarySystem.Data;
+    using LibrarySystem.Data.Repository;
+    using LibrarySystem.Services;
+    using LibrarySystem.Services.IService;
+    using LibrarySystem.Utility;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using System;
+    using System.Threading.Tasks;
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-builder.Services.AddScoped<ISectionService, SectionService>();
-builder.Services.AddScoped<IAuthorService, AuthorService>();
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<CloudinaryService>();
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
 
-var cloudinarySettings = builder.Configuration
+            // Configure Database
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            });
 
-                        .GetSection("Cloudinary")
+            // Register services
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+            builder.Services.AddScoped<ISectionService, SectionService>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
 
-                        .Get<CloudinarySettings>();
+            builder.Services.AddScoped<CloudinaryService>();
 
+            // Configure Cloudinary
+            var cloudinarySettings = builder.Configuration.GetSection("Cloudinary").Get<CloudinarySettings>();
+            var account = new Account(cloudinarySettings.CloudName, cloudinarySettings.ApiKey, cloudinarySettings.ApiSecret);
+            var cloudinary = new Cloudinary(account);
+            builder.Services.AddSingleton(cloudinary);
 
+            // Configure Identity
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
-var account = new Account(cloudinarySettings.CloudName,
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
 
-cloudinarySettings.ApiKey, cloudinarySettings.ApiSecret);
+            builder.Services.AddRazorPages();
 
+            var app = builder.Build();
 
+            // Configure middleware
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-var cloudinary = new Cloudinary(account);
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
 
-builder.Services.AddSingleton(cloudinary);
+            // Create roles and admin user on startup
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                await CreateRoles(services);
+                await CreateAdmin(services);
+            }
 
-var app = builder.Build();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+            await app.RunAsync(); // Ensure `RunAsync` is used instead of `Run()`
+        }
+
+        private static async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            string[] roleNames = { SD.AdminRole, SD.LibrarianRole, SD.UserRole };
+
+            foreach (var roleName in roleNames)
+            {
+                if (!await roleManager.RoleExistsAsync(roleName))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+        }
+
+        private static async Task CreateAdmin(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var adminEmail = "admin@admin.com";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+            if (adminUser == null)
+            {
+                var user = new IdentityUser { UserName = adminEmail, Email = adminEmail };
+                var result = await userManager.CreateAsync(user, "AdminPassword123!");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, SD.AdminRole);
+                }
+            }
+        }
+    }
+
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();

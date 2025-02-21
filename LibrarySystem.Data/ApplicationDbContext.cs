@@ -1,10 +1,12 @@
 ﻿using LibrarySystem.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace LibrarySystem.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Author> Authors { get; set; }
@@ -40,6 +42,8 @@ namespace LibrarySystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TitleAuthor>().HasKey(x => new { x.AuthorId, x.TitleId });
             modelBuilder.Entity<Favorite>().HasKey(x => new { x.LibraryUnitId, x.ReaderId });
 
