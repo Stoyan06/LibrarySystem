@@ -1,0 +1,40 @@
+﻿@model RegisterViewModel
+<h2 class="text-center">Регистрация на читател</h2>
+<form asp-action="Register" method="post" class="w-50 mx-auto border p-4 rounded shadow-sm bg-light">
+    <div class="mb-3">        
+        <label asp-for="FirstName" class="form-label">Име</label>
+        <input asp-for="FirstName" class="form-control" /> 
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MiddleName" class="form-label">Презиме</label>
+        <input asp-for="MiddleName" class="form-control" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Фамилия</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" /> 
+        <span asp-validation-for="Email" class="text-danger"></span> 
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Парола</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ConfirmPassword" class="form-label">Потвърди паролата</label> 
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Регистрирай се</button></form>

@@ -1,0 +1,41 @@
+﻿@model LoginViewModel
+<h2 class="text-center">Login</h2>
+<form asp-action="Login" method="post" class="w-50 mx-auto border p-4 rounded shadow bg-light animate__animated animate__fadeIn">
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" id="emailInput" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+       <div class="input-group">
+        <input asp-for="Password" type="password" class="form-control" id="passwordInput" />
+        <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+            <i class="bi bi-eye" id="toggleIcon"></i>            </button> 
+        </div>        <span asp-validation-for="Password" class="text-danger"></span>
+     </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="RememberMe" class="form-check-input" id="rememberMeCheck" />
+        <label asp-for="RememberMe" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+</form>
+
+    @section Scripts {<script> function togglePassword() {
+            let passwordInput = document.getElementById("passwordInput");
+            let toggleIcon = document.getElementById("toggleIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("bi-eye");
+                toggleIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("bi-eye-slash");
+                toggleIcon.classList.add("bi-eye");
+            }
+        }
+    </script>}

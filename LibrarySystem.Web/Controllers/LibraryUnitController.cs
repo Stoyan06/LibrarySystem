@@ -15,7 +15,9 @@ namespace LibrarySystem.Web.Controllers
         private CloudinaryService _cloudinaryService;
         private IService<Image> _imageService;
 
-        public LibraryUnitController(IService<LibraryUnit> libraryUnitService, IService<Title> titleService, CloudinaryService cloudinaryService, IService<Image> imageService)
+        public LibraryUnitController(IService<LibraryUnit> libraryUnitService,
+            IService<Title> titleService, CloudinaryService cloudinaryService,
+            IService<Image> imageService)
         {
             _libraryUnitService = libraryUnitService;
             _titleService = titleService;
@@ -41,10 +43,7 @@ namespace LibrarySystem.Web.Controllers
                     isScrapped = libraryUnit.IsScrapped,
                     TitleId = libraryUnit.TitleId,
                     TitleName = title.Name,
-                    //Isbn = libraryUnit.Isbn,
                     TypeLibraryUnit = libraryUnit.TypeLibraryUnit,
-                    //Year = (int)libraryUnit.Year,
-                    //PublishingHouse = libraryUnit.PublishingHouse
                 };
 
                 if (libraryUnit.Isbn == null) model.Isbn = null;

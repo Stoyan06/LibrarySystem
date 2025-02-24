@@ -3,6 +3,7 @@
     using CloudinaryDotNet;
     using LibrarySystem.Data;
     using LibrarySystem.Data.Repository;
+    using LibrarySystem.Models;
     using LibrarySystem.Services;
     using LibrarySystem.Services.IService;
     using LibrarySystem.Utility;
@@ -98,22 +99,55 @@
             }
         }
 
+        /*
         private static async Task CreateAdmin(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-            var adminEmail = "admin@admin.com";
+            var adminEmail = "stoyanzlankov06@gmail.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
             if (adminUser == null)
             {
-                var user = new IdentityUser { UserName = adminEmail, Email = adminEmail };
-                var result = await userManager.CreateAsync(user, "AdminPassword123!");
+                var identityUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
+                var result = await userManager.CreateAsync(identityUser, "AdminPassword123!");
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, SD.AdminRole);
+                    await userManager.AddToRoleAsync(identityUser, SD.AdminRole);
+                    var user = new User
+                    { FirstName = "Стоян", MiddleName = "Пенков", LastName = "Зланков", IdentityUserId = identityUser.Id };
+                }
+            }
+        }
+        */
+
+        private static async Task CreateAdmin(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userService = serviceProvider.GetRequiredService<IService<User>>();
+
+            var adminEmail = "stoyanzlankov06@gmail.com";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+            if (adminUser == null)
+            {
+                var identityUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
+                var result = await userManager.CreateAsync(identityUser, "AdminPassword123!");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(identityUser, SD.AdminRole);
+
+                    var user = new User
+                    {
+                        FirstName = "Стоян",
+                        MiddleName = "Пенков",
+                        LastName = "Зланков",
+                        IdentityUserId = identityUser.Id
+                    };
+
+                    await userService.AddAsync(user);
                 }
             }
         }
     }
-
 }

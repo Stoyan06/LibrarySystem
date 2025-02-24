@@ -19,8 +19,6 @@ namespace LibrarySystem.Data
 
         public DbSet<MovementOfLibraryUnit> MovementsOfLibraryUnits { get;set; }
 
-        public DbSet<Role> Roles { get; set; }
-
         public DbSet<ScrappedUnit> ScrappedUnits { get; set; }
 
         public DbSet<Section> Sections { get; set; }
@@ -76,32 +74,11 @@ namespace LibrarySystem.Data
             modelBuilder.Entity<Image>().ToTable("images");
             modelBuilder.Entity<LibraryUnit>().ToTable("library_units");
             modelBuilder.Entity<MovementOfLibraryUnit>().ToTable("movements_of_library_units");
-            modelBuilder.Entity<Role>().ToTable("roles");
             modelBuilder.Entity<ScrappedUnit>().ToTable("scrapped_units");
             modelBuilder.Entity<Section>().ToTable("sections");
             modelBuilder.Entity<Title>().ToTable("titles");
             modelBuilder.Entity<TitleAuthor>().ToTable("titles_authors");
             modelBuilder.Entity<User>().ToTable("users");
-
-            modelBuilder.Entity<Role>().HasData(
-                new Role {Id=1, Name = "administrator"},
-                new Role {Id=2, Name = "librarian" },
-                new Role {Id=3, Name = "reader" }
-            );
-
-            modelBuilder.Entity<User>().HasData(
-                 new User
-                 {
-                     Id=1,
-                     Email = "stoyanzlankov06@gmail.com",
-                     FirstName = "Stoyan",
-                     MiddleName = "Penkov",
-                     LastName = "Zlankov",
-                     Username = "stoyan06",
-                     RoleId = 1,
-                     Password = "stoyan06pass"
-                 }
-                );
         }
     }
 }

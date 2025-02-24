@@ -173,40 +173,6 @@ namespace LibrarySystem.Data.Migrations
                     b.ToTable("movements_of_library_units", (string)null);
                 });
 
-            modelBuilder.Entity("LibrarySystem.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("roles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "administrator"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "librarian"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "reader"
-                        });
-                });
-
             modelBuilder.Entity("LibrarySystem.Models.ScrappedUnit", b =>
                 {
                     b.Property<int>("Id")
@@ -307,15 +273,12 @@ namespace LibrarySystem.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdentityUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
@@ -326,37 +289,11 @@ namespace LibrarySystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("users", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "stoyanzlankov06@gmail.com",
-                            FirstName = "Stoyan",
-                            LastName = "Zlankov",
-                            MiddleName = "Penkov",
-                            Password = "stoyan06pass",
-                            RoleId = 1,
-                            Username = "stoyan06"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -668,16 +605,10 @@ namespace LibrarySystem.Data.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("LibrarySystem.Models.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("IdentityUserId")
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

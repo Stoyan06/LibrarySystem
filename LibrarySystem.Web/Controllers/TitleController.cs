@@ -116,7 +116,6 @@ namespace LibrarySystem.Web.Controllers
                 }
                 return View(model);
             } 
-            //await _title_author_service.AddAsync(new TitleAuthor { AuthorId = model.AuthorId, TitleId = title.Id });
         }
 
         public async Task<IActionResult> UpdateTitle(int id)
@@ -218,7 +217,6 @@ namespace LibrarySystem.Web.Controllers
                 }
                 return View(model);
             }
-            //await _title_author_service.AddAsync(new TitleAuthor { AuthorId = model.AuthorId, TitleId = title.Id });
         }
 
         public async Task<IActionResult> RemoveTitle(int id)
