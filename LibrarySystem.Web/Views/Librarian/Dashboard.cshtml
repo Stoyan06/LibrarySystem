@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Библиотекарски Панел";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">📚 Библиотекарски Панел</h2>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Manage Authors -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Librarian" asp-action="ManageAuthors" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-feather-alt admin-icon"></i>
+                        <h5 class="card-title">Управление на автори</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на автори.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Manage Titles -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Librarian" asp-action="ManageTitles" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-book admin-icon"></i>
+                        <h5 class="card-title">Управление на заглавия</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на заглавия.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Manage Sections -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Librarian" asp-action="ManageSections" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-folder-open admin-icon"></i>
+                        <h5 class="card-title">Управление на раздели</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на раздели.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Manage Library Units -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Librarian" asp-action="ManageLibraryUnits" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-archive admin-icon"></i>
+                        <h5 class="card-title">Управление на библиотечни единици</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на библиотечни единици.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Borrow/Return Units -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Librarian" asp-action="BorrowReturn" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-hand-holding-book admin-icon"></i>
+                        <h5 class="card-title">Заемане/Връщане на единица</h5>
+                        <p class="card-text">Управление на заемането и връщането на книги.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .admin-card {
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .admin-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .admin-icon {
+        font-size: 2rem;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+
+    h5 {
+        font-weight: bold;
+    }
+</style>

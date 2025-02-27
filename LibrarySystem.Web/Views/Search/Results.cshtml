@@ -1,0 +1,26 @@
+﻿@model List<SearchResult>
+
+<h2>Search Results</h2>
+<div>
+    @if (Model.Any())
+    {
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/default.jpg" : item.ImageUrl)" alt="Book Image" width="50" />
+                    <strong>@item.Title</strong> by @item.Author
+                    <p>Section: @item.Section | Year: @(item.Year.HasValue ? item.Year.ToString() : "N/A")</p>
+                    <p>Publishing House: @(string.IsNullOrEmpty(item.PublishingHouse) ? "Unknown" : item.PublishingHouse)</p>
+                    <p>Inventory Number: @(string.IsNullOrEmpty(item.InventoryNumber) ? "N/A" : item.InventoryNumber)</p> <!-- 🔹 Display Inventory Number -->
+                    <p>ISBN: @(string.IsNullOrEmpty(item.Isbn) ? "N/A" : item.Isbn)</p> <!-- 🔹 Display ISBN -->
+                    <a href="@Url.Action("Details", "Search", new { id = item.Id })">View Details</a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</div>

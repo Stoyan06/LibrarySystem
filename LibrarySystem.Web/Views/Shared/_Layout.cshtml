@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using LibrarySystem.Utility
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,7 +36,34 @@
                         <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Section" asp-action="AllSections">Раздели</a></li>
                         <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="AllAuthors">Автори</a></li>
                         <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Title" asp-action="AllTitles">Заглавия</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="LibraryUnit" asp-action="AllLibraryUnits">Библиотечни единици</a></li>
+                        @if(User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                        {
+                            <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="LibraryUnit" asp-action="AllLibraryUnits">Библиотечни единици</a></li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                    <path d="M9.605 1.05a1 1 0 0 1 .79 0l1.16.464a1 1 0 0 1 .545.543l.464 1.16a1 1 0 0 1 0 .79l-.464 1.16a1 1 0 0 1-.543.545l-1.16.464a1 1 0 0 1-.79 0l-1.16-.464a1 1 0 0 1-.545-.543l-.464-1.16a1 1 0 0 1 0-.79l.464-1.16a1 1 0 0 1 .543-.545l1.16-.464zM8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492z" />
+                                </svg> Админ панел
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Librarian" asp-action="Dashboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+                                    <path d="M8.5 2.5v11l.5-.5h6.5V3h-6l-.5-.5zm-1 11v-11L7 3H1.5v10h6l-.5.5z" />
+                                </svg> Библиотекарски панел
+                            </a>
+                        </li>
+                        <form asp-controller="Search" asp-action="Results" method="get" class="d-flex ms-auto position-relative">
+                            <input class="form-control me-2 search-box" type="search" name="query" placeholder="Търсене..." aria-label="Search">
+                            <button class="btn btn-outline-light search-btn" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5A5.5 5.5 0 1 1 1 6.5a5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </form>
+
                     </ul>
 
                     <partial name ="_LoginPartial"/>

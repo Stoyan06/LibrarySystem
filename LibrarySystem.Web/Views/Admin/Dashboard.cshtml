@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Админ Панел";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">⚙️ Админ Панел</h2>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Manage Users -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Admin" asp-action="ManageUsers" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-users admin-icon"></i>
+                        <h5 class="card-title">Управление на потребителите</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на потребители.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Admin Information -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="Admin" asp-action="AdminInfo" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-user-shield admin-icon"></i>
+                        <h5 class="card-title">Информация за администратора</h5>
+                        <p class="card-text">Преглед и управление на администраторски данни.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

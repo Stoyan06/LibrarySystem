@@ -1,9 +1,13 @@
 ﻿using LibrarySystem.Models;
 using LibrarySystem.Services;
 using LibrarySystem.Services.IService;
+using LibrarySystem.Utility;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using NuGet.Protocol.Core.Types;
 using static System.Collections.Specialized.BitVector32;
 
 namespace LibrarySystem.Web.Controllers
@@ -27,12 +31,16 @@ namespace LibrarySystem.Web.Controllers
 
         public async Task<IActionResult> AllLibraryUnits()
         {
+            if(!User.IsInRole(SD.LibrarianRole) && !User.IsInRole(SD.AdminRole)){
+                return View("AccessDenied");
+            }
             List<LibraryUnitViewModel> list = new List<LibraryUnitViewModel>();
             IEnumerable<LibraryUnit> libraryUnits = await _libraryUnitService.GetAllAsync();
 
             foreach (LibraryUnit libraryUnit in libraryUnits)
             {
                 Title title = await _titleService.GetByIdAsync(libraryUnit.TitleId);
+                Image image = _imageService.GetWhere(x => x.Id == libraryUnit.ImageId).FirstOrDefault();
 
                 LibraryUnitViewModel model = new LibraryUnitViewModel
                 {
@@ -44,6 +52,7 @@ namespace LibrarySystem.Web.Controllers
                     TitleId = libraryUnit.TitleId,
                     TitleName = title.Name,
                     TypeLibraryUnit = libraryUnit.TypeLibraryUnit,
+                    Image = image
                 };
 
                 if (libraryUnit.Isbn == null) model.Isbn = null;
@@ -87,7 +96,14 @@ namespace LibrarySystem.Web.Controllers
         {
             LibraryUnit unit = _libraryUnitService.GetWhere(x => x.InventoryNumber == model.InventoryNumber).FirstOrDefault();
 
-            if (unit == null)
+            LibraryUnit unitIsbn = null;
+
+            if(model.Isbn != String.Empty && model.Isbn != null)
+            {
+                unitIsbn = _libraryUnitService.GetWhere(x => x.Isbn == model.Isbn).FirstOrDefault();
+            }
+
+            if (unit == null && unitIsbn == null)
             {
                 if (!ModelState.IsValid)
                 {
@@ -125,7 +141,13 @@ namespace LibrarySystem.Web.Controllers
             }
             else
             {
+                if(unit != null && unitIsbn != null)
+                    TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер и с този ISBN";
+                else if (unit != null && unitIsbn == null)
                 TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер";
+
+                else if(unitIsbn != null && unit == null)
+                    TempData["error"] = "Вече съществува библиотечна единица с този ISBN";
 
                 model.Titles = _titleService.GetAllAsync().Result.Select(e => new SelectListItem
                 {
