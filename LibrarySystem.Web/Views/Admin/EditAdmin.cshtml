@@ -1,0 +1,54 @@
+﻿@model UserViewModel
+
+<h2>Редактиране на информацията за администратора</h2>
+
+<form asp-action="EditAdmin" method="post">
+    <div>
+        <label>Потребителско име:</label>
+        <input type="text" asp-for="Username" class="form-control" readonly />
+    </div>
+
+    <div>
+        <label>Имейл:</label>
+        <input type="email" asp-for="Email" class="form-control" readonly />
+    </div>
+
+    <div>
+        <label>Име:</label>
+        <input type="text" asp-for="FirstName" class="form-control" required />
+    </div>
+
+    <div>
+        <label>Презиме:</label>
+        <input type="text" asp-for="MiddleName" class="form-control" />
+    </div>
+
+    <div>
+        <label>Фамилия:</label>
+        <input type="text" asp-for="LastName" class="form-control" required />
+    </div>
+
+    <hr>
+    <h4>Смяна на паролата</h4>
+
+    <div>
+        <label>Стара парола:</label>
+        <input type="password" asp-for="OldPassword" class="form-control" />
+        <span asp-validation-for="OldPassword" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Нова парола:</label>
+        <input type="password" asp-for="NewPassword" class="form-control" />
+    </div>
+
+    <div>
+        <label>Потвърдете новата парола:</label>
+        <input type="password" asp-for="ConfirmNewPassword" class="form-control" />
+        <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-success">Запази промените</button>
+    <a href="@Url.Action("AdminInfo", "Admin")" class="btn btn-secondary">Назад</a>
+</form>

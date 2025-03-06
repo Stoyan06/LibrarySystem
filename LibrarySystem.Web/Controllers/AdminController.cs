@@ -1,4 +1,7 @@
-﻿using LibrarySystem.Data;
+﻿using CloudinaryDotNet.Actions;
+using LibrarySystem.Data;
+using LibrarySystem.Models;
+using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,12 +10,18 @@ using Microsoft.EntityFrameworkCore;
 public class AdminController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly ApplicationDbContext _context;
+    private IService<User> _userService;
 
-    public AdminController(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+    public AdminController(UserManager<IdentityUser> userManager,
+        ApplicationDbContext context, IService<User> userService,
+        RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _context = context;
+        _userService = userService;
+        _roleManager = roleManager;
     }
 
     public async Task<IActionResult> AdminInfo()
@@ -131,5 +140,43 @@ public class AdminController : Controller
         {
             return View("AccessDenied");
         }
+    }
+
+    public async Task<IActionResult> ManageUsers(string searchTerm)
+    {
+        var users = await _userService.GetAllAsync();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            users = users.Where(u =>
+                u.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.MiddleName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+        }
+        List<UserViewModel> list = new List<UserViewModel>();
+
+        ViewData["SearchTerm"] = searchTerm;
+
+        foreach (var user in users)
+        {
+            var identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+            var roles = await _userManager.GetRolesAsync(identityUser); // Get user roles
+            string userRole = roles.FirstOrDefault(); // Get first role or set default
+
+            UserViewModel model = new UserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Username = identityUser.UserName,
+                Role = userRole // Assign the retrieved role
+            };
+
+            list.Add(model);
+        }
+
+        return View(list);
     }
 }

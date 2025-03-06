@@ -1,0 +1,46 @@
+﻿<!-- Views/Search/Results.cshtml -->
+@model List<SearchResult>
+
+<h2>Search Results</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Section</th>
+                <th>Year</th>
+                <th>Inventory Number</th>
+                <th>ISBN</th>
+                <th>Publishing House</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model)
+            {
+                <tr>
+                    <td>@result.Title</td>
+                    <td>@result.Author</td>
+                    <td>@result.Section</td>
+                    <td>@result.Year</td>
+                    <td>@result.InventoryNumber</td>
+                    <td>@result.Isbn</td>
+                    <td>@result.PublishingHouse</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(result.ImageUrl))
+                        {
+                            <img src="@result.ImageUrl" alt="Book Image" style="max-width: 100px;" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found.</p>
+}

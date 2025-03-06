@@ -1,0 +1,32 @@
+﻿@model UserViewModel
+
+<h2>Информация за администратора</h2>
+
+<table>
+    <tr>
+        <td><strong>Потребителско име:</strong></td>
+        <td>@Model.Username</td>
+    </tr>
+    <tr>
+        <td><strong>Имейл:</strong></td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td><strong>Име:</strong></td>
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <td><strong>Презиме:</strong></td>
+        <td>@Model.MiddleName</td>
+    </tr>
+    <tr>
+        <td><strong>Фамилия:</strong></td>
+        <td>@Model.LastName</td>
+    </tr>
+</table>
+
+<!-- Buttons for Editing and Going Back -->
+<div>
+    <a href="@Url.Action("EditAdmin", "Admin")" class="btn btn-primary">Редактирай</a>
+    <a href="javascript:history.back()" class="btn btn-secondary">Назад</a>
+</div>

@@ -14,7 +14,7 @@
                     <p>Publishing House: @(string.IsNullOrEmpty(item.PublishingHouse) ? "Unknown" : item.PublishingHouse)</p>
                     <p>Inventory Number: @(string.IsNullOrEmpty(item.InventoryNumber) ? "N/A" : item.InventoryNumber)</p> <!-- 🔹 Display Inventory Number -->
                     <p>ISBN: @(string.IsNullOrEmpty(item.Isbn) ? "N/A" : item.Isbn)</p> <!-- 🔹 Display ISBN -->
-                    <a href="@Url.Action("Details", "Search", new { id = item.Id })">View Details</a>
+                    <a href="@Url.Action("Details", "LibraryUnit", new { id = item.Id })">View Details</a>
                 </li>
             }
         </ul>
