@@ -42,6 +42,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5JbmZvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/ConfirmDeleteReader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29uZmlybURlbGV0ZVJlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/CreateReader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUmVhZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,8 +58,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/EditReader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFJlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/ManageLibrarians.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlTGlicmFyaWFucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/ManageReaders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlUmVhZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/ManageUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Admin/ReaderDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUmVhZGVyRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Author/AddAuthor.cshtml]

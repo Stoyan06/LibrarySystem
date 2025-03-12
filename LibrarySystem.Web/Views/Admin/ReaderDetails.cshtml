@@ -1,0 +1,29 @@
+﻿@model UserViewModel
+
+@{
+    //ViewData["Title"] = "Детайли за Читател";
+}
+
+<div class="card shadow-lg p-4 rounded-4 mt-4">
+    <h3 class="mb-4 text-primary">Детайли за читател</h3>
+
+    <dl class="row">
+        <dt class="col-sm-3">Име</dt>
+        <dd class="col-sm-9">@Model.FirstName</dd>
+
+        <dt class="col-sm-3">Презиме</dt>
+        <dd class="col-sm-9">@Model.MiddleName</dd>
+
+        <dt class="col-sm-3">Фамилия</dt>
+        <dd class="col-sm-9">@Model.LastName</dd>
+
+        <dt class="col-sm-3">Имейл</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+    </dl>
+
+    <div class="mt-4">
+        <a asp-action="ManageReaders" class="btn btn-secondary">
+            ⬅ Назад
+        </a>
+    </div>
+</div>

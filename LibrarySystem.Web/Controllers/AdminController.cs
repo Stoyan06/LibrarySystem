@@ -5,7 +5,9 @@ using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 public class AdminController : Controller
 {
@@ -144,7 +146,17 @@ public class AdminController : Controller
 
     public async Task<IActionResult> ManageUsers(string searchTerm)
     {
+        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
+
+        return View();
+    }
+
+    public async Task<IActionResult> ManageReaders(string searchTerm)
+    {
+        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
+
         var users = await _userService.GetAllAsync();
+        var allRoles = _roleManager.Roles;
 
         if (!string.IsNullOrEmpty(searchTerm))
         {
@@ -152,7 +164,48 @@ public class AdminController : Controller
                 u.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 u.MiddleName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 u.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
-            ).ToList();
+                ).ToList();
+        }
+        List<UserViewModel> list = new List<UserViewModel>();
+
+        ViewData["SearchTerm"] = searchTerm;
+
+        foreach (User user in users)
+        {
+            var identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+            var roles = await _userManager.GetRolesAsync(identityUser); // Get user roles
+            string userRole = roles.FirstOrDefault(); // Get first role or set default
+
+            UserViewModel model = new UserViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                Username = identityUser.UserName,
+                Role = userRole // Assign the retrieved role
+            };
+
+            if(userRole != SD.LibrarianRole && userRole != SD.AdminRole)
+            list.Add(model);
+        }
+        return View(list);
+    }
+
+    public async Task<IActionResult> ManageLibrarians(string searchTerm)
+    {
+        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
+
+        var users = await _userService.GetAllAsync();
+        var allRoles = _roleManager.Roles;
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            users = users.Where(u =>
+                u.FirstName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.MiddleName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                u.LastName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
         }
         List<UserViewModel> list = new List<UserViewModel>();
 
@@ -173,10 +226,112 @@ public class AdminController : Controller
                 Username = identityUser.UserName,
                 Role = userRole // Assign the retrieved role
             };
+            if (userRole != SD.UserRole && userRole != SD.AdminRole)
+                list.Add(model);
+        }
+        return View(list);
+    }
 
-            list.Add(model);
+    public IActionResult CreateReader()
+    {
+        if (User.IsInRole(SD.AdminRole))
+            return View();
+        else return View("AccessDenied");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateReader(ReaderViewModel model)
+    {
+        if (!User.IsInRole(SD.AdminRole))
+        return View("AccessDenied");
+
+        if (!ModelState.IsValid)
+            return View(model);
+
+        IdentityUser user = await _userManager.FindByEmailAsync(model.Email);
+
+        if (user != null)
+        {
+            TempData["error"] = "Вече е регистриран потребител с този имейл";
+            return View(model);
         }
 
-        return View(list);
+        User newUser = new User()
+        {
+            FirstName = model.FirstName,
+            MiddleName = model.MiddleName,
+            LastName = model.LastName
+        };
+
+        var identityUser = new IdentityUser() { Email = model.Email, UserName = model.Email };
+        var result = await _userManager.CreateAsync(identityUser, model.Password);
+
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(identityUser, SD.UserRole);
+
+            newUser.IdentityUserId = identityUser.Id;
+            await _userService.AddAsync(newUser);
+        }
+        TempData["success"] = "Успешно добавен читател";
+        return RedirectToAction("ManageReaders");
+    }
+
+    public async Task<IActionResult> ReaderDetails(int userId)
+    {
+        if (!User.IsInRole(SD.AdminRole))
+            return View("AccessDenied");
+
+        User user = await _userService.GetByIdAsync(userId);
+        IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+        return View(new UserViewModel 
+        { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email});
+    }
+
+    public async Task<IActionResult> EditReader(int userId)
+    {
+        if (!User.IsInRole(SD.AdminRole))
+            return View("AccessDenied");
+
+        User user = await _userService.GetByIdAsync(userId);
+        IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+        return View(new EditReaderViewModel
+        { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email, Id = userId });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditReader(EditReaderViewModel model)
+    {
+
+        if (!User.IsInRole(SD.AdminRole))
+            return View("AccessDenied");
+        IdentityUser identityUser = await _userManager.FindByEmailAsync(model.Email);
+        User user = await _userService.GetByIdAsync(model.Id);
+
+        if (identityUser != null && user.IdentityUserId != identityUser.Id)
+        {
+            TempData["error"] = "Този имейл вече е използван за друг акаунт";
+            return View(model);
+        }
+        else
+        {
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.MiddleName = model.MiddleName;
+            identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+            identityUser.Email = model.Email;
+            await _userService.UpdateAsync(user);
+            await _userManager.UpdateAsync(identityUser);
+            TempData["success"] = "Успешна редакция";
+            return RedirectToAction("ManageReaders");
+        }
+    }
+
+    public async Task<IActionResult> ConfirmDeleteReader(int readerId)
+    {
+        User reader = await _userService.GetByIdAsync(readerId);
+        IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
+        return View(new ReaderViewModel 
+        { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id});
     }
 }
