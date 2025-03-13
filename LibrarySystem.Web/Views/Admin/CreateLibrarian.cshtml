@@ -1,0 +1,52 @@
+﻿@model ReaderViewModel
+
+@{
+    ViewData["Title"] = "Добавяне на библиотекар";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+
+<form asp-action="CreateLibrarian" method="post" class="needs-validation" novalidate>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label asp-for="FirstName" class="form-label">Име</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="MiddleName" class="form-label">Презиме</label>
+            <input asp-for="MiddleName" class="form-control" />
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="LastName" class="form-label">Фамилия</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Email" class="form-label">Имейл</label>
+            <input asp-for="Email" type="email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Password" class="form-label">Парола</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="ConfirmPassword" class="form-label">Потвърди парола</label>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Запиши</button>
+        <a asp-action="ManageLibrarians" class="btn btn-secondary">Отказ</a>
+    </div>
+</form>

@@ -28,5 +28,6 @@
 <!-- Buttons for Editing and Going Back -->
 <div>
     <a href="@Url.Action("EditAdmin", "Admin")" class="btn btn-primary">Редактирай</a>
-    <a href="javascript:history.back()" class="btn btn-secondary">Назад</a>
+    <a asp-action="ChangeAdminPassword" class="btn btn-secondary">Смяна на паролата</a>
+    <a asp-action="Dashboard" class="btn btn-secondary">Назад</a>
 </div>

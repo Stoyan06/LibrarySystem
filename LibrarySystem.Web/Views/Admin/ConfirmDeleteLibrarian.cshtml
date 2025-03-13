@@ -1,11 +1,11 @@
-﻿@model ReaderViewModel
+﻿@model LibrarianViewModel
 
 @{
     //ViewData["Title"] = "Потвърждение за изтриване на читател";
 }
 
 <div class="card shadow-lg p-4 rounded-4 mt-4">
-    <h3 class="mb-4 text-danger">Сигурни ли сте, че искате да изтриете този читател?</h3>
+    <h3 class="mb-4 text-danger">Сигурни ли сте, че искате да изтриете този библиотекар?</h3>
 
     <dl class="row">
         <dt class="col-sm-3">Име</dt>
@@ -22,7 +22,7 @@
     </dl>
 
     <div class="mt-4">
-            <a asp-action="DeleteReader" asp-route-UserId="@Model.Id" class="btn btn-danger">Изтрий</a>
-            <a asp-action="ManageReaders" class="btn btn-secondary">Отказ</a>
+        <a asp-action="DeleteLibrarian" asp-route-UserId="@Model.Id" class="btn btn-danger">Изтрий</a>
+        <a asp-action="ManageLibrarians" class="btn btn-secondary">Отказ</a>
     </div>
 </div>

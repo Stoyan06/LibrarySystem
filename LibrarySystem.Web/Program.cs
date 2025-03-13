@@ -123,31 +123,38 @@
         private static async Task CreateAdmin(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userService = serviceProvider.GetRequiredService<IService<User>>();
 
+            // Ensure the Admin role exist
+
+            // Get all users in the Admin role
+            var admins = await userManager.GetUsersInRoleAsync(SD.AdminRole);
+
+            // If there's already at least one admin, do nothing
+            if (admins.Any())
+                return;
+
+            // Otherwise, create the default admin
             var adminEmail = "stoyanzlankov06@gmail.com";
-            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            var identityUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
+            var result = await userManager.CreateAsync(identityUser, "AdminPassword123!");
 
-            if (adminUser == null)
+            if (result.Succeeded)
             {
-                var identityUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
-                var result = await userManager.CreateAsync(identityUser, "AdminPassword123!");
+                await userManager.AddToRoleAsync(identityUser, SD.AdminRole);
 
-                if (result.Succeeded)
+                var user = new User
                 {
-                    await userManager.AddToRoleAsync(identityUser, SD.AdminRole);
+                    FirstName = "Стоян",
+                    MiddleName = "Пенков",
+                    LastName = "Зланков",
+                    IdentityUserId = identityUser.Id
+                };
 
-                    var user = new User
-                    {
-                        FirstName = "Стоян",
-                        MiddleName = "Пенков",
-                        LastName = "Зланков",
-                        IdentityUserId = identityUser.Id
-                    };
-
-                    await userService.AddAsync(user);
-                }
+                await userService.AddAsync(user);
             }
         }
+
     }
 }

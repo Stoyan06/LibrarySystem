@@ -1,13 +1,13 @@
-﻿@model EditReaderViewModel
+﻿@model EditLibrarianViewModel
 
 @{
-    //ViewData["Title"] = "Редактиране на Читател";
+    //ViewData["Title"] = "Редактиране на библиотекар";
 }
 
 <div class="card shadow-lg p-4 rounded-4 mt-4">
-    <h3 class="mb-4 text-primary">Редактиране на читател</h3>
+    <h3 class="mb-4 text-primary">Редактиране на библиотекар</h3>
 
-    <form asp-action="EditReader" method="post">
+    <form asp-action="EditLibrarian" method="post">
         <input type="hidden" asp-for="Id" />
 
         <div class="mb-3">
@@ -35,15 +35,17 @@
         </div>
 
         <hr />
-       
+
 
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-success">💾 Запази</button>
-            <a asp-action="ChangeReaderPassword" asp-route-UserId="@Model.Id" class="btn btn-secondary">
+            <a asp-action="ChangeLibrarianPassword" asp-route-UserId="@Model.Id" class="btn btn-secondary">
                 Смяна на парола
             </a>
-            <a asp-action="ManageReaders" class="btn btn-secondary">⬅ Отказ</a>
+            <a asp-action="ManageLibrarians" class="btn btn-secondary">⬅ Отказ</a>
         </div>
+
+
     </form>
 </div>
 
