@@ -3,6 +3,7 @@ using LibrarySystem.Data;
 using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
+using LibrarySystem.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -59,9 +60,8 @@ public class AdminController : Controller
 
         var userDetails = _context.Users
             .Where(u => u.IdentityUserId == user.Id)
-            .Select(u => new UserViewModel
+            .Select(u => new EditAdminViewModel
             {
-                Username = user.UserName,
                 Email = user.Email,
                 FirstName = u.FirstName,
                 MiddleName = u.MiddleName,
@@ -73,7 +73,7 @@ public class AdminController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditAdmin(UserViewModel model)
+    public async Task<IActionResult> EditAdmin(EditAdminViewModel model)
     {
         if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
 
@@ -85,49 +85,20 @@ public class AdminController : Controller
         var user = await _userManager.GetUserAsync(User);
 
         var userDetails = await _context.Users.FirstOrDefaultAsync(u => u.IdentityUserId == user.Id);
+
         
 
         // Update user details
         userDetails.FirstName = model.FirstName;
         userDetails.MiddleName = model.MiddleName;
         userDetails.LastName = model.LastName;
+        user.Email = model.Email;
 
         // Save changes
         _context.Users.Update(userDetails);
+        await _userManager.UpdateAsync(user);
         await _context.SaveChangesAsync();
-
-        // Handle password change
-        if (!string.IsNullOrEmpty(model.NewPassword))
-        {
-            if (string.IsNullOrEmpty(model.OldPassword))
-            {
-                ModelState.AddModelError("", "Моля, въведете старата парола.");
-                return View(model);
-            }
-
-            var passwordCheck = await _userManager.CheckPasswordAsync(user, model.OldPassword);
-            if (!passwordCheck)
-            {
-                ModelState.AddModelError("", "Старата парола е грешна.");
-                return View(model);
-            }
-
-            if (model.NewPassword != model.ConfirmNewPassword)
-            {
-                ModelState.AddModelError("", "Новите пароли не съвпадат.");
-                return View(model);
-            }
-
-            var passwordChangeResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-            if (!passwordChangeResult.Succeeded)
-            {
-                foreach (var error in passwordChangeResult.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-                return View(model);
-            }
-        }
+        TempData["success"] = "Информацията за администратора е променена";
 
         return RedirectToAction("AdminInfo");
     }
@@ -548,27 +519,41 @@ public class AdminController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> ChangeAdminPassword(ChangePasswordViewModel model)
+    public async Task<IActionResult> ChangeAdminPassword(ChangeAdminPasswordViewModel model)
     {
         if (!User.IsInRole(SD.AdminRole))
             return View("AccessDenied");
 
-        var admins = await _userManager.GetUsersInRoleAsync(SD.AdminRole);
-        var admin = admins.FirstOrDefault();
-
         if (!ModelState.IsValid)
+            return View(model);
+
+        // Get currently logged-in admin IdentityUser
+        var identityUser = await _userManager.GetUserAsync(User);
+
+        // Check if the old password is correct
+        var passwordCheck = await _userManager.CheckPasswordAsync(identityUser, model.OldPassword);
+        if (!passwordCheck)
         {
+            TempData["error"] = "Старата парола е грешна";
             return View(model);
         }
-        
-        //if(model.OldPassword.ToHashSet().ToString() == admin.PasswordHash)
-        //{
-            TempData["success"] = "success";
-        //}
-        //else
-       // {
-            TempData["error"] = "error";
-       // }
-        return RedirectToAction("AdminInfo");
+
+        // Change password
+        var result = await _userManager.ChangePasswordAsync(identityUser, model.OldPassword, model.ConfirmNewPassword);
+        if (result.Succeeded)
+        {
+            TempData["success"] = "Паролата е променена успешно.";
+            return RedirectToAction("AdminInfo", "Admin");
+        }
+        else
+        {
+            foreach (var error in result.Errors)
+            {
+                TempData["error"] = error.Description;
+            }
+
+            return View(model);
+        }
     }
+
 }

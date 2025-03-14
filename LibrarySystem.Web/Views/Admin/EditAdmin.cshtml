@@ -1,16 +1,12 @@
-﻿@model UserViewModel
+﻿@model EditAdminViewModel
 
 <h2>Редактиране на информацията за администратора</h2>
 
 <form asp-action="EditAdmin" method="post">
-    <div>
-        <label>Потребителско име:</label>
-        <input type="text" asp-for="Username" class="form-control" readonly />
-    </div>
 
     <div>
         <label>Имейл:</label>
-        <input type="email" asp-for="Email" class="form-control" readonly />
+        <input type="email" asp-for="Email" class="form-control" />
     </div>
 
     <div>
@@ -27,4 +23,7 @@
         <label>Фамилия:</label>
         <input type="text" asp-for="LastName" class="form-control" required />
     </div>
+    <br />
+    <button type="submit" class="btn btn-success">Запази промените</button>
+    <a href="@Url.Action("AdminInfo", "Admin")" class="btn btn-secondary">Назад</a>
 </form>
