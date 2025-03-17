@@ -22,8 +22,5 @@ namespace LibrarySystem.Models
         public int LibrarianId { get; set; }
 
         public User Librarian {  get; set; }
-
-        [Required]
-        public string Comment { get; set; }
     }
 }

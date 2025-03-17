@@ -14,9 +14,21 @@ namespace LibrarySystem.Web.Controllers
             _sectionService = sectionService;
         }
 
-        public async Task<IActionResult> AllSections()
+        public async Task<IActionResult> AllSections(string SearchTerm)
         {
-            return View(await _sectionService.GetAllAsync());
+            ViewData["SearchTerm"] = SearchTerm;
+
+            var sections = await _sectionService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                sections = sections
+                    .Where(x => x.Name != null && x.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                    || x.Description.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View(sections);
         }
 
         public IActionResult AddSection()

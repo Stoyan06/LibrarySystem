@@ -356,8 +356,7 @@ namespace LibrarySystem.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LibraryUnitId = table.Column<int>(type: "int", nullable: false),
                     DateTimeOfScrapping = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LibrarianId = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LibrarianId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

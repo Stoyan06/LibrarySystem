@@ -3,6 +3,7 @@ using LibrarySystem.Services;
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,15 +19,24 @@ namespace LibrarySystem.Web.Controllers
         private IService<Title> _titleService;
         private CloudinaryService _cloudinaryService;
         private IService<Image> _imageService;
+        private IService<ScrappedUnit> _scrappedUnitService;
+        private IService<User> _userService;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public LibraryUnitController(IService<LibraryUnit> libraryUnitService,
             IService<Title> titleService, CloudinaryService cloudinaryService,
-            IService<Image> imageService)
+            IService<Image> imageService, IService<ScrappedUnit> screppedUnitService,
+            IService<User> userService, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _libraryUnitService = libraryUnitService;
             _titleService = titleService;
             _cloudinaryService = cloudinaryService;
             _imageService = imageService;
+            _scrappedUnitService = screppedUnitService;
+            _userService = userService;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> AllLibraryUnits()
@@ -36,6 +46,50 @@ namespace LibrarySystem.Web.Controllers
             }
             List<LibraryUnitViewModel> list = new List<LibraryUnitViewModel>();
             IEnumerable<LibraryUnit> libraryUnits = await _libraryUnitService.GetAllAsync();
+
+            foreach (LibraryUnit libraryUnit in libraryUnits)
+            {
+                Title title = await _titleService.GetByIdAsync(libraryUnit.TitleId);
+                Image image = _imageService.GetWhere(x => x.Id == libraryUnit.ImageId).FirstOrDefault();
+
+                LibraryUnitViewModel model = new LibraryUnitViewModel
+                {
+                    Id = libraryUnit.Id,
+                    InventoryNumber = libraryUnit.InventoryNumber,
+                    Condition = libraryUnit.Condition,
+                    Medium = libraryUnit.Medium,
+                    isScrapped = libraryUnit.IsScrapped,
+                    TitleId = libraryUnit.TitleId,
+                    TitleName = title.Name,
+                    TypeLibraryUnit = libraryUnit.TypeLibraryUnit,
+                    Image = image
+                };
+
+                if (libraryUnit.Isbn == null) model.Isbn = null;
+                else model.Isbn = libraryUnit.Isbn;
+
+
+                if (libraryUnit.Year == null) model.Year = null;
+                else model.Year = libraryUnit.Year;
+
+
+                if (libraryUnit.PublishingHouse == null) model.PublishingHouse = null;
+                else model.PublishingHouse = libraryUnit.PublishingHouse;
+
+                list.Add(model);
+            }
+
+            return View(list.Where(x => x.isScrapped == false));
+        }
+
+        public async Task<IActionResult> ScrappedLibraryUnits()
+        {
+            if (!User.IsInRole(SD.LibrarianRole) && !User.IsInRole(SD.AdminRole))
+            {
+                return View("AccessDenied");
+            }
+            List<LibraryUnitViewModel> list = new List<LibraryUnitViewModel>();
+            IEnumerable<LibraryUnit> libraryUnits = _libraryUnitService.GetWhere(x => x.IsScrapped == true).ToList();
 
             foreach (LibraryUnit libraryUnit in libraryUnits)
             {
@@ -328,6 +382,20 @@ namespace LibrarySystem.Web.Controllers
             else model.PublishingHouse = unit.PublishingHouse;
 
             return View("ConfirmScrape", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Scrape(LibraryUnitViewModel model)
+        {
+            LibraryUnit unit = await _libraryUnitService.GetByIdAsync (model.Id);
+            unit.IsScrapped = true;
+            await _libraryUnitService.UpdateAsync (unit);
+            var identityUser = await _userManager.GetUserAsync(User);
+            string identityUserId = identityUser.Id;
+            User user = _userService.GetWhere(x => x.IdentityUserId == identityUserId).First();
+            await _scrappedUnitService.AddAsync(new ScrappedUnit { LibrarianId = user.Id, DateTimeOfScrapping = DateTime.Now, LibraryUnitId = unit.Id });
+            TempData["success"] = "Успешно бракувана единица";
+            return RedirectToAction("AllLibraryUnits");
         }
     }
 }

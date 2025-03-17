@@ -2,7 +2,7 @@
 @model IEnumerable<LibraryUnitViewModel>
 
 @{
-    ViewData["Title"] = "Библиотечни единици";
+    ViewData["Title"] = "Бракувани единици";
 }
 
 <head>
@@ -21,23 +21,15 @@
     </style>
 </head>
 
-<h1>Библиотечни единици</h1>
+<h1>Бракувани единици</h1>
 
-<a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary mb-3">
-    <i class="bi bi-plus-square"></i> Добави библиотечна единица
-</a>
-
-<a asp-action="ExtendedSearch" asp-controller="Search" class="btn btn-primary mb-3">
-    <i class="bi bi-plus-square"></i> Търсене на единици
-</a>
-
-<a asp-action="ScrappedLibraryUnits" asp-controller="LibraryUnit" class="btn btn-primary mb-3">
-    <i class="bi bi-plus-square"></i> Бракувани единици
+<a asp-action=" ExtendedSearchScrapped" asp-controller="Search" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-square"></i> Търсене на бракувани единици
 </a>
 
 @if (Model == null || !Model.Any())
 {
-    <h2>Няма съществуващи библиотечни единици в системата</h2>
+    <h2>Няма бракувани единици в системата</h2>
 }
 else
 {
@@ -55,12 +47,6 @@ else
                     <div class="card-footer text-center">
                         <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i> Детайли
-                        </a>
-                        <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" class="btn btn-primary btn-sm">
-                            <i class="bi bi-pen"></i> Редактирай
-                        </a>
-                        <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id" class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash3"></i> Бракувай
                         </a>
                     </div>
                 </div>

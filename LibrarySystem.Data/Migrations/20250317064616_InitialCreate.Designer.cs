@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibrarySystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250224063610_InitialCreate")]
+    [Migration("20250317064616_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -183,10 +183,6 @@ namespace LibrarySystem.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateTimeOfScrapping")
                         .HasColumnType("datetime2");

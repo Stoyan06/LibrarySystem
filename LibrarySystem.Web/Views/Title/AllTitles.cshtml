@@ -10,6 +10,11 @@
 </head>
 
 <h1>Заглавия</h1>
+<form method="get" asp-action="AllTitles">
+    <input type="text" name="SearchTerm" value="@ViewData["SearchTerm"]" placeholder="Търси заглавие" class="form-control mb-3" />
+    <button type="submit" class="btn btn-primary">Търси</button>
+    <a asp-action="AllTitles" class="btn btn-secondary">Нулирай</a>
+</form>
 
 <a asp-action="AddTitle" asp-controller="Title" class="btn btn-primary mb-3">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
@@ -20,7 +25,7 @@
 
 @if (Model == null || !Model.Any())
 {
-    <h2>Няма съществуващи заглавия в системата</h2>
+    <h2>Няма намерени заглавия</h2>
 }
 else
 {

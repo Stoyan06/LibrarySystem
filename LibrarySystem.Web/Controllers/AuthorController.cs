@@ -1,5 +1,6 @@
 ﻿using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.Web.Controllers
@@ -13,10 +14,22 @@ namespace LibrarySystem.Web.Controllers
             _authorService = authorService;
         }
 
-        public async Task<IActionResult> AllAuthors()
+        public async Task<IActionResult> AllAuthors(string SearchTerm)
         {
-            return View(await _authorService.GetAllAsync());
+            ViewData["SearchTerm"] = SearchTerm;
+
+            var authors = await _authorService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                authors = authors
+                    .Where(x => x.FullName != null && x.FullName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View(authors);
         }
+
 
         public IActionResult AddAuthor()
         {

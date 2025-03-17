@@ -29,12 +29,24 @@ namespace LibrarySystem.Web.Controllers
             _libraryUnitService = libraryUnitService;
         }
 
-        public async Task<IActionResult> AllTitles()
+        public async Task<IActionResult> AllTitles(string SearchTerm)
         {
-            return View(await _titleService.GetAllAsync());
+            ViewData["SearchTerm"] = SearchTerm;
+
+            var titles = await _titleService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                titles = titles
+                    .Where(x => x.Name != null && x.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                    || x.Description.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View(titles);
         }
 
-       [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> AddTitle()
         {
             IEnumerable<Section> sections = await _sectionService.GetAllAsync();
