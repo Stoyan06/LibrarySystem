@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibrarySystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250317064616_InitialCreate")]
+    [Migration("20250319082343_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -127,53 +127,6 @@ namespace LibrarySystem.Data.Migrations
                     b.HasIndex("TitleId");
 
                     b.ToTable("library_units", (string)null);
-                });
-
-            modelBuilder.Entity("LibrarySystem.Models.MovementOfLibraryUnit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateOnly>("Deadline")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("LibrarianId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LibraryUnitId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReaderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LibrarianId");
-
-                    b.HasIndex("LibraryUnitId");
-
-                    b.HasIndex("ReaderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("movements_of_library_units", (string)null);
                 });
 
             modelBuilder.Entity("LibrarySystem.Models.ScrappedUnit", b =>
@@ -493,6 +446,53 @@ namespace LibrarySystem.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MovementOfLibraryUnit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly?>("Deadline")
+                        .HasColumnType("date");
+
+                    b.Property<int>("LibrarianId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibraryUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReaderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibrarianId");
+
+                    b.HasIndex("LibraryUnitId");
+
+                    b.HasIndex("ReaderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("movements_of_library_units", (string)null);
+                });
+
             modelBuilder.Entity("LibrarySystem.Models.Favorite", b =>
                 {
                     b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
@@ -525,35 +525,6 @@ namespace LibrarySystem.Data.Migrations
                     b.Navigation("Image");
 
                     b.Navigation("Title");
-                });
-
-            modelBuilder.Entity("LibrarySystem.Models.MovementOfLibraryUnit", b =>
-                {
-                    b.HasOne("LibrarySystem.Models.User", "Librarian")
-                        .WithMany()
-                        .HasForeignKey("LibrarianId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
-                        .WithMany()
-                        .HasForeignKey("LibraryUnitId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("LibrarySystem.Models.User", "Reader")
-                        .WithMany()
-                        .HasForeignKey("ReaderId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("LibrarySystem.Models.User", null)
-                        .WithMany("MovementsOfLibraryUnits")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Librarian");
-
-                    b.Navigation("LibraryUnit");
-
-                    b.Navigation("Reader");
                 });
 
             modelBuilder.Entity("LibrarySystem.Models.ScrappedUnit", b =>
@@ -653,6 +624,37 @@ namespace LibrarySystem.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MovementOfLibraryUnit", b =>
+                {
+                    b.HasOne("LibrarySystem.Models.User", "Librarian")
+                        .WithMany()
+                        .HasForeignKey("LibrarianId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
+                        .WithMany()
+                        .HasForeignKey("LibraryUnitId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("LibrarySystem.Models.User", "Reader")
+                        .WithMany()
+                        .HasForeignKey("ReaderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("LibrarySystem.Models.User", null)
+                        .WithMany("MovementsOfLibraryUnits")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Librarian");
+
+                    b.Navigation("LibraryUnit");
+
+                    b.Navigation("Reader");
                 });
 
             modelBuilder.Entity("LibrarySystem.Models.Author", b =>

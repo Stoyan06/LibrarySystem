@@ -1,0 +1,122 @@
+﻿@model LibrarySystem.Models.MovementViewModel
+
+@{
+    ViewData["Title"] = "Register Library Unit Movement";
+}
+
+<h2>Register Library Unit Movement</h2>
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="ActionDateTime"></label>
+        <input asp-for="ActionDateTime" class="form-control" type="datetime-local" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DeadLine"></label>
+        <input asp-for="DeadLine" class="form-control" type="datetime-local" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OperationType"></label>
+        <select asp-for="OperationType" class="form-control">
+            <option value="Giving">Giving</option>
+            <option value="Returning">Returning</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Library Unit</label>
+        <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
+        <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
+        <div id="libraryUnitInfo" class="search-results"></div>
+    </div>
+
+    <div class="form-group">
+        <label>Reader</label>
+        <input type="text" id="readerSearch" class="form-control" placeholder="Search by name..." autocomplete="off" />
+        <input type="hidden" asp-for="ReaderId" id="ReaderId" />
+        <div id="readerInfo" class="search-results"></div>
+    </div>
+
+    <div class="form-group">
+        <label>Librarian</label>
+        <input type="text" id="librarianSearch" class="form-control" placeholder="Search by name..." autocomplete="off" />
+        <input type="hidden" asp-for="LibrarianId" id="LibrarianId" />
+        <div id="librarianInfo" class="search-results"></div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Condition"></label>
+        <input asp-for="Condition" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<style>
+    .search-results {
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        width: 100%;
+        max-height: 150px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+    }
+
+    .search-result {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+        .search-result:hover {
+            background: #f0f0f0;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function setupSearch(inputId, hiddenFieldId, infoDivId, searchUrl) {
+                $(inputId).on("input", function () {
+                    let query = $(this).val();
+                    if (query.length > 2) {
+                        $.getJSON(searchUrl, { query: query }, function (data) {
+                            let html = "";
+                            if (data.length === 0) {
+                                html = "<div class='search-result'>No results found</div>";
+                            } else {
+                                data.forEach(item => {
+                                    html += `<div class='search-result' data-id='${item.id}'>${item.text}</div>`;
+                                });
+                            }
+                            $(infoDivId).html(html).show();
+                        });
+                    } else {
+                        $(infoDivId).hide();
+                    }
+                });
+
+                $(document).on("click", infoDivId + " .search-result", function () {
+                    let id = $(this).data("id");
+                    let text = $(this).text();
+                    $(inputId).val(text);
+                    $(hiddenFieldId).val(id);
+                    $(infoDivId).hide();
+                });
+
+                $(document).click(function (event) {
+                    if (!$(event.target).closest(infoDivId).length && !$(event.target).closest(inputId).length) {
+                        $(infoDivId).hide();
+                    }
+                });
+            }
+
+            setupSearch("#libraryUnitSearch", "#LibraryUnitId", "#libraryUnitInfo", "/Movement/SearchLibraryUnit");
+            setupSearch("#readerSearch", "#ReaderId", "#readerInfo", "/Movement/SearchUser");
+            setupSearch("#librarianSearch", "#LibrarianId", "#librarianInfo", "/Movement/SearchUser");
+        });
+    </script>
+}

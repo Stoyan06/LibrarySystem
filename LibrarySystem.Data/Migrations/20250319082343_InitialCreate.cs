@@ -315,11 +315,11 @@ namespace LibrarySystem.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Deadline = table.Column<DateOnly>(type: "date", nullable: false),
+                    Deadline = table.Column<DateOnly>(type: "date", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LibraryUnitId = table.Column<int>(type: "int", nullable: false),
-                    ReaderId = table.Column<int>(type: "int", nullable: true),
-                    LibrarianId = table.Column<int>(type: "int", nullable: true),
+                    ReaderId = table.Column<int>(type: "int", nullable: false),
+                    LibrarianId = table.Column<int>(type: "int", nullable: false),
                     Condition = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },

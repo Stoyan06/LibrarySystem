@@ -1,0 +1,44 @@
+﻿<!-- Views/Search/ExtendedSearch.cshtml -->
+@model ExtendedSearchViewModel
+
+<h2>Extended Search Scrapped</h2>
+
+<form asp-action="ExtendedSearchScrapped" method="post">
+    <div class="form-group">
+        <label asp-for="Section">Section</label>
+        <select asp-for="Section" class="form-control">
+            <option value="">-- Select Section --</option>
+            @foreach (var sec in ViewBag.Sections)
+            {
+                <option value="@sec">@sec</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Author">Author</label>
+        <input asp-for="Author" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Condition">Condition</label>
+        <input asp-for="Condition" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Medium">Medium</label>
+        <input asp-for="Medium" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublishingHouse">Publishing House</label>
+        <input asp-for="PublishingHouse" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
