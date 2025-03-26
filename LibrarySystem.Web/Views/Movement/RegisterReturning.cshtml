@@ -1,0 +1,95 @@
+﻿@model LibrarySystem.Models.MovementReturningViewModel
+
+@{
+    ViewData["Title"] = "Register Library Unit Movement";
+}
+
+<h2>Register Library Unit Movement</h2>
+
+<form asp-action="RegisterReturning" method="post">
+    <div class="form-group position-relative">
+        <label>Library Unit</label>
+        <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
+        <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
+        <div id="libraryUnitInfo" class="search-results"></div>
+        <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Condition"></label>
+        <input asp-for="Condition" class="form-control" />
+        <span asp-validation-for="Condition" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<style>
+    .search-results {
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        width: 100%;
+        max-height: 150px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+    }
+
+    .search-result {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+        .search-result:hover {
+            background: #f0f0f0;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function setupSearch(inputId, hiddenFieldId, infoDivId, searchUrl) {
+                $(inputId).on("input", function () {
+                    let query = $(this).val().trim();
+                    if (query.length > 2) {
+                        $.getJSON(searchUrl, { query: query })
+                            .done(function (data) {
+                                let html = "";
+                                if (data.length === 0) {
+                                    html = "<div class='search-result'>No results found</div>";
+                                } else {
+                                    data.forEach(item => {
+                                        html += `<div class='search-result' data-id='${item.id}'>${item.text}</div>`;
+                                    });
+                                }
+                                $(infoDivId).html(html).show();
+                            })
+                            .fail(function () {
+                                console.error("Search request failed.");
+                            });
+                    } else {
+                        $(infoDivId).hide();
+                    }
+                });
+
+                $(document).on("click", infoDivId + " .search-result", function () {
+                    let id = $(this).data("id");
+                    let text = $(this).text();
+                    $(inputId).val(text);
+                    $(hiddenFieldId).val(id);
+                    $(infoDivId).hide();
+                });
+
+                $(document).click(function (event) {
+                    if (!$(event.target).closest(infoDivId).length && !$(event.target).closest(inputId).length) {
+                        $(infoDivId).hide();
+                    }
+                });
+            }
+
+            // Call search for units that are unavailable and NOT scrapped
+            setupSearch("#libraryUnitSearch", "#LibraryUnitId", "#libraryUnitInfo", "/Movement/SearchUnavailableLibraryUnits");
+        });
+    </script>
+}

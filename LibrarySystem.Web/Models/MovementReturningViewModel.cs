@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LibrarySystem.Models
 {
-    public class MovementViewModel
+    public class MovementReturningViewModel
     {
         public DateOnly? DeadLine { get; set; }
 
@@ -13,11 +13,8 @@ namespace LibrarySystem.Models
         [Required(ErrorMessage = "Please select a Reader.")]
         public int ReaderId { get; set; }
 
-        //another view model for returning the unit with condition field
-        /*
         [Required(ErrorMessage = "Please enter the book condition.")]
         [StringLength(255, ErrorMessage = "Condition must not exceed 255 characters.")]
         public string Condition { get; set; }
-        */
     }
 }

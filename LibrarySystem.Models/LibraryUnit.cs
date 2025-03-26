@@ -44,5 +44,7 @@ namespace LibrarySystem.Models
         [ForeignKey(nameof(Image))]
         public int ImageId { get; set; }
         public Image? Image { get; set; }
+
+        public bool IsAvailable {  get; set; }
     }
 }

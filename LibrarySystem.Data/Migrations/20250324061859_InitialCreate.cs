@@ -246,7 +246,8 @@ namespace LibrarySystem.Data.Migrations
                     TypeLibraryUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: true),
                     PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageId = table.Column<int>(type: "int", nullable: false)
+                    ImageId = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

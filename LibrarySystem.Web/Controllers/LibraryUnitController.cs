@@ -186,7 +186,8 @@ namespace LibrarySystem.Web.Controllers
                         TypeLibraryUnit = model.TypeLibraryUnit,
                         Year = model.Year,
                         PublishingHouse = model.PublishingHouse,
-                        ImageId = image.Id
+                        ImageId = image.Id,
+                        IsAvailable = true
                     };
                     await _libraryUnitService.AddAsync(newUnit);
                     TempData["success"] = "Успешно добавена библиотечна единица";
@@ -388,7 +389,14 @@ namespace LibrarySystem.Web.Controllers
         public async Task<IActionResult> Scrape(LibraryUnitViewModel model)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync (model.Id);
+            if(unit.IsAvailable == false)
+            {
+                TempData["error"] = "Единицата не може да бъде бракувана, защото е заета от читател!";
+                return RedirectToAction("AllLibraryUnits");
+            }
+
             unit.IsScrapped = true;
+            unit.IsAvailable = false;
             await _libraryUnitService.UpdateAsync (unit);
             var identityUser = await _userManager.GetUserAsync(User);
             string identityUserId = identityUser.Id;
