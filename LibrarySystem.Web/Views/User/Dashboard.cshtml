@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Потребителски Панел";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">Потребителски Панел</h2>
+     <!-- Admin Information -->
+        <div class="col-md-5">
+            <a asp-area="" asp-controller="User" asp-action="UserInfo" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-user-shield admin-icon"></i>
+                        <h5 class="card-title">Информация за потребителя</h5>
+                        <p class="card-text">Преглед и управление на вашите данни.</p>
+                    </div>
+                </div>
+            </a>
+
+        <a asp-area="" asp-controller="User" asp-action="UserHistory" class="admin-card">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-user-shield admin-icon"></i>
+                    <h5 class="card-title">История на заеманията</h5>
+                    <p class="card-text">Преглед на заетите и върнатите единици.</p>
+                </div>
+            </div>
+        </a>
+        </div>
+    </div>
+</div>

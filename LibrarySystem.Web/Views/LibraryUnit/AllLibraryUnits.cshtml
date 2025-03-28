@@ -1,4 +1,5 @@
 ﻿@using LibrarySystem.Models
+@using LibrarySystem.Utility
 @model IEnumerable<LibraryUnitViewModel>
 
 @{
@@ -62,6 +63,11 @@ else
                         <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash3"></i> Бракувай
                         </a>
+
+                        @if (User.IsInRole(SD.UserRole))
+                        {
+                            <a href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })" class="btn btn-success">Резервирай</a>
+                        }
                     </div>
                 </div>
             </div>

@@ -39,12 +39,15 @@ namespace LibrarySystem.Models
         [AllowNull]
         public string? PublishingHouse { get; set; }
 
-        public List<Favorite> FavoriteToUsers { get; set; } = new List<Favorite>();
-
         [ForeignKey(nameof(Image))]
         public int ImageId { get; set; }
         public Image? Image { get; set; }
 
         public bool IsAvailable {  get; set; }
+
+        public bool IsSavedByUser { get; set; }
+
+        [ForeignKey(nameof(User))]
+        public int? SavedByReaderId { get; set; }
     }
 }

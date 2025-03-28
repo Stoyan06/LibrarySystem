@@ -41,9 +41,7 @@ namespace LibrarySystem.Web.Controllers
 
         public async Task<IActionResult> AllLibraryUnits()
         {
-            if(!User.IsInRole(SD.LibrarianRole) && !User.IsInRole(SD.AdminRole)){
-                return View("AccessDenied");
-            }
+            
             List<LibraryUnitViewModel> list = new List<LibraryUnitViewModel>();
             IEnumerable<LibraryUnit> libraryUnits = await _libraryUnitService.GetAllAsync();
 
@@ -187,7 +185,8 @@ namespace LibrarySystem.Web.Controllers
                         Year = model.Year,
                         PublishingHouse = model.PublishingHouse,
                         ImageId = image.Id,
-                        IsAvailable = true
+                        IsAvailable = true,
+                        IsSavedByUser = false
                     };
                     await _libraryUnitService.AddAsync(newUnit);
                     TempData["success"] = "Успешно добавена библиотечна единица";

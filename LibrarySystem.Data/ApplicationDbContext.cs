@@ -11,8 +11,6 @@ namespace LibrarySystem.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Author> Authors { get; set; }
 
-        public DbSet<Favorite> Favorites { get; set; }
-
         public DbSet<Image> Images { get; set; }
 
         public DbSet<LibraryUnit> LibraryUnits { get; set; }
@@ -43,13 +41,9 @@ namespace LibrarySystem.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TitleAuthor>().HasKey(x => new { x.AuthorId, x.TitleId });
-            modelBuilder.Entity<Favorite>().HasKey(x => new { x.LibraryUnitId, x.ReaderId });
 
             modelBuilder.Entity<Title>().HasMany(x => x.TitleAuthors).WithOne(x => x.Title);
             modelBuilder.Entity<Author>().HasMany(x => x.AuthorTitles).WithOne(x => x.Author);
-
-            modelBuilder.Entity<User>().HasMany(x => x.Favorites).WithOne(x => x.Reader);
-            modelBuilder.Entity<LibraryUnit>().HasMany(x => x.FavoriteToUsers).WithOne(x => x.LibraryUnit);
 
             modelBuilder.Entity<MovementOfLibraryUnit>()
            .HasOne(x => x.Reader)
@@ -70,7 +64,6 @@ namespace LibrarySystem.Data
             .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Author>().ToTable("authors");
-            modelBuilder.Entity<Favorite>().ToTable("favorites");
             modelBuilder.Entity<Image>().ToTable("images");
             modelBuilder.Entity<LibraryUnit>().ToTable("library_units");
             modelBuilder.Entity<MovementOfLibraryUnit>().ToTable("movements_of_library_units");

@@ -39,25 +39,6 @@ namespace LibrarySystem.Data.Migrations
                     b.ToTable("authors", (string)null);
                 });
 
-            modelBuilder.Entity("LibrarySystem.Models.Favorite", b =>
-                {
-                    b.Property<int>("LibraryUnitId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReaderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LibraryUnitId", "ReaderId");
-
-                    b.HasIndex("ReaderId");
-
-                    b.ToTable("favorites", (string)null);
-                });
-
             modelBuilder.Entity("LibrarySystem.Models.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -97,6 +78,9 @@ namespace LibrarySystem.Data.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSavedByUser")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsScrapped")
                         .HasColumnType("bit");
 
@@ -109,6 +93,9 @@ namespace LibrarySystem.Data.Migrations
 
                     b.Property<string>("PublishingHouse")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SavedByReaderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("TitleId")
                         .HasColumnType("int");
@@ -493,23 +480,6 @@ namespace LibrarySystem.Data.Migrations
                     b.ToTable("movements_of_library_units", (string)null);
                 });
 
-            modelBuilder.Entity("LibrarySystem.Models.Favorite", b =>
-                {
-                    b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
-                        .WithMany("FavoriteToUsers")
-                        .HasForeignKey("LibraryUnitId")
-                        .IsRequired();
-
-                    b.HasOne("LibrarySystem.Models.User", "Reader")
-                        .WithMany("Favorites")
-                        .HasForeignKey("ReaderId")
-                        .IsRequired();
-
-                    b.Navigation("LibraryUnit");
-
-                    b.Navigation("Reader");
-                });
-
             modelBuilder.Entity("LibrarySystem.Models.LibraryUnit", b =>
                 {
                     b.HasOne("LibrarySystem.Models.Image", "Image")
@@ -662,11 +632,6 @@ namespace LibrarySystem.Data.Migrations
                     b.Navigation("AuthorTitles");
                 });
 
-            modelBuilder.Entity("LibrarySystem.Models.LibraryUnit", b =>
-                {
-                    b.Navigation("FavoriteToUsers");
-                });
-
             modelBuilder.Entity("LibrarySystem.Models.Title", b =>
                 {
                     b.Navigation("TitleAuthors");
@@ -674,8 +639,6 @@ namespace LibrarySystem.Data.Migrations
 
             modelBuilder.Entity("LibrarySystem.Models.User", b =>
                 {
-                    b.Navigation("Favorites");
-
                     b.Navigation("MovementsOfLibraryUnits");
                 });
 #pragma warning restore 612, 618

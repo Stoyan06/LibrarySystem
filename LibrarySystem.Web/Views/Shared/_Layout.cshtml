@@ -53,7 +53,26 @@
                                 </a>
                             </li>
                         }
+
+                        @if (User.IsInRole(SD.UserRole))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Dashboard">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+                                        <path d="M8.5 2.5v11l.5-.5h6.5V3h-6l-.5-.5zm-1 11v-11L7 3H1.5v10h6l-.5.5z" />
+                                    </svg> Потребителски панел
+                                </a>
+                            </li>
+                        }
                         
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LibraryUnit" asp-action="AllLibraryUnits">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+                                    <path d="M8.5 2.5v11l.5-.5h6.5V3h-6l-.5-.5zm-1 11v-11L7 3H1.5v10h6l-.5.5z" />
+                                </svg> Всички материали
+                            </a>
+                        </li>
+
                         <form asp-controller="Search" asp-action="Results" method="get" class="d-flex ms-auto position-relative">
                             <input class="form-control me-2 search-box" type="search" name="query" placeholder="Търсене на материали" aria-label="Search">
                             <button class="btn btn-outline-light search-btn" type="submit">

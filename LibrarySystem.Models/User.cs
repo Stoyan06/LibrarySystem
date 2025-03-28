@@ -19,8 +19,6 @@ namespace LibrarySystem.Models
         [Required]
         public string LastName { get; set; }
 
-        public List<Favorite> Favorites { get; set; }
-
         public List<MovementOfLibraryUnit> MovementsOfLibraryUnits { get; set; }
 
         public IdentityUser IdentityUser { get;set; }

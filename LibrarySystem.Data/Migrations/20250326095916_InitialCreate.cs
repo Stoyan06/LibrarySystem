@@ -247,7 +247,9 @@ namespace LibrarySystem.Data.Migrations
                     Year = table.Column<int>(type: "int", nullable: true),
                     PublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageId = table.Column<int>(type: "int", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    IsSavedByUser = table.Column<bool>(type: "bit", nullable: false),
+                    SavedByReaderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -283,29 +285,6 @@ namespace LibrarySystem.Data.Migrations
                         name: "FK_titles_authors_titles_TitleId",
                         column: x => x.TitleId,
                         principalTable: "titles",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "favorites",
-                columns: table => new
-                {
-                    ReaderId = table.Column<int>(type: "int", nullable: false),
-                    LibraryUnitId = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_favorites", x => new { x.LibraryUnitId, x.ReaderId });
-                    table.ForeignKey(
-                        name: "FK_favorites_library_units_LibraryUnitId",
-                        column: x => x.LibraryUnitId,
-                        principalTable: "library_units",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_favorites_users_ReaderId",
-                        column: x => x.ReaderId,
-                        principalTable: "users",
                         principalColumn: "Id");
                 });
 
@@ -414,11 +393,6 @@ namespace LibrarySystem.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_favorites_ReaderId",
-                table: "favorites",
-                column: "ReaderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_library_units_ImageId",
                 table: "library_units",
                 column: "ImageId");
@@ -491,9 +465,6 @@ namespace LibrarySystem.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "favorites");
 
             migrationBuilder.DropTable(
                 name: "movements_of_library_units");

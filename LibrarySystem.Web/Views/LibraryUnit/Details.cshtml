@@ -1,4 +1,5 @@
 ﻿@using LibrarySystem.Models
+@using LibrarySystem.Utility
 @model LibraryUnitViewModel
 
 @{
@@ -86,6 +87,11 @@
         <div class="d-flex justify-content-between mt-4">
             <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
         </div>
+
+        @if (User.IsInRole(SD.UserRole))
+        {
+            <a href="@Url.Action("Reserve", "LibraryUnit", new { id = Model.Id })" class="btn btn-success">Резервирай</a>
+        }
     </div>
 </div>
 
