@@ -33,20 +33,19 @@ public class AccountController : Controller
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                TempData["Error"] = "User not found.";
+                TempData["Error"] = "Потребителят не е намерен.";
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
-            // var result = await _signInManager.PasswordSignInAsync("Admin", model.Password, model.RememberMe, false);            
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);          
 
             if (result.Succeeded)
             {
-                TempData["Success"] = "Влизането е успешно";
+                TempData["Success"] = "Влизането е успешно.";
                 return RedirectToAction("Index", "Home");
             }
-            TempData["Error"] = "Invalid login attempt.";
-            ModelState.AddModelError("", "Invalid login attempt.");
+            TempData["Error"] = "Неуспешно влизане.";
+            ModelState.AddModelError("", "Неуспешно влизане.");
 
         }
         return View(model);
@@ -70,15 +69,14 @@ public class AccountController : Controller
                     FirstName = model.FirstName,
                     MiddleName = model.MiddleName,
                     LastName = model.LastName,
-                    // Свързване с новосъздадения потребител
                     IdentityUserId = user.Id
                 };
 
                   await _userService.AddAsync(userNew);
-                  await _userManager.AddToRoleAsync(user, SD.UserRole); // По подразбиране новите потребители са "User"                    await _signInManager.SignInAsync(user, isPersistent: true);
+                  await _userManager.AddToRoleAsync(user, SD.UserRole);
 
                   await _signInManager.SignInAsync(user, isPersistent: false);
-                TempData["Success"] = "Успешна регистрация!";
+                TempData["Success"] = "Успешна регистрация.";
                 return RedirectToAction("Index","Home");
             }
             foreach (var error in result.Errors)
@@ -90,7 +88,7 @@ public class AccountController : Controller
         var existingUser = await _userManager.FindByEmailAsync(model.Email);
         if (existingUser != null)
         {
-            ModelState.AddModelError("Email", "Този email вече е използван за регистрацията на акаунт!");
+            ModelState.AddModelError("Email", "Този email вече е регистриран в системата.");
             return View(model);
         }
         return View(model);

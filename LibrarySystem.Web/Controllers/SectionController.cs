@@ -50,12 +50,12 @@ namespace LibrarySystem.Web.Controllers
             if(_sectionService.ExisisSection(section.Name).Result == false)
             {
                 await _sectionService.AddAsync(section);
-                TempData["success"] = "Успешно добавен раздел";
+                TempData["success"] = "Успешно добавен раздел.";
                 return RedirectToAction("AllSections");
             }
             else
             {
-                TempData["error"] = "Вече съществува раздел с това име";
+                TempData["error"] = "Вече съществува раздел с това име.";
                 return RedirectToAction("AddSection");
             }
         }
@@ -83,12 +83,12 @@ namespace LibrarySystem.Web.Controllers
                 || check.Name == section.Name)
             {
                 await _sectionService.UpdateAsync(section);
-                TempData["success"] = "Успешно редактиран раздел";
+                TempData["success"] = "Успешно редактиран раздел.";
                 return RedirectToAction("AllSections");
             }
             else
             {
-                TempData["error"] = "Вече съществува раздел с това име";
+                TempData["error"] = "Вече съществува раздел с това име.";
                 return RedirectToAction("UpdateSection", section.Id);
             }
         }
@@ -105,12 +105,12 @@ namespace LibrarySystem.Web.Controllers
             try
             {
                 await _sectionService.DeleteAsync(section.Id);
-                TempData["success"] = "Успешно изтрит раздел";
+                TempData["success"] = "Успешно изтрит раздел.";
                 return RedirectToAction("AllSections");
             }
             catch (Exception ex)
             {
-                TempData["error"] = "Има обвързани заглавия с този раздел";
+                TempData["error"] = "Разделът не може да бъде изтрит, защото към него има обвързани заглавия.";
                 return RedirectToAction("AllSections");
             }
         }

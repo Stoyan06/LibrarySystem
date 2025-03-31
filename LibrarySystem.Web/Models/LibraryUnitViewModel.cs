@@ -42,6 +42,6 @@ public class LibraryUnitViewModel
     public int? ImageId { get; set; }
     public Image? Image { get; set; }
 
-    [Required(ErrorMessage="Моля, добавете изображение")]
+    [Required(ErrorMessage="Моля, добавете изображение.")]
     public IFormFile UploadedImage { get; set; }
 }

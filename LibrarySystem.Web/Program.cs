@@ -34,6 +34,7 @@
             builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
             builder.Services.AddScoped<ISectionService, SectionService>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<ISearchService, SearchService>();
 
             builder.Services.AddScoped<CloudinaryService>();
 
@@ -155,6 +156,5 @@
                 await userService.AddAsync(user);
             }
         }
-
     }
 }

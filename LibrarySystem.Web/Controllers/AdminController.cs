@@ -1,40 +1,35 @@
-﻿using CloudinaryDotNet.Actions;
-using LibrarySystem.Data;
+﻿using LibrarySystem.Data;
 using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using LibrarySystem.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 public class AdminController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly ApplicationDbContext _context;
     private IService<User> _userService;
 
     public AdminController(UserManager<IdentityUser> userManager,
-        ApplicationDbContext context, IService<User> userService,
+        IService<User> userService,
         RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
-        _context = context;
         _userService = userService;
         _roleManager = roleManager;
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> AdminInfo()
     {
-        if (User.IsInRole(SD.AdminRole))
-        {
             var user = await _userManager.GetUserAsync(User);
 
-            var userDetails = _context.Users
-                .Where(u => u.IdentityUserId == user.Id)
+            var userDetails = _userService.GetWhere
+                (u => u.IdentityUserId == user.Id)
                 .Select(u => new UserViewModel
                 {
                     Username = user.UserName,
@@ -46,20 +41,16 @@ public class AdminController : Controller
                 .FirstOrDefault();
 
             return View(userDetails);
-        }
-        else
-        {
-            return View("AccessDenied");
-        }
     }
+
+
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditAdmin()
     {
-        if(!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
-
         var user = await _userManager.GetUserAsync(User);
 
-        var userDetails = _context.Users
-            .Where(u => u.IdentityUserId == user.Id)
+        var userDetails = _userService.GetWhere
+            (u => u.IdentityUserId == user.Id)
             .Select(u => new EditAdminViewModel
             {
                 Email = user.Email,
@@ -73,10 +64,9 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditAdmin(EditAdminViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
-
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -84,48 +74,36 @@ public class AdminController : Controller
 
         var user = await _userManager.GetUserAsync(User);
 
-        var userDetails = await _context.Users.FirstOrDefaultAsync(u => u.IdentityUserId == user.Id);
+        var userDetails = _userService.GetWhere(u => u.IdentityUserId == user.Id).First();
 
-        
-
-        // Update user details
         userDetails.FirstName = model.FirstName;
         userDetails.MiddleName = model.MiddleName;
         userDetails.LastName = model.LastName;
         user.Email = model.Email;
 
-        // Save changes
-        _context.Users.Update(userDetails);
+        await _userService.UpdateAsync(userDetails);
         await _userManager.UpdateAsync(user);
-        await _context.SaveChangesAsync();
-        TempData["success"] = "Информацията за администратора е променена";
+        TempData["success"] = "Успешна промяна на данните.";
 
         return RedirectToAction("AdminInfo");
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public IActionResult Dashboard()
     {
-        if (User.IsInRole(SD.AdminRole))
-        {
-            return View();
-        }
-        else
-        {
-            return View("AccessDenied");
-        }
+        return View();
     }
 
-    public async Task<IActionResult> ManageUsers(string searchTerm)
+    [Authorize(Roles = SD.AdminRole)]
+    public IActionResult ManageUsers(string searchTerm)
     {
-        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
 
         return View();
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ManageReaders(string searchTerm)
     {
-        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
-
         var users = await _userService.GetAllAsync();
         var allRoles = _roleManager.Roles;
 
@@ -144,8 +122,8 @@ public class AdminController : Controller
         foreach (User user in users)
         {
             var identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
-            var roles = await _userManager.GetRolesAsync(identityUser); // Get user roles
-            string userRole = roles.FirstOrDefault(); // Get first role or set default
+            var roles = await _userManager.GetRolesAsync(identityUser);
+            string userRole = roles.FirstOrDefault();
 
             UserViewModel model = new UserViewModel
             {
@@ -154,7 +132,7 @@ public class AdminController : Controller
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
                 Username = identityUser.UserName,
-                Role = userRole // Assign the retrieved role
+                Role = userRole
             };
 
             if(userRole != SD.LibrarianRole && userRole != SD.AdminRole)
@@ -163,10 +141,9 @@ public class AdminController : Controller
         return View(list);
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ManageLibrarians(string searchTerm)
     {
-        if (!User.IsInRole(SD.AdminRole)) return View("AccessDenied");
-
         var users = await _userService.GetAllAsync();
         var allRoles = _roleManager.Roles;
 
@@ -185,8 +162,8 @@ public class AdminController : Controller
         foreach (var user in users)
         {
             var identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
-            var roles = await _userManager.GetRolesAsync(identityUser); // Get user roles
-            string userRole = roles.FirstOrDefault(); // Get first role or set default
+            var roles = await _userManager.GetRolesAsync(identityUser);
+            string userRole = roles.FirstOrDefault();
 
             UserViewModel model = new UserViewModel
             {
@@ -195,7 +172,7 @@ public class AdminController : Controller
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
                 Username = identityUser.UserName,
-                Role = userRole // Assign the retrieved role
+                Role = userRole
             };
             if (userRole != SD.UserRole && userRole != SD.AdminRole)
                 list.Add(model);
@@ -203,19 +180,16 @@ public class AdminController : Controller
         return View(list);
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public IActionResult CreateReader()
     {
-        if (User.IsInRole(SD.AdminRole))
-            return View();
-        else return View("AccessDenied");
+        return View();
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> CreateReader(ReaderViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole))
-        return View("AccessDenied");
-
         if (!ModelState.IsValid)
             return View(model);
 
@@ -223,7 +197,7 @@ public class AdminController : Controller
 
         if (user != null)
         {
-            TempData["error"] = "Вече е регистриран потребител с този имейл";
+            TempData["error"] = "Вече е регистриран потребител с този email адрес.";
             return View(model);
         }
 
@@ -244,26 +218,22 @@ public class AdminController : Controller
             newUser.IdentityUserId = identityUser.Id;
             await _userService.AddAsync(newUser);
         }
-        TempData["success"] = "Успешно добавен читател";
+        TempData["success"] = "Успешно добавен читател.";
         return RedirectToAction("ManageReaders");
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ReaderDetails(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new UserViewModel 
         { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email});
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditReader(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new EditReaderViewModel
@@ -271,17 +241,15 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditReader(EditReaderViewModel model)
     {
-
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
         IdentityUser identityUser = await _userManager.FindByEmailAsync(model.Email);
         User user = await _userService.GetByIdAsync(model.Id);
 
         if (identityUser != null && user.IdentityUserId != identityUser.Id)
         {
-            TempData["error"] = "Този имейл вече е използван за друг акаунт";
+            TempData["error"] = "Този email вече е използван за друг акаунт.";
             return View(model);
         }
         else
@@ -293,49 +261,42 @@ public class AdminController : Controller
             identityUser.Email = model.Email;
             await _userService.UpdateAsync(user);
             await _userManager.UpdateAsync(identityUser);
-            TempData["success"] = "Успешна редакция";
+            TempData["success"] = "Успешна редакция.";
             return RedirectToAction("ManageReaders");
         }
     }
+
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ConfirmDeleteReader(int userId)
     {
-        if(!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User reader = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
         return View(new ReaderViewModel 
         { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id});
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteReader(int userId)
     {
-        if(!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         await _userService.DeleteAsync(user.Id);
         await _userManager.RemoveFromRoleAsync(identityUser, SD.UserRole);
         await _userManager.DeleteAsync(identityUser);
-        TempData["success"] = "Успешно премахнат читател";
+        TempData["success"] = "Читателят е премахнат успешно.";
         return RedirectToAction("ManageReaders");
     }
 
-    //librarian
+    [Authorize(Roles = SD.AdminRole)]
     public IActionResult CreateLibrarian()
     {
-        if (User.IsInRole(SD.AdminRole))
-            return View();
-        else return View("AccessDenied");
+        return View();
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> CreateLibrarian(ReaderViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         if (!ModelState.IsValid)
             return View(model);
 
@@ -343,7 +304,7 @@ public class AdminController : Controller
 
         if (user != null)
         {
-            TempData["error"] = "Вече е регистриран потребител с този имейл";
+            TempData["error"] = "Вече е регистриран потребител с този email адрес.";
             return View(model);
         }
 
@@ -364,26 +325,22 @@ public class AdminController : Controller
             newUser.IdentityUserId = identityUser.Id;
             await _userService.AddAsync(newUser);
         }
-        TempData["success"] = "Успешно добавен библиотекар";
+        TempData["success"] = "Успешно добавен библиотекар.";
         return RedirectToAction("ManageLibrarians");
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> LibrarianDetails(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new UserViewModel
         { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email });
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditLibrarian(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new EditLibrarianViewModel
@@ -391,17 +348,15 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditLibrarian(EditLibrarianViewModel model)
     {
-
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
         IdentityUser identityUser = await _userManager.FindByEmailAsync(model.Email);
         User user = await _userService.GetByIdAsync(model.Id);
 
         if (identityUser != null && user.IdentityUserId != identityUser.Id)
         {
-            TempData["error"] = "Този имейл вече е използван за друг акаунт";
+            TempData["error"] = "Този email вече е използван за друг акаунт.";
             return View(model);
         }
         else
@@ -413,41 +368,35 @@ public class AdminController : Controller
             identityUser.Email = model.Email;
             await _userService.UpdateAsync(user);
             await _userManager.UpdateAsync(identityUser);
-            TempData["success"] = "Успешна редакция";
+            TempData["success"] = "Успешна редакция на библиотекар.";
             return RedirectToAction("ManageLibrarians");
         }
     }
+
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ConfirmDeleteLibrarian(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User reader = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
         return View(new LibrarianViewModel
         { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id });
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteLibrarian(int userId)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User user = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         await _userService.DeleteAsync(user.Id);
         await _userManager.RemoveFromRoleAsync(identityUser, SD.LibrarianRole);
         await _userManager.DeleteAsync(identityUser);
-        TempData["success"] = "Успешно премахнат библиотекар";
+        TempData["success"] = "Успешно премахнат библиотекар.";
         return RedirectToAction("ManageLibrarians");
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeReaderPassword(int userId)
     {
-
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User reader = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
         return View(new ChangePasswordViewModel 
@@ -457,29 +406,24 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeReaderPassword(ChangePasswordViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         if (ModelState.IsValid)
         {
             User reader = await _userService.GetByIdAsync(model.Id);
             IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
             await _userManager.RemovePasswordAsync(identityUser);
             await _userManager.AddPasswordAsync(identityUser, model.ConfirmNewPassword);
-            TempData["success"] = "Успешна смяна на паролата";
+            TempData["success"] = "Паролата е сменена успешно.";
             return RedirectToAction("EditReader", new {userId = model.Id});
         }
         else return View(model);
     }
 
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeLibrarianPassword(int userId)
     {
-
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         User reader = await _userService.GetByIdAsync(userId);
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
         return View(new ChangePasswordViewModel
@@ -493,11 +437,9 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeLibrarianPassword(ChangePasswordViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         if (ModelState.IsValid)
         {
             User reader = await _userService.GetByIdAsync(model.Id);
@@ -505,40 +447,34 @@ public class AdminController : Controller
             await _userManager.RemovePasswordAsync(identityUser);
             await _userManager.AddPasswordAsync(identityUser, model.ConfirmNewPassword);
 
-            TempData["success"] = "Успешна смяна на паролата";
+            TempData["success"] = "Паролата е сменена успешно.";
             return RedirectToAction("EditLibrarian",new { userId = model.Id });
         }
         else return View(model);
     }
 
-    public async Task<IActionResult> ChangeAdminPassword()
+    [Authorize(Roles = SD.AdminRole)]
+    public IActionResult ChangeAdminPassword()
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
         return View();
     }
 
     [HttpPost]
+    [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeAdminPassword(ChangeAdminPasswordViewModel model)
     {
-        if (!User.IsInRole(SD.AdminRole))
-            return View("AccessDenied");
-
         if (!ModelState.IsValid)
             return View(model);
 
-        // Get currently logged-in admin IdentityUser
         var identityUser = await _userManager.GetUserAsync(User);
 
-        // Check if the old password is correct
         var passwordCheck = await _userManager.CheckPasswordAsync(identityUser, model.OldPassword);
         if (!passwordCheck)
         {
-            TempData["error"] = "Старата парола е грешна";
+            TempData["error"] = "Старата парола е грешна.";
             return View(model);
         }
 
-        // Change password
         var result = await _userManager.ChangePasswordAsync(identityUser, model.OldPassword, model.ConfirmNewPassword);
         if (result.Succeeded)
         {

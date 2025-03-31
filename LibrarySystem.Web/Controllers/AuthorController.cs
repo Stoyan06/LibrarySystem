@@ -1,11 +1,13 @@
 ﻿using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
+using LibrarySystem.Utility;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.Web.Controllers
 {
-    public class AuthorController:Controller
+    public class AuthorController : Controller
     {
         private IAuthorService _authorService;
 
@@ -14,6 +16,7 @@ namespace LibrarySystem.Web.Controllers
             _authorService = authorService;
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AllAuthors(string SearchTerm)
         {
             ViewData["SearchTerm"] = SearchTerm;
@@ -30,13 +33,14 @@ namespace LibrarySystem.Web.Controllers
             return View(authors);
         }
 
-
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult AddAuthor()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddAuthor(Author author)
         {
             if(author.FullName == null || author.FullName == string.Empty)
@@ -44,22 +48,24 @@ namespace LibrarySystem.Web.Controllers
             if(await _authorService.ExistsAuthor(author.FullName) == false)
             {
                 await _authorService.AddAsync(author);
-                TempData["success"] = "Успешно добавен автор";
+                TempData["success"] = "Успешно добавен автор.";
                 return RedirectToAction("AllAuthors");
             }
             else
             {
-                TempData["error"] = "Вече съществува автор с това име";
+                TempData["error"] = "Вече съществува автор с тези имена.";
                 return RedirectToAction("AddAuthor");
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateAuthor(int id)
         {
             return View(await _authorService.GetByIdAsync(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateAuthor(Author author)
         {
             Author getAuthor = await _authorService.GetByIdAsync(author.Id);
@@ -69,16 +75,17 @@ namespace LibrarySystem.Web.Controllers
             if(await _authorService.ExistsAuthor(author.FullName) == false || getAuthor.FullName == author.FullName)
             {
                 await _authorService.UpdateAsync(author);
-                TempData["success"] = "Успешно редактиран автор";
+                TempData["success"] = "Успешно редактиран автор.";
                 return RedirectToAction("AllAuthors");
             }
             else
             {
-                TempData["error"] = "Вече съществува автор с тези имена";
+                TempData["error"] = "Вече съществува автор с тези имена.";
                 return RedirectToAction("UpdateAuthor", author.Id);
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveAuthor(int id)
         {
             Author aut = await _authorService.GetByIdAsync(id);
@@ -86,17 +93,18 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveAuthor(Author author)
         {
             try
             {
                 await _authorService.DeleteAsync(author.Id);
-                TempData["success"] = "Успешно премахнат автор";
+                TempData["success"] = "Успешно премахнат автор.";
                 return RedirectToAction("AllAuthors");
             }
             catch(Exception ex)
             {
-                TempData["error"] = "Има обвързани заглавия с този автор";
+                TempData["error"] = "Изтриването е неуспешно. Има обвързани заглавия с този автор.";
                 return RedirectToAction("AllAuthors");
             }
         }

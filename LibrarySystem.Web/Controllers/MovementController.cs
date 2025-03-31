@@ -6,37 +6,42 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using LibrarySystem.Utility;
 using LibrarySystem.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibrarySystem.Controllers
 {
     public class MovementController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IService<User> _userService;
         private readonly IService<LibraryUnit> _libraryUnitService;
         private readonly IService<MovementOfLibraryUnit> _movementService;
 
-        public MovementController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IService<User> userService, IService<LibraryUnit> libraryUnitService, IService<MovementOfLibraryUnit> movementService)
+        public MovementController(UserManager<IdentityUser> userManager,
+            IService<User> userService, 
+            IService<LibraryUnit> libraryUnitService,
+            IService<MovementOfLibraryUnit> movementService)
         {
-            _context = context;
             _userManager = userManager;
             _userService = userService;
             _libraryUnitService = libraryUnitService;
             _movementService = movementService;
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult Register()
         {
             return View();
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult RegisterGiving()
         {
             return View(new MovementViewModel());
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RegisterGiving(MovementViewModel model)
         {
             if (ModelState.IsValid)
@@ -56,24 +61,25 @@ namespace LibrarySystem.Controllers
                     Condition = unit.Condition
                 };
 
-                _context.MovementsOfLibraryUnits.Add(movement);
+                await _movementService.AddAsync(movement);
                 unit.IsAvailable = false;
                 await _libraryUnitService.UpdateAsync(unit);
-                _context.SaveChanges();
 
-                TempData["success"] = "success movement";
+                TempData["success"] = "Движението е регистрирано успешно.";
 
                 return RedirectToAction("Register");
             }
             return View(model);
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult RegisterReturning()
         {
             return View(new MovementReturningViewModel());
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RegisterReturning(MovementReturningViewModel model)
         {
             if (ModelState.IsValid)
@@ -94,13 +100,12 @@ namespace LibrarySystem.Controllers
                     Condition = model.Condition
                 };
 
-                _context.MovementsOfLibraryUnits.Add(movement);
+                await _movementService.AddAsync(movement);
                 unit.IsAvailable = true;
                 unit.Condition = model.Condition;
                 await _libraryUnitService.UpdateAsync(unit);
-                _context.SaveChanges();
 
-                TempData["success"] = "success movement returning";
+                TempData["success"] = "Движението е регистрирано успешно.";
 
                 return RedirectToAction("Register");
             }
@@ -108,46 +113,45 @@ namespace LibrarySystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult SearchAvailableLibraryUnits(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return Json(new { });
 
-            var results = _context.LibraryUnits
-                .Include(u => u.Title)
-                .Where(u => u.IsAvailable &&
-                            (u.InventoryNumber.Contains(query) ||
-                             (u.Isbn != null && u.Isbn.Contains(query)) ||
-                             u.Title.Name.Contains(query)))
-                .Select(u => new
-                {
-                    id = u.Id,
-                    text = $"{u.InventoryNumber} - {u.Title.Name}"
-                })
-                .ToList();
+            var results = _libraryUnitService.GetWhere(u => u.IsAvailable &&
+                (u.InventoryNumber.Contains(query) ||
+                 (u.Isbn != null && u.Isbn.Contains(query)) ||
+                 u.Title.Name.Contains(query)))
+            .Select(u => new
+            {
+              id = u.Id,
+              text = $"{u.InventoryNumber} - {u.Title.Name}"
+             })
+             .ToList();
+
 
             return Json(results);
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult SearchUnavailableLibraryUnits(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return Json(new { });
 
-            var results = _context.LibraryUnits
-                .Include(u => u.Title)
-                .Where(u => !u.IsAvailable && !u.IsScrapped &&
-                           (u.InventoryNumber.Contains(query) ||
-                            (u.Isbn != null && u.Isbn.Contains(query)) ||
-                            u.Title.Name.Contains(query)))
-                .Select(u => new
-                {
-                    id = u.Id,
-                    text = $"{u.InventoryNumber} - {u.Title.Name}"
-                })
-                .ToList();
-
+            var results = _libraryUnitService.GetWhere(u => !u.IsAvailable && !u.IsScrapped &&
+                (u.InventoryNumber.Contains(query) ||
+                 (u.Isbn != null && u.Isbn.Contains(query)) ||
+                 u.Title.Name.Contains(query)))
+            .Select(u => new
+            {
+                id = u.Id,
+                text = $"{u.InventoryNumber} - {u.Title.Name}"
+             })
+             .ToList();
+          
             return Json(results);
         }
 
@@ -155,28 +159,26 @@ namespace LibrarySystem.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> SearchUser(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return Json(new { });
 
-            var userIdsInRole = await _userManager.GetUsersInRoleAsync(SD.UserRole); // Get all users in role "User"
+            var userIdsInRole = await _userManager.GetUsersInRoleAsync(SD.UserRole);
             var filteredUserIds = userIdsInRole.Select(u => u.Id).ToList();
 
-            var users = await _context.Users
-                .Where(u => filteredUserIds.Contains(u.IdentityUserId) &&
-                           (EF.Functions.Like(u.FirstName, $"%{query}%") ||
-                            EF.Functions.Like(u.LastName, $"%{query}%")))
-                .Select(u => new
-                {
-                    id = u.Id,
-                    text = $"{u.FirstName} {u.LastName}"
-                })
-                .ToListAsync();
+            var users = _userService.GetWhere(u => filteredUserIds.Contains(u.IdentityUserId) &&
+                 (EF.Functions.Like(u.FirstName, $"%{query}%") ||
+                  EF.Functions.Like(u.LastName, $"%{query}%")))
+           .Select(u => new
+           {
+             id = u.Id,
+             text = $"{u.FirstName} {u.LastName}"
+            })
+           .ToList();
 
             return Json(users);
         }
-
-
     }
 }

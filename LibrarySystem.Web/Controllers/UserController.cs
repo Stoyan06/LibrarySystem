@@ -14,17 +14,15 @@ public class UserController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly ApplicationDbContext _context;
     private IService<User> _userService;
     private IService<MovementOfLibraryUnit> _movementOfLibraryUnitService;
     private IService<LibraryUnit> _libraryUnitService;
 
-    public UserController(UserManager<IdentityUser> userManager,
-        ApplicationDbContext context, IService<User> userService,
-        RoleManager<IdentityRole> roleManager, IService<MovementOfLibraryUnit> movementOfLibraryUnitService, IService<LibraryUnit> libraryUnitService)
+    public UserController(UserManager<IdentityUser> userManager, IService<User> userService,
+        RoleManager<IdentityRole> roleManager, IService<MovementOfLibraryUnit> movementOfLibraryUnitService,
+        IService<LibraryUnit> libraryUnitService)
     {
         _userManager = userManager;
-        _context = context;
         _userService = userService;
         _roleManager = roleManager;
         _movementOfLibraryUnitService = movementOfLibraryUnitService;
@@ -36,8 +34,8 @@ public class UserController : Controller
         
             var user = await _userManager.GetUserAsync(User);
 
-            var userDetails = _context.Users
-                .Where(u => u.IdentityUserId == user.Id)
+            var userDetails = _userService.GetWhere
+                (u => u.IdentityUserId == user.Id)
                 .Select(u => new UserViewModel
                 {
                     Username = user.UserName,
@@ -56,8 +54,8 @@ public class UserController : Controller
 
         var user = await _userManager.GetUserAsync(User);
 
-        var userDetails = _context.Users
-            .Where(u => u.IdentityUserId == user.Id)
+        var userDetails = _userService.GetWhere
+            (u => u.IdentityUserId == user.Id)
             .Select(u => new EditUserViewModel
             {
                 Email = user.Email,
@@ -73,8 +71,6 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> EditUser(EditUserViewModel model)
     {
-        
-
         if (!ModelState.IsValid)
         {
             return View(model);
@@ -82,21 +78,16 @@ public class UserController : Controller
 
         var user = await _userManager.GetUserAsync(User);
 
-        var userDetails = await _context.Users.FirstOrDefaultAsync(u => u.IdentityUserId == user.Id);
+        var userDetails = _userService.GetWhere(u => u.IdentityUserId == user.Id).First();
 
-
-
-        // Update user details
         userDetails.FirstName = model.FirstName;
         userDetails.MiddleName = model.MiddleName;
         userDetails.LastName = model.LastName;
         user.Email = model.Email;
 
-        // Save changes
-        _context.Users.Update(userDetails);
+        await _userService.UpdateAsync(userDetails);
         await _userManager.UpdateAsync(user);
-        await _context.SaveChangesAsync();
-        TempData["success"] = "Информацията за потребителя е променена";
+        TempData["success"] = "Информацията за потребителя е променена успешно.";
 
         return RedirectToAction("UserInfo");
     }
@@ -109,7 +100,6 @@ public class UserController : Controller
     
     public async Task<IActionResult> ChangeUserPassword()
     {
-        
         return View();
     }
 
@@ -117,22 +107,18 @@ public class UserController : Controller
     public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordViewModel model)
     {
         
-
-        if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             return View(model);
 
-        // Get currently logged-in admin IdentityUser
         var identityUser = await _userManager.GetUserAsync(User);
 
-        // Check if the old password is correct
         var passwordCheck = await _userManager.CheckPasswordAsync(identityUser, model.OldPassword);
         if (!passwordCheck)
         {
-            TempData["error"] = "Старата парола е грешна";
+            TempData["error"] = "Въведената стара парола е грешна.";
             return View(model);
         }
 
-        // Change password
         var result = await _userManager.ChangePasswordAsync(identityUser, model.OldPassword, model.ConfirmNewPassword);
         if (result.Succeeded)
         {

@@ -7,14 +7,13 @@ namespace LibrarySystem.Models
     {
         public DateOnly? DeadLine { get; set; }
 
-        [Required(ErrorMessage = "Please select a Library Unit.")]
+        [Required(ErrorMessage = "Изберете библиотечна единица.")]
         public int LibraryUnitId { get; set; }
 
-        [Required(ErrorMessage = "Please select a Reader.")]
+        [Required(ErrorMessage = "Изберете читател.")]
         public int ReaderId { get; set; }
 
-        [Required(ErrorMessage = "Please enter the book condition.")]
-        [StringLength(255, ErrorMessage = "Condition must not exceed 255 characters.")]
+        [Required(ErrorMessage = "Въведете текущото състояние на единицата.")]
         public string Condition { get; set; }
     }
 }

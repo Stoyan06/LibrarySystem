@@ -17,3 +17,5 @@ D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\obj\Debug\n
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\obj\Debug\net8.0\ref\LibrarySystem.Services.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\bin\Debug\net8.0\LibrarySystem.Services.runtimeconfig.json
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\obj\Debug\net8.0\LibrarySystem.Services.genruntimeconfig.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\bin\Debug\net8.0\LibrarySystem.Shared.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Services\bin\Debug\net8.0\LibrarySystem.Shared.pdb

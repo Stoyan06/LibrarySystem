@@ -3,6 +3,7 @@ using LibrarySystem.Services;
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -80,12 +81,9 @@ namespace LibrarySystem.Web.Controllers
             return View(list.Where(x => x.isScrapped == false));
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> ScrappedLibraryUnits()
         {
-            if (!User.IsInRole(SD.LibrarianRole) && !User.IsInRole(SD.AdminRole))
-            {
-                return View("AccessDenied");
-            }
             List<LibraryUnitViewModel> list = new List<LibraryUnitViewModel>();
             IEnumerable<LibraryUnit> libraryUnits = _libraryUnitService.GetWhere(x => x.IsScrapped == true).ToList();
 
@@ -124,6 +122,7 @@ namespace LibrarySystem.Web.Controllers
             return View(list);
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddLibraryUnit()
         {
             IEnumerable<Title> allTitles = await _titleService.GetAllAsync();
@@ -144,6 +143,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddLibraryUnit(LibraryUnitViewModel model)
         {
             LibraryUnit unit = _libraryUnitService.GetWhere(x => x.InventoryNumber == model.InventoryNumber).FirstOrDefault();
@@ -189,19 +189,19 @@ namespace LibrarySystem.Web.Controllers
                         IsSavedByUser = false
                     };
                     await _libraryUnitService.AddAsync(newUnit);
-                    TempData["success"] = "Успешно добавена библиотечна единица";
+                    TempData["success"] = "Успешно добавена библиотечна единица.";
                     return RedirectToAction("AllLibraryUnits");
                 }
             }
             else
             {
                 if(unit != null && unitIsbn != null)
-                    TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер и с този ISBN";
+                    TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер и с този ISBN.";
                 else if (unit != null && unitIsbn == null)
-                TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер";
+                TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер.";
 
                 else if(unitIsbn != null && unit == null)
-                    TempData["error"] = "Вече съществува библиотечна единица с този ISBN";
+                    TempData["error"] = "Вече съществува библиотечна единица с този ISBN.";
 
                 model.Titles = _titleService.GetAllAsync().Result.Select(e => new SelectListItem
                 {
@@ -226,10 +226,7 @@ namespace LibrarySystem.Web.Controllers
                 isScrapped = unit.IsScrapped,
                 TitleId = unit.TitleId,
                 TitleName = title.Name,
-                //Isbn = libraryUnit.Isbn,
                 TypeLibraryUnit = unit.TypeLibraryUnit,
-                //Year = (int)libraryUnit.Year,
-                //PublishingHouse = libraryUnit.PublishingHouse
                 Image = await _imageService.GetByIdAsync(unit.ImageId)
             };
 
@@ -248,6 +245,7 @@ namespace LibrarySystem.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateLibraryUnit(int id)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
@@ -269,10 +267,7 @@ namespace LibrarySystem.Web.Controllers
                 isScrapped = unit.IsScrapped,
                 TitleId = unit.TitleId,
                 TitleName = title.Name,
-                //Isbn = libraryUnit.Isbn,
                 TypeLibraryUnit = unit.TypeLibraryUnit,
-                //Year = (int)libraryUnit.Year,
-                //PublishingHouse = libraryUnit.PublishingHouse
                 Image = await _imageService.GetByIdAsync(unit.ImageId)
             };
 
@@ -292,6 +287,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateLibraryUnit(LibraryUnitUpdateViewModel model)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(model.Id);
@@ -326,20 +322,18 @@ namespace LibrarySystem.Web.Controllers
                     if(model.UploadedImage != null)
                     {
                         var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
-                        //await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
                         Image image = await _imageService.GetByIdAsync(unit.ImageId);
-                        //to upload the pic successfully
                         image.DestinationLink = ImageLink;
                         await _imageService.UpdateAsync(image);
                     }
                     await _libraryUnitService.UpdateAsync(unit);
-                    TempData["success"] = "Успешно редактирана библиотечна единица";
+                    TempData["success"] = "Библиотечната единица е редактирана успешно.";
                     return RedirectToAction("AllLibraryUnits");
                 }
             }
             else
             {
-                TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер";
+                TempData["error"] = "Вече съществува библиотечна единица с този инвентарен номер.";
 
                 model.Titles = _titleService.GetAllAsync().Result.Select(e => new SelectListItem
                 {
@@ -350,6 +344,7 @@ namespace LibrarySystem.Web.Controllers
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> Scrape(int id)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
@@ -364,10 +359,7 @@ namespace LibrarySystem.Web.Controllers
                 isScrapped = unit.IsScrapped,
                 TitleId = unit.TitleId,
                 TitleName = title.Name,
-                //Isbn = libraryUnit.Isbn,
                 TypeLibraryUnit = unit.TypeLibraryUnit,
-                //Year = (int)libraryUnit.Year,
-                //PublishingHouse = libraryUnit.PublishingHouse
             };
 
             if (unit.Isbn == null) model.Isbn = null;
@@ -385,12 +377,13 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> Scrape(LibraryUnitViewModel model)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync (model.Id);
             if(unit.IsAvailable == false)
             {
-                TempData["error"] = "Единицата не може да бъде бракувана, защото е заета от читател!";
+                TempData["error"] = "Единицата не може да бъде бракувана, защото е заета от читател.";
                 return RedirectToAction("AllLibraryUnits");
             }
 
@@ -401,7 +394,7 @@ namespace LibrarySystem.Web.Controllers
             string identityUserId = identityUser.Id;
             User user = _userService.GetWhere(x => x.IdentityUserId == identityUserId).First();
             await _scrappedUnitService.AddAsync(new ScrappedUnit { LibrarianId = user.Id, DateTimeOfScrapping = DateTime.Now, LibraryUnitId = unit.Id });
-            TempData["success"] = "Успешно бракувана единица";
+            TempData["success"] = "Единицата е бракувана успешно.";
             return RedirectToAction("AllLibraryUnits");
         }
     }

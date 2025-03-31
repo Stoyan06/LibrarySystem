@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Web", "Librar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Services", "LibrarySystem.Services\LibrarySystem.Services.csproj", "{C7BE765F-B187-45BC-BA19-1B69D6B81E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Utility", "LibrarySystem.Utility\LibrarySystem.Utility.csproj", "{951412CF-AA74-452C-BD64-BA262C5B1170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Utility", "LibrarySystem.Utility\LibrarySystem.Utility.csproj", "{951412CF-AA74-452C-BD64-BA262C5B1170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Shared", "LibrarySystem.Shared\LibrarySystem.Shared.csproj", "{B66C97C4-1A24-44CC-9320-ECCFBACE5517}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{951412CF-AA74-452C-BD64-BA262C5B1170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{951412CF-AA74-452C-BD64-BA262C5B1170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{951412CF-AA74-452C-BD64-BA262C5B1170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

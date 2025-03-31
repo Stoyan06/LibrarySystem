@@ -91,7 +91,7 @@ namespace LibrarySystem.Web.Controllers
                         Value = e.Id.ToString(),
                         Text = e.FullName
                     });
-                    TempData["error"] = "Вече има заглавие с това име";
+                    TempData["error"] = "Вече има заглавие с това име.";
                     return View(model);
                 }
 
@@ -102,7 +102,7 @@ namespace LibrarySystem.Web.Controllers
                     SectionId = model.SectionId
                 };
                 await _titleService.AddAsync(title);
-                TempData["success"] = "Успешно добавено заглавие";
+                TempData["success"] = "Успешно добавено заглавие.";
                 foreach(int authorId in model.SelectedAuthors)
                 {
                     await _title_author_service.AddAsync(new TitleAuthor { AuthorId = authorId, TitleId = title.Id});
@@ -124,7 +124,7 @@ namespace LibrarySystem.Web.Controllers
                 });
                 if(model.SelectedAuthors.Count == 0)
                 {
-                    TempData["error"] = "Изберете един или няколко автора";
+                    TempData["error"] = "Изберете един или няколко автори.";
                 }
                 return View(model);
             } 
@@ -190,7 +190,7 @@ namespace LibrarySystem.Web.Controllers
                         Value = e.Id.ToString(),
                         Text = e.FullName
                     });
-                    TempData["error"] = "Вече има заглавие с това име";
+                    TempData["error"] = "Вече има заглавие с това име.";
                     return View(model);
                 }
 
@@ -200,7 +200,7 @@ namespace LibrarySystem.Web.Controllers
                 title.SectionId = model.SectionId;
  
                 await _titleService.UpdateAsync(title);
-                TempData["success"] = "Успешно редактирано заглавие";
+                TempData["success"] = "Успешно редактирано заглавие.";
 
                 await _title_author_service.DeleteWhere(x => x.TitleId == title.Id);
 
@@ -225,7 +225,7 @@ namespace LibrarySystem.Web.Controllers
                 });
                 if (model.SelectedAuthors.Count == 0)
                 {
-                    TempData["error"] = "Изберете един или няколко автора";
+                    TempData["error"] = "Изберете един или няколко автори.";
                 }
                 return View(model);
             }
@@ -243,13 +243,13 @@ namespace LibrarySystem.Web.Controllers
 
             if(unit != null)
             {
-                TempData["error"] = "Има обвързани библиотечни единици с това заглавие";
+                TempData["error"] = "Заглавието не може да бъде изтрито, защото към него има обвързани библиотечни единици.";
                 return RedirectToAction("AllTitles");
             }
 
             await _title_author_service.DeleteWhere(x => x.TitleId == title.Id);
             await _titleService.DeleteAsync(title.Id);
-            TempData["success"] = "Успешно премахнато заглавие";
+            TempData["success"] = "Заглавието е премахнато успешно.";
             return RedirectToAction("AllTitles");
         }
 
