@@ -10,27 +10,56 @@
         <title>@ViewData["Title"] - Библиотечна система</title>
     </head>
 
-    <h1 class="mb-4 text-center">Добавяне на раздел</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Добавяне на раздел</h1>
 
-    <form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
-        <!-- Name Field -->
-        <div class="mb-3">
-            <label for="nameInput" class="form-label fw-bold">Име</label>
-            <input type="text" id="nameInput" asp-for="Name" class="form-control" placeholder="Въведи име на раздел">
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
+        <form method="post" class="w-75 mx-auto p-4 border rounded shadow-sm bg-light">
+            <!-- Name Field -->
+            <div class="mb-3">
+                <label for="nameInput" class="form-label fw-bold">Име</label>
+                <input type="text" id="nameInput" asp-for="Name" class="form-control" placeholder="Въведи име на раздел">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
 
-        <!-- Description Field -->
-        <div class="mb-3">
-            <label for="descriptionInput" class="form-label fw-bold">Описание</label>
-            <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
-        </div>
+            <!-- Description Field -->
+            <div class="mb-3">
+                <label for="descriptionInput" class="form-label fw-bold">Описание</label>
+                <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
+            </div>
 
-        <!-- Submit Button -->
-        <div class="d-flex justify-content-between mt-4">
-            <!-- Go Back Button -->
-            <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">Откажи</a>
-            <input type="submit" value="Добави раздел" class="btn btn-primary btn-lg px-4">
-        </div>
-    </form>
+            <!-- Submit and Cancel Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <!-- Go Back Button -->
+                <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">Откажи</a>
+                <input type="submit" value="Добави раздел" class="btn btn-primary btn-lg px-4">
+            </div>
+        </form>
+    </div>
 }
+
+<style>
+    /* Responsive form styling */
+    .container {
+        max-width: 600px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+
+    /* Mobile adjustments */
+    @@media (max-width: 768px) {
+        .container {
+            width: 90%;
+        }
+
+        .btn {
+            font-size: 1rem;
+        }
+    }
+</style>

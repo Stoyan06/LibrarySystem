@@ -4,33 +4,37 @@
     ViewData["Title"] = "Register Library Unit Movement";
 }
 
-<h2>Register Library Unit Movement</h2>
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">📚 Register Library Unit Movement</h2>
 
-<form asp-action="RegisterGiving" asp-controller="Movement" method="post">
-    <div class="form-group">
-        <label asp-for="DeadLine"></label>
-        <input asp-for="DeadLine" class="form-control" type="date" />
-        <span asp-validation-for="DeadLine" class="text-danger"></span>
-    </div>
+    <form asp-action="RegisterGiving" asp-controller="Movement" method="post">
+        <div class="form-group mb-4">
+            <label asp-for="DeadLine" class="form-label">Deadline</label>
+            <input asp-for="DeadLine" class="form-control" type="date" />
+            <span asp-validation-for="DeadLine" class="text-danger"></span>
+        </div>
 
-    <div class="form-group position-relative">
-        <label>Library Unit</label>
-        <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
-        <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
-        <div id="libraryUnitInfo" class="search-results"></div>
-        <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
-    </div>
+        <div class="form-group mb-4 position-relative">
+            <label class="form-label">Library Unit</label>
+            <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
+            <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
+            <div id="libraryUnitInfo" class="search-results"></div>
+            <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
+        </div>
 
-    <div class="form-group position-relative">
-        <label>Reader</label>
-        <input type="text" id="readerSearch" class="form-control" placeholder="Search by name..." autocomplete="off" />
-        <input type="hidden" asp-for="ReaderId" id="ReaderId" />
-        <div id="readerInfo" class="search-results"></div>
-        <span asp-validation-for="ReaderId" class="text-danger"></span>
-    </div>
+        <div class="form-group mb-4 position-relative">
+            <label class="form-label">Reader</label>
+            <input type="text" id="readerSearch" class="form-control" placeholder="Search by name..." autocomplete="off" />
+            <input type="hidden" asp-for="ReaderId" id="ReaderId" />
+            <div id="readerInfo" class="search-results"></div>
+            <span asp-validation-for="ReaderId" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
 
 <style>
     .search-results {
@@ -42,16 +46,35 @@
         overflow-y: auto;
         display: none;
         z-index: 1000;
+        border-radius: 5px;
     }
 
     .search-result {
-        padding: 5px;
+        padding: 10px;
         cursor: pointer;
     }
 
         .search-result:hover {
             background: #f0f0f0;
         }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.25rem;
+    }
 </style>
 
 @section Scripts {

@@ -1,44 +1,90 @@
-﻿<!-- Views/Search/ExtendedSearch.cshtml -->
-@model ExtendedSearchViewModel
+﻿@model ExtendedSearchViewModel
 
-<h2>Extended Search Scrapped</h2>
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">🔍 Extended Search - Scrapped</h2>
 
-<form asp-action="ExtendedSearchScrapped" method="post">
-    <div class="form-group">
-        <label asp-for="Section">Section</label>
-        <select asp-for="Section" class="form-control">
-            <option value="">-- Select Section --</option>
-            @foreach (var sec in ViewBag.Sections)
-            {
-                <option value="@sec">@sec</option>
-            }
-        </select>
-    </div>
+    <form asp-action="ExtendedSearchScrapped" method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="Section">Section</label>
+                    <select asp-for="Section" class="form-control">
+                        <option value="">-- Select Section --</option>
+                        @foreach (var sec in ViewBag.Sections)
+                        {
+                            <option value="@sec">@sec</option>
+                        }
+                    </select>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" />
-    </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="Title">Title</label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Author">Author</label>
-        <input asp-for="Author" class="form-control" />
-    </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="Author">Author</label>
+                    <input asp-for="Author" class="form-control" />
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Condition">Condition</label>
-        <input asp-for="Condition" class="form-control" />
-    </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="Condition">Condition</label>
+                    <input asp-for="Condition" class="form-control" />
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Medium">Medium</label>
-        <input asp-for="Medium" class="form-control" />
-    </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="Medium">Medium</label>
+                    <input asp-for="Medium" class="form-control" />
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="PublishingHouse">Publishing House</label>
-        <input asp-for="PublishingHouse" class="form-control" />
-    </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="PublishingHouse">Publishing House</label>
+                    <input asp-for="PublishingHouse" class="form-control" />
+                </div>
+            </div>
 
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .container {
+        max-width: 800px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+
+    .row {
+        margin-bottom: 2rem;
+    }
+</style>

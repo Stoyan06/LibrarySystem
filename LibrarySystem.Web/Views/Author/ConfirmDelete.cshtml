@@ -11,16 +11,22 @@
 
 <h1 class="mb-4 text-center text-danger">Потвърждение за изтриване на автор</h1>
 
-<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+<!-- Container for Delete Confirmation -->
+<div class="w-75 w-md-50 mx-auto p-4 border rounded shadow-sm bg-light">
     <p class="text-center fw-bold">
         Сигурни ли сте, че искате да изтриете автор: <span class="text-danger">"@Model.FullName"</span>?
     </p>
 
-    <form method="post" class="d-flex justify-content-between">
+    <!-- Form with Buttons -->
+    <form method="post" class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
         <!-- Confirm Delete Button -->
-        <button type="submit" class="btn btn-danger btn-lg px-4">Изтрий</button>
+        <button type="submit" class="btn btn-danger btn-lg mb-3 mb-sm-0 me-sm-3 px-4 w-100 w-sm-auto">
+            Изтрий
+        </button>
 
         <!-- Cancel Button -->
-        <a asp-action="AllAuthors" class="btn btn-secondary btn-lg px-4">Откажи</a>
+        <a asp-action="AllAuthors" class="btn btn-secondary btn-lg px-4 w-100 w-sm-auto">
+            Откажи
+        </a>
     </form>
 </div>

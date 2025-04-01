@@ -1,5 +1,14 @@
-﻿<input type="text" id="searchBox" placeholder="Search books..." />
-<div id="suggestions"></div>
+﻿<div class="container mt-5">
+    <div class="d-flex flex-column align-items-center">
+        <h2 class="text-center fw-bold mb-4">🔍 Search Books</h2>
+        
+        <!-- Search Box -->
+        <input type="text" id="searchBox" class="form-control w-75" placeholder="Search books..." />
+
+        <!-- Suggestions Container -->
+        <div id="suggestions" class="mt-3 w-75"></div>
+    </div>
+</div>
 
 <script>
     document.getElementById("searchBox").addEventListener("input", function () {
@@ -9,12 +18,12 @@
                 .then(response => response.json())
                 .then(data => {
                     let html = data.map(b => `
-                            <p>
-                                <a href='/Search/Details/${b.id}'>
-                                    ${b.title} - ${b.author}
-                                    ${b.publishingHouse ? ` (Published by: ${b.publishingHouse})` : ""}
-                                </a>
-                            </p>`).join("");
+                        <div class="suggestion-item mb-2">
+                            <a href='/Search/Details/${b.id}' class="suggestion-link">
+                                <strong>${b.title}</strong> - ${b.author}
+                                ${b.publishingHouse ? ` <small class="text-muted">Published by: ${b.publishingHouse}</small>` : ""}
+                            </a>
+                        </div>`).join("");
                     document.getElementById("suggestions").innerHTML = html;
                 });
         } else {
@@ -22,3 +31,66 @@
         }
     });
 </script>
+
+<style>
+    /* Container Styling */
+    .container {
+        max-width: 800px;
+        margin-top: 50px;
+    }
+
+    /* Search Input Box Styling */
+    #searchBox {
+        font-size: 1rem;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    /* Suggestions Styling */
+    #suggestions {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        max-height: 300px;
+        overflow-y: auto;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        width: 100%;
+    }
+
+    .suggestion-item {
+        padding: 8px 12px;
+    }
+
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    .suggestion-link {
+        text-decoration: none;
+        color: #333;
+        font-size: 0.9rem;
+    }
+
+    .suggestion-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Mobile Friendly */
+    @@media (max-width: 768px) {
+        .container {
+            width: 90%;
+        }
+
+        #searchBox {
+            width: 100%;
+        }
+
+        #suggestions {
+            width: 100%;
+        }
+    }
+</style>

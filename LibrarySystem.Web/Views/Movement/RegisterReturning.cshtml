@@ -4,25 +4,32 @@
     ViewData["Title"] = "Register Library Unit Movement";
 }
 
-<h2>Register Library Unit Movement</h2>
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">📚 Register Library Unit Movement</h2>
 
-<form asp-action="RegisterReturning" method="post">
-    <div class="form-group position-relative">
-        <label>Library Unit</label>
-        <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
-        <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
-        <div id="libraryUnitInfo" class="search-results"></div>
-        <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
-    </div>
+    <form asp-action="RegisterReturning" method="post">
+        <!-- Library Unit Search -->
+        <div class="form-group mb-4 position-relative">
+            <label class="form-label">Library Unit</label>
+            <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
+            <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
+            <div id="libraryUnitInfo" class="search-results"></div>
+            <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Condition"></label>
-        <input asp-for="Condition" class="form-control" />
-        <span asp-validation-for="Condition" class="text-danger"></span>
-    </div>
+        <!-- Condition Input -->
+        <div class="form-group mb-4">
+            <label asp-for="Condition" class="form-label">Condition</label>
+            <input asp-for="Condition" class="form-control" />
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
 
 <style>
     .search-results {
@@ -34,16 +41,35 @@
         overflow-y: auto;
         display: none;
         z-index: 1000;
+        border-radius: 5px;
     }
 
     .search-result {
-        padding: 5px;
+        padding: 10px;
         cursor: pointer;
     }
 
         .search-result:hover {
             background: #f0f0f0;
         }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.25rem;
+    }
 </style>
 
 @section Scripts {
@@ -88,7 +114,7 @@
                 });
             }
 
-            // Call search for units that are unavailable and NOT scrapped
+            // ✅ Use endpoint for unavailable units
             setupSearch("#libraryUnitSearch", "#LibraryUnitId", "#libraryUnitInfo", "/Movement/SearchUnavailableLibraryUnits");
         });
     </script>

@@ -7,7 +7,7 @@
 
     <div class="row g-4 justify-content-center">
         <!-- Manage Authors -->
-        <div class="col-md-5">
+        <div class="col-sm-12 col-md-5 col-lg-3">
             <a asp-area="" asp-controller="Author" asp-action="AllAuthors" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -20,7 +20,7 @@
         </div>
 
         <!-- Manage Titles -->
-        <div class="col-md-5">
+        <div class="col-sm-12 col-md-5 col-lg-3">
             <a asp-area="" asp-controller="Title" asp-action="AllTitles" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Manage Sections -->
-        <div class="col-md-5">
+        <div class="col-sm-12 col-md-5 col-lg-3">
             <a asp-area="" asp-controller="Section" asp-action="AllSections" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Manage Library Units -->
-        <div class="col-md-5">
+        <div class="col-sm-12 col-md-5 col-lg-3">
             <a asp-area="" asp-controller="LibraryUnit" asp-action="AllLibraryUnits" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Borrow/Return Units -->
-        <div class="col-md-5">
+        <div class="col-sm-12 col-md-5 col-lg-3">
             <a asp-area="" asp-controller="Movement" asp-action="Register" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -80,10 +80,10 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .admin-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
+        .admin-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
     .card {
         border: none;

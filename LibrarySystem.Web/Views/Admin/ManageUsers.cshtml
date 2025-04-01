@@ -6,8 +6,8 @@
     <h2 class="text-center fw-bold mb-4">⚙️ Управление на потребители</h2>
 
     <div class="row g-4 justify-content-center">
-        <!-- Manage Users -->
-        <div class="col-md-5">
+        <!-- Manage Librarians -->
+        <div class="col-md-5 col-sm-12">
             <a asp-controller="Admin" asp-action="ManageLibrarians" class="admin-card">
                 <div class="card text-center shadow-sm">
                     <div class="card-body">
@@ -19,16 +19,17 @@
             </a>
         </div>
 
-        <div class="row g-4 justify-content-center">
-            <!-- Manage Users -->
-            <div class="col-md-5">
-                <a asp-controller="Admin" asp-action="ManageReaders" class="admin-card">
-                    <div class="card text-center shadow-sm">
-                        <div class="card-body">
-                            <i class="fas fa-users admin-icon"></i>
-                            <h5 class="card-title">Управление на читатели</h5>
-                            <p class="card-text">Добавяне, редактиране и премахване на читатели.</p>
-                        </div>
+        <!-- Manage Readers -->
+        <div class="col-md-5 col-sm-12">
+            <a asp-controller="Admin" asp-action="ManageReaders" class="admin-card">
+                <div class="card text-center shadow-sm">
+                    <div class="card-body">
+                        <i class="fas fa-users admin-icon"></i>
+                        <h5 class="card-title">Управление на читатели</h5>
+                        <p class="card-text">Добавяне, редактиране и премахване на читатели.</p>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

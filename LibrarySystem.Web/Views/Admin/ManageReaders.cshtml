@@ -5,19 +5,23 @@
     ViewData["Title"] = "Управление на читатели";
 }
 
-<h2>Управление на читатели</h2>
+<h2 class="text-center mb-4">Управление на читатели</h2>
 
 <!-- Поле за търсене -->
-<form method="get" asp-action="ManageReaders">
-    <input type="text" name="SearchTerm" value="@ViewData["SearchTerm"]" placeholder="Търси по име" class="form-control mb-3" />
-    <button type="submit" class="btn btn-primary">Търси</button>
+<form method="get" asp-action="ManageReaders" class="mb-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between">
+        <input type="text" name="SearchTerm" value="@ViewData["SearchTerm"]" placeholder="Търси по име" class="form-control mb-3 mb-sm-0" />
+        <button type="submit" class="btn btn-primary mb-3 mb-sm-0 ms-sm-2">Търси</button>
+    </div>
 </form>
 
 <!-- Бутон за добавяне на нов потребител -->
-<a asp-action="ManageReaders" class="btn btn-secondary">Нулирай</a>
-<a asp-action="CreateReader" class="btn btn-success mb-3">Добави нов читател</a>
+<div class="d-flex justify-content-between mb-4">
+    <a asp-action="ManageReaders" class="btn btn-secondary">Нулирай</a>
+    <a asp-action="CreateReader" class="btn btn-success">Добави нов читател</a>
+</div>
 
-@if(Model.Count == 0)
+@if (Model.Count == 0)
 {
     <h3>Няма намерени читатели</h3>
 }
@@ -43,8 +47,8 @@ else
                         <td>@user.MiddleName</td>
                         <td>@user.LastName</td>
                         <td>
-                            <a asp-controller= "Admin" asp-action="ReaderDetails" asp-route-UserId="@user.Id" class="btn btn-info btn-sm">Детайли</a>
-                            <a asp-controller="Admin"  asp-action="EditReader" asp-route-UserId="@user.Id" class="btn btn-warning btn-sm">Редактирай</a>
+                            <a asp-controller="Admin" asp-action="ReaderDetails" asp-route-UserId="@user.Id" class="btn btn-info btn-sm">Детайли</a>
+                            <a asp-controller="Admin" asp-action="EditReader" asp-route-UserId="@user.Id" class="btn btn-warning btn-sm">Редактирай</a>
                             <a asp-controller="Admin" asp-action="ConfirmDeleteReader" asp-route-UserId="@user.Id" class="btn btn-danger btn-sm">Изтрий</a>
                         </td>
                     </tr>

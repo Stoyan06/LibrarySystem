@@ -8,46 +8,97 @@
 
 <head>
     <title>@ViewData["Title"] - Библиотечна система</title>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .zoomable-img {
+            cursor: pointer;
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Responsive Design */
+        @@media (min-width: 768px) {
+            .details-section {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .details-section .left, .details-section .right {
+                flex: 1;
+            }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-control-static {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <h1 class="mb-4 text-center">Детайли за библиотечна единица</h1>
 
-<div class="d-flex justify-content-center">
+<div class="details-section mx-auto w-100 p-4">
     <!-- Image Preview (Left Side) -->
-    <div class="me-4">
+    <div class="left image-container">
         @if (!string.IsNullOrEmpty(Model.Image.DestinationLink))
         {
-            <div class="position-relative text-center">
-                <img src="@Model.Image.DestinationLink" id="imagePreview" class="img-thumbnail" alt="Изображение на библиотечната единица" style="max-width: 250px; cursor: pointer;" onclick="zoomImage()">
+            <div class="position-relative">
+                <img src="@Model.Image.DestinationLink" id="imagePreview" class="img-thumbnail zoomable-img" alt="Изображение на библиотечната единица" style="max-width: 250px;" onclick="zoomImage()">
                 <small class="d-block mt-1">Изображение на библиотечната единица</small>
             </div>
         }
     </div>
 
     <!-- Details (Right Side) -->
-    <div class="w-50 p-4 border rounded shadow-sm bg-light">
+    <div class="right w-100 bg-light rounded p-4 shadow-sm">
         <!-- Inventory Number -->
         <div class="mb-3">
             <label class="form-label fw-bold">Инвентарен номер</label>
-            <p class="form-control bg-light">@Model.InventoryNumber</p>
+            <p class="form-control-static">@Model.InventoryNumber</p>
         </div>
 
         <!-- Condition -->
         <div class="mb-3">
             <label class="form-label fw-bold">Състояние</label>
-            <p class="form-control bg-light">@Model.Condition</p>
+            <p class="form-control-static">@Model.Condition</p>
         </div>
 
         <!-- Medium -->
         <div class="mb-3">
             <label class="form-label fw-bold">Носител</label>
-            <p class="form-control bg-light">@Model.Medium</p>
+            <p class="form-control-static">@Model.Medium</p>
         </div>
 
         <!-- Title -->
         <div class="mb-3">
             <label class="form-label fw-bold">Заглавие</label>
-            <p class="form-control bg-light">@Model.TitleName</p>
+            <p class="form-control-static">@Model.TitleName</p>
         </div>
 
         <!-- ISBN -->
@@ -55,14 +106,14 @@
         {
             <div class="mb-3">
                 <label class="form-label fw-bold">ISBN</label>
-                <p class="form-control bg-light">@Model.Isbn</p>
+                <p class="form-control-static">@Model.Isbn</p>
             </div>
         }
 
         <!-- Type Library Unit -->
         <div class="mb-3">
             <label class="form-label fw-bold">Тип</label>
-            <p class="form-control bg-light">@Model.TypeLibraryUnit</p>
+            <p class="form-control-static">@Model.TypeLibraryUnit</p>
         </div>
 
         <!-- Year -->
@@ -70,7 +121,7 @@
         {
             <div class="mb-3">
                 <label class="form-label fw-bold">Година</label>
-                <p class="form-control bg-light">@Model.Year</p>
+                <p class="form-control-static">@Model.Year</p>
             </div>
         }
 
@@ -79,7 +130,7 @@
         {
             <div class="mb-3">
                 <label class="form-label fw-bold">Издателство</label>
-                <p class="form-control bg-light">@Model.PublishingHouse</p>
+                <p class="form-control-static">@Model.PublishingHouse</p>
             </div>
         }
 

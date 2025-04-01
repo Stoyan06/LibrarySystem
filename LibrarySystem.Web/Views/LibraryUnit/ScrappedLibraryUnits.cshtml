@@ -18,25 +18,49 @@
             height: 200px;
             object-fit: cover;
         }
+
+        /* Center the buttons and adjust for mobile view */
+        .action-buttons {
+            margin-bottom: 20px;
+        }
+
+        .action-buttons a {
+            font-size: 1.1rem;
+            padding: 10px 30px;
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .card {
+                margin-bottom: 20px;
+            }
+
+            .card-img-top {
+                height: 150px;
+            }
+        }
     </style>
 </head>
 
-<h1>Бракувани единици</h1>
+<h1 class="text-center mb-4">Бракувани единици</h1>
 
-<a asp-action="ExtendedSearchScrapped" asp-controller="Search" class="btn btn-primary mb-3">
-    <i class="bi bi-plus-square"></i> Търсене на бракувани единици
-</a>
+<div class="action-buttons d-flex justify-content-center mb-4">
+    <!-- Search Scrapped Units Button -->
+    <a asp-action="ExtendedSearchScrapped" asp-controller="Search" class="btn btn-primary">
+        <i class="bi bi-search"></i> Търсене на бракувани единици
+    </a>
+</div>
 
 @if (Model == null || !Model.Any())
 {
-    <h2>Няма бракувани единици в системата</h2>
+    <h2 class="text-center">Няма бракувани единици в системата</h2>
 }
 else
 {
     <div class="row">
         @foreach (var unit in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100">
                     <img src="@unit.Image.DestinationLink" class="card-img-top" alt="Изображение на @unit.TitleName">
                     <div class="card-body">

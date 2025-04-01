@@ -9,24 +9,47 @@
     <title>@ViewData["Title"] - Библиотечна система</title>
 </head>
 
-<h1 class="mb-4 text-center text-danger">Потвърждение за изтриване на раздел</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center text-danger">Потвърждение за изтриване на раздел</h1>
 
-<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
-    <p class="text-center fw-bold">
-        Сигурни ли сте, че искате да изтриете раздел: <span class="text-danger">"@Model.Name"</span>?
-    </p>
+    <div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
+        <p class="text-center fw-bold">
+            Сигурни ли сте, че искате да изтриете раздел: <span class="text-danger">"@Model.Name"</span>?
+        </p>
 
-    <!-- Section Description if available -->
-    @if (!string.IsNullOrEmpty(Model.Description))
-    {
-        <p class="text-center text-muted">Описание: @Model.Description</p>
+        <!-- Section Description if available -->
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <p class="text-center text-muted">Описание: @Model.Description</p>
+        }
+
+        <form method="post" class="d-flex justify-content-between mt-4">
+            <!-- Confirm Delete Button -->
+            <button type="submit" class="btn btn-danger btn-lg px-4">Изтрий</button>
+
+            <!-- Cancel Button -->
+            <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">Откажи</a>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Responsive Design */
+    .container {
+        max-width: 600px;
     }
 
-    <form method="post" class="d-flex justify-content-between">
-        <!-- Confirm Delete Button -->
-        <button type="submit" class="btn btn-danger btn-lg px-4">Изтрий</button>
-
-        <!-- Cancel Button -->
-        <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">Откажи</a>
-    </form>
-</div>
+    /* Button adjustments for mobile */
+    @@media (max-width: 768px) {
+        .w-50 {
+            width: 100%;
+        }
+        .d-flex {
+            flex-direction: column;
+        }
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>

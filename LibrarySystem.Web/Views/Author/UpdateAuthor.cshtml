@@ -5,25 +5,29 @@
     ViewData["Title"] = "Редактиране на автор";
 }
 
-@{
-    <head>
-        <title>@ViewData["Title"] - Библиотечна система</title>
-    </head>
+<head>
+    <title>@ViewData["Title"] - Библиотечна система</title>
+</head>
 
-    <h1 class="mb-4 text-center">Редактиране на автор</h1>
+<h1 class="mb-4 text-center">Редактиране на автор</h1>
 
-    <form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
-        <!-- Name Field -->
-        <div class="mb-3">
-            <label for="nameInput" class="form-label fw-bold">Име</label>
-            <input type="text" id="nameInput" asp-for="FullName" class="form-control" placeholder="Въведи пълното име на автор">
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
+<!-- Form for Editing Author -->
+<form method="post" class="w-75 w-md-50 mx-auto p-4 border rounded shadow-sm bg-light">
+    <!-- Name Field -->
+    <div class="mb-3">
+        <label for="nameInput" class="form-label fw-bold">Име</label>
+        <input type="text" id="nameInput" asp-for="FullName" class="form-control" placeholder="Въведи пълното име на автор">
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between mt-4">
+        <!-- Cancel Button -->
+        <a asp-action="AllAuthors" class="btn btn-secondary btn-lg mb-3 mb-sm-0 w-100 w-sm-auto px-4">
+            Откажи
+        </a>
 
         <!-- Submit Button -->
-        <div class="d-flex justify-content-between mt-4">
-            <a asp-action="AllAuthors" class="btn btn-secondary btn-lg px-4">Откажи</a>
-            <input type="submit" value="Редактирай автор" class="btn btn-primary btn-lg px-4">
-        </div>
-    </form>
-}
+        <input type="submit" value="Редактирай автор" class="btn btn-primary btn-lg w-100 w-sm-auto px-4">
+    </div>
+</form>

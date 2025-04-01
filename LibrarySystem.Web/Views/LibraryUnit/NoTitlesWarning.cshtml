@@ -4,17 +4,54 @@
 
 <head>
     <title>@ViewData["Title"] - Библиотечна система</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .warning-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .warning-box p {
+            font-size: 1.2rem;
+            color: #dc3545;
+        }
+
+        .warning-box .btn {
+            font-size: 1.1rem;
+            padding: 10px 30px;
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .warning-box {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 
 <h1 class="mb-4 text-center text-warning">Невалидна операция</h1>
 
-<div class="w-50 mx-auto p-4 border rounded shadow-sm bg-light text-center">
-    <p class="fw-bold text-danger">
-        В системата няма въведени заглавия. Моля, добавате заглавия преди да добавите библиотечни единици!
-    </p>
+<div class="container">
+    <div class="warning-box">
+        <p class="fw-bold text-danger">
+            В системата няма въведени заглавия. Моля, добавате заглавия преди да добавите библиотечни единици!
+        </p>
 
-    <div class="d-flex justify-content-center">
-        <!-- Go Back Button -->
-        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+        <div class="d-flex justify-content-center">
+            <!-- Go Back Button -->
+            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+        </div>
     </div>
 </div>

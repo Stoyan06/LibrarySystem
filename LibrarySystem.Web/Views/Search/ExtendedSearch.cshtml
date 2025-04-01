@@ -1,44 +1,94 @@
-﻿<!-- Views/Search/ExtendedSearch.cshtml -->
-@model ExtendedSearchViewModel
+﻿@model ExtendedSearchViewModel
 
-<h2>Extended Search</h2>
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">🔍 Extended Search</h2>
 
-<form asp-action="ExtendedSearch" method="post">
-    <div class="form-group">
-        <label asp-for="Section">Section</label>
-        <select asp-for="Section" class="form-control">
-            <option value="">-- Select Section --</option>
-            @foreach (var sec in ViewBag.Sections)
-            {
-                <option value="@sec">@sec</option>
-            }
-        </select>
-    </div>
+    <form asp-action="ExtendedSearch" method="post">
+        <!-- Section Dropdown -->
+        <div class="form-group mb-4">
+            <label asp-for="Section" class="form-label">Section</label>
+            <select asp-for="Section" class="form-control">
+                <option value="">-- Select Section --</option>
+                @foreach (var sec in ViewBag.Sections)
+                {
+                    <option value="@sec">@sec</option>
+                }
+            </select>
+            <span asp-validation-for="Section" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" />
-    </div>
+        <!-- Title Input -->
+        <div class="form-group mb-4">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Author">Author</label>
-        <input asp-for="Author" class="form-control" />
-    </div>
+        <!-- Author Input -->
+        <div class="form-group mb-4">
+            <label asp-for="Author" class="form-label">Author</label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Condition">Condition</label>
-        <input asp-for="Condition" class="form-control" />
-    </div>
+        <!-- Condition Input -->
+        <div class="form-group mb-4">
+            <label asp-for="Condition" class="form-label">Condition</label>
+            <input asp-for="Condition" class="form-control" />
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Medium">Medium</label>
-        <input asp-for="Medium" class="form-control" />
-    </div>
+        <!-- Medium Input -->
+        <div class="form-group mb-4">
+            <label asp-for="Medium" class="form-label">Medium</label>
+            <input asp-for="Medium" class="form-control" />
+            <span asp-validation-for="Medium" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="PublishingHouse">Publishing House</label>
-        <input asp-for="PublishingHouse" class="form-control" />
-    </div>
+        <!-- Publishing House Input -->
+        <div class="form-group mb-4">
+            <label asp-for="PublishingHouse" class="form-label">Publishing House</label>
+            <input asp-for="PublishingHouse" class="form-control" />
+            <span asp-validation-for="PublishingHouse" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 5px;
+    }
+</style>

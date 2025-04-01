@@ -16,16 +16,18 @@ namespace LibrarySystem.Controllers
         private readonly IService<User> _userService;
         private readonly IService<LibraryUnit> _libraryUnitService;
         private readonly IService<MovementOfLibraryUnit> _movementService;
+        private readonly ISearchService _searchService;
 
         public MovementController(UserManager<IdentityUser> userManager,
             IService<User> userService, 
             IService<LibraryUnit> libraryUnitService,
-            IService<MovementOfLibraryUnit> movementService)
+            IService<MovementOfLibraryUnit> movementService, ISearchService searchService)
         {
             _userManager = userManager;
             _userService = userService;
             _libraryUnitService = libraryUnitService;
             _movementService = movementService;
+            _searchService = searchService;
         }
 
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]

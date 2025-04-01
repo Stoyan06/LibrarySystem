@@ -1,33 +1,255 @@
 ﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Информация за администратора";
+    Layout = "_Layout";
+}
 
-<h2>Информация за администратора</h2>
+<!-- Font Awesome CSS (if not already included in your layout) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<table>
-    <tr>
-        <td><strong>Потребителско име:</strong></td>
-        <td>@Model.Username</td>
-    </tr>
-    <tr>
-        <td><strong>Имейл:</strong></td>
-        <td>@Model.Email</td>
-    </tr>
-    <tr>
-        <td><strong>Име:</strong></td>
-        <td>@Model.FirstName</td>
-    </tr>
-    <tr>
-        <td><strong>Презиме:</strong></td>
-        <td>@Model.MiddleName</td>
-    </tr>
-    <tr>
-        <td><strong>Фамилия:</strong></td>
-        <td>@Model.LastName</td>
-    </tr>
-</table>
+<div class="admin-info-container">
+    <div class="admin-info-card">
+        <div class="admin-header">
+            <i class="fas fa-user-shield fa-lg"></i>
+            <h2>Информация за администратора</h2>
+        </div>
 
-<!-- Buttons for Editing and Going Back -->
-<div>
-    <a href="@Url.Action("EditAdmin", "Admin")" class="btn btn-primary">Редактирай</a>
-    <a asp-action="ChangeAdminPassword" class="btn btn-secondary">Смяна на паролата</a>
-    <a asp-action="Dashboard" class="btn btn-secondary">Назад</a>
+        <div class="info-section">
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-envelope"></i> Имейл:
+                </div>
+                <div class="info-value">
+                    <span>@Model.Email</span>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-user-circle"></i> Име:
+                </div>
+                <div class="info-value">@Model.FirstName</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-id-badge"></i> Презиме:
+                </div>
+                <div class="info-value">@Model.MiddleName</div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-user-tag"></i> Фамилия:
+                </div>
+                <div class="info-value">@Model.LastName</div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a asp-action="EditAdmin" asp-controller="Admin" class="btn btn-edit">
+                <i class="fas fa-user-edit"></i> Редактирай профил
+            </a>
+            <a asp-action="ChangeAdminPassword" class="btn btn-password">
+                <i class="fas fa-shield-alt"></i> Смяна на паролата
+            </a>
+            <a asp-action="Dashboard" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Назад
+            </a>
+        </div>
+    </div>
 </div>
+
+<style>
+    .admin-info-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .admin-info-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .admin-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .admin-header h2 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .admin-header i {
+        margin-right: 0.75rem;
+        color: #3498db;
+        font-size: 1.8rem;
+    }
+
+    .info-section {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #f9fafc;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        min-width: 140px;
+        display: flex;
+        align-items: center;
+        color: #555;
+        font-weight: 500;
+    }
+
+    .info-label i {
+        width: 24px;
+        margin-right: 0.5rem;
+        color: #3498db;
+        text-align: center;
+    }
+
+    .info-value {
+        flex: 1;
+        color: #333;
+        font-weight: 400;
+        word-break: break-word;
+        display: flex;
+        align-items: center;
+    }
+
+    .verified-icon {
+        margin-left: 0.5rem;
+        color: #27ae60;
+        font-size: 0.9rem;
+    }
+
+    .status-active {
+        color: #27ae60;
+        font-weight: 500;
+    }
+
+    .status-icon {
+        font-size: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem 1.4rem;
+        border-radius: 6px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn i {
+        margin-right: 0.6rem;
+        font-size: 1rem;
+    }
+
+    .btn-edit {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-password {
+        background-color: #9b59b6;
+        color: white;
+    }
+
+    .btn-password:hover {
+        background-color: #8e44ad;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-back {
+        background-color: #34495e;
+        color: white;
+    }
+
+    .btn-back:hover {
+        background-color: #2c3e50;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Responsive styles */
+    @@media (max-width: 768px) {
+        .admin-info-card {
+            padding: 1.5rem 1rem;
+        }
+
+        .info-row {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.5rem 0.5rem;
+        }
+
+        .info-label {
+            margin-bottom: 0.25rem;
+        }
+
+        .button-group {
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            min-width: 140px;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .button-group {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
