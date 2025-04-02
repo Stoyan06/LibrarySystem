@@ -1,94 +1,194 @@
 ﻿@model ExtendedSearchViewModel
-
-<div class="container mt-5">
-    <h2 class="text-center fw-bold mb-4">🔍 Extended Search</h2>
-
-    <form asp-action="ExtendedSearch" method="post">
-        <!-- Section Dropdown -->
-        <div class="form-group mb-4">
-            <label asp-for="Section" class="form-label">Section</label>
-            <select asp-for="Section" class="form-control">
-                <option value="">-- Select Section --</option>
-                @foreach (var sec in ViewBag.Sections)
-                {
-                    <option value="@sec">@sec</option>
-                }
-            </select>
-            <span asp-validation-for="Section" class="text-danger"></span>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Разширено Търсене</title>
+    <style>
+        :root {
+            --primary-color: #4169E1;
+            --secondary-color: #6c757d;
+            --light-bg: #ffffff;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        .search-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .form-label {
+            font-weight: normal;
+            color: #555;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-label i {
+            margin-right: 0.5rem;
+            color: #666;
+        }
+        
+        .form-control {
+            padding: 0.6rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+        }
+        
+        .search-btn {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .clear-btn {
+            background-color: transparent;
+            border: 1px solid #ced4da;
+            color: #666;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .footer {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @@media (max-width: 768px) {
+            .form-row {
+                display: block;
+            }
+            
+            .search-btn, .clear-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="search-container mx-auto">
+                    <h2 class="text-center page-title">
+                        <i class="fas fa-search me-2"></i>Разширено Търсене
+                    </h2>
+                    
+                    <form asp-action="ExtendedSearch" method="post">
+                        <!-- Section Dropdown -->
+                        <div class="mb-3">
+                            <label asp-for="Section" class="form-label">
+                                <i class="fas fa-layer-group"></i> Секция
+                            </label>
+                            <select asp-for="Section" class="form-select form-control">
+                                <option value="">-- Изберете Секция --</option>
+                                @foreach (var sec in ViewBag.Sections)
+                                {
+                                    <option value="@sec">@sec</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <!-- Title Input -->
+                                <label asp-for="Title" class="form-label">
+                                    <i class="fas fa-heading"></i> Заглавие
+                                </label>
+                                <input asp-for="Title" class="form-control" placeholder="Въведете заглавие" />
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <!-- Author Input -->
+                                <label asp-for="Author" class="form-label">
+                                    <i class="fas fa-user-edit"></i> Автор
+                                </label>
+                                <input asp-for="Author" class="form-control" placeholder="Въведете автор" />
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <!-- Condition Input -->
+                                <label asp-for="Condition" class="form-label">
+                                    <i class="fas fa-star-half-alt"></i> Състояние
+                                </label>
+                                <input asp-for="Condition" class="form-control" placeholder="Въведете състояние" />
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <!-- Medium Input -->
+                                <label asp-for="Medium" class="form-label">
+                                    <i class="fas fa-compact-disc"></i> Формат
+                                </label>
+                                <input asp-for="Medium" class="form-control" placeholder="Въведете формат" />
+                            </div>
+                        </div>
+                        
+                        <!-- Publishing House Input -->
+                        <div class="mb-4">
+                            <label asp-for="PublishingHouse" class="form-label">
+                                <i class="fas fa-building"></i> Издателство
+                            </label>
+                            <input asp-for="PublishingHouse" class="form-control" placeholder="Въведете издателство" />
+                        </div>
+                        
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="submit" class="btn search-btn">
+                                <i class="fas fa-search me-2"></i>Търсене
+                            </button>
+                            <button type="reset" class="btn clear-btn ms-2">
+                                <i class="fas fa-undo me-2"></i>Изчисти
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- Title Input -->
-        <div class="form-group mb-4">
-            <label asp-for="Title" class="form-label">Title</label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
-
-        <!-- Author Input -->
-        <div class="form-group mb-4">
-            <label asp-for="Author" class="form-label">Author</label>
-            <input asp-for="Author" class="form-control" />
-            <span asp-validation-for="Author" class="text-danger"></span>
-        </div>
-
-        <!-- Condition Input -->
-        <div class="form-group mb-4">
-            <label asp-for="Condition" class="form-label">Condition</label>
-            <input asp-for="Condition" class="form-control" />
-            <span asp-validation-for="Condition" class="text-danger"></span>
-        </div>
-
-        <!-- Medium Input -->
-        <div class="form-group mb-4">
-            <label asp-for="Medium" class="form-label">Medium</label>
-            <input asp-for="Medium" class="form-control" />
-            <span asp-validation-for="Medium" class="text-danger"></span>
-        </div>
-
-        <!-- Publishing House Input -->
-        <div class="form-group mb-4">
-            <label asp-for="PublishingHouse" class="form-label">Publishing House</label>
-            <input asp-for="PublishingHouse" class="form-control" />
-            <span asp-validation-for="PublishingHouse" class="text-danger"></span>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg">Search</button>
-        </div>
-    </form>
-</div>
-
-<style>
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-label {
-        font-weight: bold;
-    }
-
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.25rem;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .mb-4 {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-control {
-        padding: 0.75rem;
-        font-size: 1rem;
-        border-radius: 5px;
-    }
-</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

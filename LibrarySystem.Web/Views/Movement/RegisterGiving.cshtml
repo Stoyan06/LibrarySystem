@@ -1,129 +1,302 @@
 ﻿@model LibrarySystem.Models.MovementViewModel
 
 @{
-    ViewData["Title"] = "Register Library Unit Movement";
+    ViewData["Title"] = "Регистриране на заемане на библиотечна единица";
 }
 
 <div class="container mt-5">
-    <h2 class="text-center fw-bold mb-4">📚 Register Library Unit Movement</h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0 rounded-lg">
+                <div class="card-header bg-primary text-white py-3">
+                    <h2 class="text-center fw-bold mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                        </svg>
+                        Регистриране на движение на библиотечна единица
+                    </h2>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form asp-action="RegisterGiving" asp-controller="Movement" method="post">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label asp-for="DeadLine" class="form-label">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    Краен срок за връщане
+                                </label>
+                                <input asp-for="DeadLine" class="form-control form-control-lg" type="date" required />
+                                <span asp-validation-for="DeadLine" class="text-danger"></span>
+                            </div>
 
-    <form asp-action="RegisterGiving" asp-controller="Movement" method="post">
-        <div class="form-group mb-4">
-            <label asp-for="DeadLine" class="form-label">Deadline</label>
-            <input asp-for="DeadLine" class="form-control" type="date" />
-            <span asp-validation-for="DeadLine" class="text-danger"></span>
-        </div>
+                            <div class="col-12 mb-4 position-relative">
+                                <label class="form-label">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1">
+                                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                                    </svg>
+                                    Библиотечна единица
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" id="libraryUnitSearch" class="form-control form-control-lg" placeholder="Търсене по инвентарен номер, ISBN или заглавие..." autocomplete="off" required />
+                                    <button class="btn btn-outline-secondary" type="button" id="clearLibraryUnit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
+                                <div id="libraryUnitInfo" class="search-results shadow-sm"></div>
+                                <div id="selectedUnit" class="selected-item mt-2 d-none">
+                                    <div class="alert alert-info d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                                        </svg>
+                                        <span id="selectedUnitText">Не е избрана единица</span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
+                            </div>
 
-        <div class="form-group mb-4 position-relative">
-            <label class="form-label">Library Unit</label>
-            <input type="text" id="libraryUnitSearch" class="form-control" placeholder="Search by inventory number, ISBN, or title..." autocomplete="off" />
-            <input type="hidden" asp-for="LibraryUnitId" id="LibraryUnitId" />
-            <div id="libraryUnitInfo" class="search-results"></div>
-            <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
-        </div>
+                            <div class="col-12 mb-4 position-relative">
+                                <label class="form-label">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-1">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Читател
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" id="readerSearch" class="form-control form-control-lg" placeholder="Търсене по име..." autocomplete="off" required />
+                                    <button class="btn btn-outline-secondary" type="button" id="clearReader">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input type="hidden" asp-for="ReaderId" id="ReaderId" />
+                                <div id="readerInfo" class="search-results shadow-sm"></div>
+                                <div id="selectedReader" class="selected-item mt-2 d-none">
+                                    <div class="alert alert-info d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <span id="selectedReaderText">Не е избран читател</span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="ReaderId" class="text-danger"></span>
+                            </div>
 
-        <div class="form-group mb-4 position-relative">
-            <label class="form-label">Reader</label>
-            <input type="text" id="readerSearch" class="form-control" placeholder="Search by name..." autocomplete="off" />
-            <input type="hidden" asp-for="ReaderId" id="ReaderId" />
-            <div id="readerInfo" class="search-results"></div>
-            <span asp-validation-for="ReaderId" class="text-danger"></span>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                    Регистрирай движение
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 <style>
     .search-results {
         position: absolute;
         background: white;
-        border: 1px solid #ccc;
+        border: 1px solid #dee2e6;
         width: 100%;
-        max-height: 150px;
+        max-height: 250px;
         overflow-y: auto;
         display: none;
         z-index: 1000;
-        border-radius: 5px;
+        border-radius: 0.375rem;
     }
 
     .search-result {
-        padding: 10px;
+        padding: 12px 15px;
         cursor: pointer;
+        border-bottom: 1px solid #f1f1f1;
+        transition: all 0.2s ease;
     }
 
-        .search-result:hover {
-            background: #f0f0f0;
-        }
+    .search-result:hover {
+        background: #f8f9fa;
+    }
 
-    .form-group {
-        margin-bottom: 1.5rem;
+    .search-result:last-child {
+        border-bottom: none;
     }
 
     .form-label {
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        color: #495057;
     }
 
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
+    .form-control-lg {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 0.375rem;
     }
 
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.25rem;
+    .selected-item {
+        padding: 0.375rem 0;
+    }
+
+    .alert {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0;
+    }
+
+    .alert-info {
+        background-color: #e9f5fd;
+        border-color: #cfe3f3;
+        color: #0c5885;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .card-header {
+        border-top-left-radius: 0.5rem !important;
+        border-top-right-radius: 0.5rem !important;
+    }
+
+    @@media (max-width: 767.98px) {
+        .card-body {
+            padding: 1.5rem !important;
+        }
+        
+        .btn-lg {
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .card-header {
+            padding: 0.75rem 1rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+        }
     }
 </style>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            function setupSearch(inputId, hiddenFieldId, infoDivId, searchUrl) {
-                $(inputId).on("input", function () {
+            function setupSearch(inputId, hiddenFieldId, infoDivId, searchUrl, selectedDivId, selectedTextId, clearBtnId) {
+                const $input = $(inputId);
+                const $hiddenField = $(hiddenFieldId);
+                const $infoDiv = $(infoDivId);
+                const $selectedDiv = $(selectedDivId);
+                const $selectedText = $(selectedTextId);
+                const $clearBtn = $(clearBtnId);
+                
+                $input.on("input", function () {
                     let query = $(this).val().trim();
                     if (query.length > 2) {
                         $.getJSON(searchUrl, { query: query })
                             .done(function (data) {
                                 let html = "";
                                 if (data.length === 0) {
-                                    html = "<div class='search-result'>No results found</div>";
+                                    html = "<div class='search-result'>Няма намерени резултати</div>";
                                 } else {
                                     data.forEach(item => {
-                                        html += `<div class='search-result' data-id='${item.id}'>${item.text}</div>`;
+                                        html += `<div class='search-result' data-id='${item.id}' data-display='${item.text}'>${item.text}</div>`;
                                     });
                                 }
-                                $(infoDivId).html(html).show();
+                                $infoDiv.html(html).show();
                             })
                             .fail(function () {
                                 console.error("Search request failed.");
+                                $infoDiv.html("<div class='search-result text-danger'>Грешка при изпълнение на търсенето</div>").show();
                             });
                     } else {
-                        $(infoDivId).hide();
+                        $infoDiv.hide();
                     }
                 });
 
                 $(document).on("click", infoDivId + " .search-result", function () {
+                    if ($(this).text() === "Няма намерени резултати" || $(this).hasClass("text-danger")) {
+                        return;
+                    }
+                    
                     let id = $(this).data("id");
-                    let text = $(this).text();
-                    $(inputId).val(text);
-                    $(hiddenFieldId).val(id);
-                    $(infoDivId).hide();
+                    let text = $(this).data("display");
+                    
+                    $hiddenField.val(id);
+                    $infoDiv.hide();
+                    $input.val("");
+                    
+                    // Show selected item info
+                    $selectedText.text(text);
+                    $selectedDiv.removeClass("d-none");
+                });
+                
+                $clearBtn.on("click", function() {
+                    $hiddenField.val("");
+                    $input.val("").focus();
+                    $selectedDiv.addClass("d-none");
                 });
 
                 $(document).click(function (event) {
                     if (!$(event.target).closest(infoDivId).length && !$(event.target).closest(inputId).length) {
-                        $(infoDivId).hide();
+                        $infoDiv.hide();
                     }
                 });
             }
 
-            // ✅ Use endpoint for available units
-            setupSearch("#libraryUnitSearch", "#LibraryUnitId", "#libraryUnitInfo", "/Movement/SearchAvailableLibraryUnits");
+            // Setup search for library units
+            setupSearch(
+                "#libraryUnitSearch", 
+                "#LibraryUnitId", 
+                "#libraryUnitInfo", 
+                "/Movement/SearchAvailableLibraryUnits",
+                "#selectedUnit",
+                "#selectedUnitText",
+                "#clearLibraryUnit"
+            );
 
-            // Reader search stays the same
-            setupSearch("#readerSearch", "#ReaderId", "#readerInfo", "/Movement/SearchUser");
+            // Setup search for readers
+            setupSearch(
+                "#readerSearch", 
+                "#ReaderId", 
+                "#readerInfo", 
+                "/Movement/SearchUser",
+                "#selectedReader",
+                "#selectedReaderText",
+                "#clearReader"
+            );
         });
     </script>
 }

@@ -6,153 +6,140 @@
     ViewData["Title"] = "Детайли за библиотечна единица";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <style>
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
+<div class="container-fluid py-3">
+    <h1 class="fs-2 fw-normal mb-3">Детайли за библиотечна единица</h1>
+    <hr class="mt-2 mb-4" />
 
-        .card-img-top {
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .zoomable-img {
-            cursor: pointer;
-        }
-
-        .details-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Responsive Design */
-        @@media (min-width: 768px) {
-            .details-section {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .details-section .left, .details-section .right {
-                flex: 1;
-            }
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .image-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-control-static {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-
-<h1 class="mb-4 text-center">Детайли за библиотечна единица</h1>
-
-<div class="details-section mx-auto w-100 p-4">
-    <!-- Image Preview (Left Side) -->
-    <div class="left image-container">
-        @if (!string.IsNullOrEmpty(Model.Image.DestinationLink))
-        {
-            <div class="position-relative">
-                <img src="@Model.Image.DestinationLink" id="imagePreview" class="img-thumbnail zoomable-img" alt="Изображение на библиотечната единица" style="max-width: 250px;" onclick="zoomImage()">
-                <small class="d-block mt-1">Изображение на библиотечната единица</small>
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-info-circle text-primary me-2 fs-5"></i>
+                <span class="fs-5 text-primary">Информация</span>
+                <span class="ms-auto badge bg-secondary rounded-pill">@Model.TypeLibraryUnit</span>
             </div>
-        }
-    </div>
-
-    <!-- Details (Right Side) -->
-    <div class="right w-100 bg-light rounded p-4 shadow-sm">
-        <!-- Inventory Number -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">Инвентарен номер</label>
-            <p class="form-control-static">@Model.InventoryNumber</p>
         </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Image Column -->
+                <div class="col-md-4 mb-3">
+                    <div class="mb-3">
+                        @if (!string.IsNullOrEmpty(Model.Image?.DestinationLink))
+                        {
+                            <img src="@Model.Image.DestinationLink"
+                                 class="img-fluid border rounded"
+                                 alt="Изображение на @Model.TitleName"
+                                 style="max-height: 400px; width: 100%; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light border rounded d-flex flex-column align-items-center justify-content-center" style="height: 300px;">
+                                <i class="bi bi-book fs-1 text-secondary mb-2"></i>
+                                <span class="text-muted">Няма налично изображение</span>
+                            </div>
+                        }
+                    </div>
 
-        <!-- Condition -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">Състояние</label>
-            <p class="form-control-static">@Model.Condition</p>
-        </div>
+                    <!-- Buttons Stack -->
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("AllLibraryUnits", "LibraryUnit")" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Назад към списъка
+                        </a>
 
-        <!-- Medium -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">Носител</label>
-            <p class="form-control-static">@Model.Medium</p>
-        </div>
+                        @if (User.IsInRole(SD.UserRole))
+                        {
+                            <a href="@Url.Action("Reserve", "LibraryUnit", new { id = Model.Id })" class="btn btn-primary">
+                                <i class="bi bi-bookmark-plus me-1"></i> Резервирай
+                            </a>
+                        }
+                    </div>
+                </div>
 
-        <!-- Title -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">Заглавие</label>
-            <p class="form-control-static">@Model.TitleName</p>
-        </div>
+                <!-- Details Column -->
+                <div class="col-md-8">
+                    <div class="mb-4">
+                        <h5 class="fw-normal border-bottom pb-2 mb-3">Основна информация</h5>
 
-        <!-- ISBN -->
-        @if (!string.IsNullOrEmpty(Model.Isbn))
-        {
-            <div class="mb-3">
-                <label class="form-label fw-bold">ISBN</label>
-                <p class="form-control-static">@Model.Isbn</p>
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold mb-1">Заглавие</label>
+                            <div class="form-control bg-light">@Model.TitleName</div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <!-- Inventory Number -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold mb-1">
+                                    <i class="bi bi-upc me-1"></i> Инвентарен номер
+                                </label>
+                                <div class="form-control bg-light">@Model.InventoryNumber</div>
+                            </div>
+
+                            <!-- Condition -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold mb-1">
+                                    <i class="bi bi-check-circle me-1"></i> Състояние
+                                </label>
+                                <div class="form-control bg-light">@Model.Condition</div>
+                            </div>
+
+                            <!-- Medium -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold mb-1">
+                                    <i class="bi bi-disc me-1"></i> Носител
+                                </label>
+                                <div class="form-control bg-light">@Model.Medium</div>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold mb-1">
+                                    <i class="bi bi-bookmark me-1"></i> Тип
+                                </label>
+                                <div class="form-control bg-light">@Model.TypeLibraryUnit</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div>
+                        <h5 class="fw-normal border-bottom pb-2 mb-3">Допълнителна информация</h5>
+                        <div class="row">
+                            <!-- ISBN if available -->
+                            @if (!string.IsNullOrEmpty(Model.Isbn))
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold mb-1">
+                                        <i class="bi bi-hash me-1"></i> ISBN
+                                    </label>
+                                    <div class="form-control bg-light">@Model.Isbn</div>
+                                </div>
+                            }
+
+                            <!-- Year if available -->
+                            @if (Model.Year.HasValue)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold mb-1">
+                                        <i class="bi bi-calendar-event me-1"></i> Година
+                                    </label>
+                                    <div class="form-control bg-light">@Model.Year</div>
+                                </div>
+                            }
+
+                            <!-- Publishing House if available -->
+                            @if (!string.IsNullOrEmpty(Model.PublishingHouse))
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold mb-1">
+                                        <i class="bi bi-building me-1"></i> Издателство
+                                    </label>
+                                    <div class="form-control bg-light">@Model.PublishingHouse</div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-        }
-
-        <!-- Type Library Unit -->
-        <div class="mb-3">
-            <label class="form-label fw-bold">Тип</label>
-            <p class="form-control-static">@Model.TypeLibraryUnit</p>
         </div>
-
-        <!-- Year -->
-        @if (Model.Year.HasValue)
-        {
-            <div class="mb-3">
-                <label class="form-label fw-bold">Година</label>
-                <p class="form-control-static">@Model.Year</p>
-            </div>
-        }
-
-        <!-- Publishing House -->
-        @if (!string.IsNullOrEmpty(Model.PublishingHouse))
-        {
-            <div class="mb-3">
-                <label class="form-label fw-bold">Издателство</label>
-                <p class="form-control-static">@Model.PublishingHouse</p>
-            </div>
-        }
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-between mt-4">
-            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
-        </div>
-
-        @if (User.IsInRole(SD.UserRole))
-        {
-            <a href="@Url.Action("Reserve", "LibraryUnit", new { id = Model.Id })" class="btn btn-success">Резервирай</a>
-        }
     </div>
 </div>
-
-<!-- JavaScript for Zoom Feature -->
-<script>
-    function zoomImage() {
-        var imgSrc = document.getElementById("imagePreview").src;
-        if (imgSrc) {
-            var zoomWindow = window.open("", "_blank");
-            zoomWindow.document.write('<img src="' + imgSrc + '" style="width: 100%; height: auto;">');
-        }
-    }
-</script>

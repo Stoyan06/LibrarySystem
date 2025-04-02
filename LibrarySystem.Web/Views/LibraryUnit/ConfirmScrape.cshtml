@@ -1,52 +1,188 @@
 ﻿@using LibrarySystem.Models
 @model LibraryUnitViewModel
-
 @{
-    ViewData["Title"] = "Потвърждение за бракуване на библиотечна единица";
+    ViewData["Title"] = "Потвърждение за бракуване";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <style>
-        .confirmation-box {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow confirmation-card">
+                <!-- Header -->
+                <div class="card-header bg-danger text-white text-center py-3">
+                    <h4 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Потвърждение за бракуване
+                    </h4>
+                </div>
 
-        .confirmation-text {
-            font-size: 1.1rem;
-        }
+                <!-- Book Info -->
+                <div class="card-body">
+                    <div class="row align-items-center mb-4">
+                        <!-- Book Image -->
+                        <div class="col-md-4 text-center mb-3 mb-md-0">
+                            @if (!string.IsNullOrEmpty(Model.Image?.DestinationLink))
+                            {
+                                <img src="@Model.Image.DestinationLink" 
+                                     alt="Изображение на @Model.TitleName" 
+                                     class="img-fluid rounded book-image"
+                                     onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                            }
+                            else
+                            {
+                                <div class="no-image-placeholder d-flex align-items-center justify-content-center h-100">
+                                    <i class="fas fa-book fa-4x text-muted"></i>
+                                </div>
+                            }
+                        </div>
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
+                        <!-- Book Details -->
+                        <div class="col-md-8">
+                            <h5 class="card-title text-primary mb-3">@Model.TitleName</h5>
+                            
+                            <div class="book-details">
+                                <div class="detail-item">
+                                    <span class="fw-bold"><i class="fas fa-hashtag me-2 text-secondary"></i>Инвентарен номер:</span>
+                                    <span class="badge bg-danger text-white ms-2">@Model.InventoryNumber</span>
+                                </div>
+                                
+                                @if (!string.IsNullOrEmpty(Model.Isbn))
+                                {
+                                    <div class="detail-item mt-2">
+                                        <span class="fw-bold"><i class="fas fa-barcode me-2 text-secondary"></i>ISBN:</span>
+                                        <span>@Model.Isbn</span>
+                                    </div>
+                                }
+                                
+                                <div class="detail-item mt-2">
+                                    <span class="fw-bold"><i class="fas fa-check-circle me-2 text-secondary"></i>Състояние:</span>
+                                    <span>@Model.Condition</span>
+                                </div>
 
-        /* Ensure form container is responsive */
-        @@media (max-width: 767px) {
-            .confirmation-box {
-                width: 90%;
-            }
-        }
-    </style>
-</head>
+                                @if (Model.Year.HasValue)
+                                {
+                                    <div class="detail-item mt-2">
+                                        <span class="fw-bold"><i class="fas fa-calendar-alt me-2 text-secondary"></i>Година:</span>
+                                        <span>@Model.Year</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
 
-<h1 class="mb-4 text-center text-danger">Потвърждение за бракуване на библиотечна единица</h1>
+                    <!-- Warning Message -->
+                    <div class="alert alert-danger mt-3">
+                        <div class="d-flex align-items-center">
+                            <div class="warning-icon me-3">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5 class="alert-heading mb-1">Внимание!</h5>
+                                <p class="mb-0">
+                                    Сигурни ли сте, че искате да бракувате тази библиотечна единица?
+                                    <strong>Това действие е необратимо и единицата ще бъде маркирана като бракувана!</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="w-75 w-md-50 mx-auto p-4 border rounded shadow-sm bg-light confirmation-box">
-    <p class="text-center fw-bold confirmation-text">
-        Сигурни ли сте, че искате да бракувате библиотечна единица с инвентарен номер <span class="text-danger">"@Model.InventoryNumber"</span>, принадлежаща към заглавие <span>"@Model.TitleName"</span>?
-        Това е необратима операция!
-    </p>
-
-    <form method="post" class="d-flex justify-content-between">
-        <!-- Cancel Button -->
-        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">
-            Откажи
-        </a>
-        <!-- Confirm Delete Button -->
-        <button type="submit" class="btn btn-danger btn-lg px-4">
-            Бракувай
-        </button>
-    </form>
+                <!-- Action Buttons -->
+                <div class="card-footer bg-light p-3">
+                    <form method="post" class="d-flex justify-content-between gap-3">
+                        <!-- Cancel Button -->
+                        <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg flex-grow-1">
+                            <i class="fas fa-times me-2"></i>Откажи
+                        </a>
+                        
+                        <!-- Confirm Scrapping Button -->
+                        <button type="submit" class="btn btn-danger btn-lg flex-grow-1">
+                            <i class="fas fa-trash-alt me-2"></i>Потвърди бракуване
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Font Awesome CSS - Add to _Layout or include here if not in _Layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    /* Card styling */
+    .confirmation-card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    /* Book image styling */
+    .book-image {
+        max-height: 200px;
+        object-fit: contain;
+        border: 1px solid #dee2e6;
+        padding: 3px;
+    }
+    
+    /* No image placeholder */
+    .no-image-placeholder {
+        height: 200px;
+        background-color: #f8f9fa;
+        border: 1px dashed #ced4da;
+        border-radius: 5px;
+    }
+    
+    /* Warning icon pulse animation */
+    .warning-icon {
+        animation: pulse 2s infinite;
+        color: #dc3545;
+    }
+    
+    @@keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    /* Button hover effects */
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    /* Mobile responsiveness */
+    @@media (max-width: 767px) {
+        .book-image {
+            max-height: 150px;
+        }
+        
+        .no-image-placeholder {
+            height: 150px;
+        }
+        
+        .card-footer {
+            padding: 1rem;
+        }
+        
+        .btn-lg {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+        }
+    }
+</style>

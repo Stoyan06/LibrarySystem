@@ -351,6 +351,11 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditLibrarian(EditLibrarianViewModel model)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
         IdentityUser identityUser = await _userManager.FindByEmailAsync(model.Email);
         User user = await _userService.GetByIdAsync(model.Id);
 

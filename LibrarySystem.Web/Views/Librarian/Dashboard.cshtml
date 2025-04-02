@@ -2,70 +2,100 @@
     ViewData["Title"] = "Библиотекарски Панел";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center fw-bold mb-4">📚 Библиотекарски Панел</h2>
-
-    <div class="row g-4 justify-content-center">
+<div class="container py-4">
+    <div class="row mb-3">
+        <div class="col-12 text-center">
+            <h2 class="fw-bold">Библиотекарски Панел</h2>
+            <p class="text-muted">Управление на библиотечната система</p>
+        </div>
+    </div>
+    
+    <div class="row g-3 justify-content-center">
         <!-- Manage Authors -->
-        <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-4">
             <a asp-area="" asp-controller="Author" asp-action="AllAuthors" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-feather-alt admin-icon"></i>
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-wrapper mb-2">
+                            <i class="fa fa-user-edit admin-icon"></i>
+                        </div>
                         <h5 class="card-title">Управление на автори</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на автори.</p>
+                        <p class="card-text small">Добавяне, редактиране и премахване на автори.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <span class="btn btn-sm btn-outline-primary">Преглед</span>
                     </div>
                 </div>
             </a>
         </div>
-
+        
         <!-- Manage Titles -->
-        <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-4">
             <a asp-area="" asp-controller="Title" asp-action="AllTitles" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-book admin-icon"></i>
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-wrapper mb-2">
+                            <i class="fa fa-book admin-icon"></i>
+                        </div>
                         <h5 class="card-title">Управление на заглавия</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на заглавия.</p>
+                        <p class="card-text small">Добавяне, редактиране и премахване на заглавия.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <span class="btn btn-sm btn-outline-primary">Преглед</span>
                     </div>
                 </div>
             </a>
         </div>
-
+        
         <!-- Manage Sections -->
-        <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-4">
             <a asp-area="" asp-controller="Section" asp-action="AllSections" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-folder-open admin-icon"></i>
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-wrapper mb-2">
+                            <i class="fa fa-folder admin-icon"></i>
+                        </div>
                         <h5 class="card-title">Управление на раздели</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на раздели.</p>
+                        <p class="card-text small">Добавяне, редактиране и премахване на раздели.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <span class="btn btn-sm btn-outline-primary">Преглед</span>
                     </div>
                 </div>
             </a>
         </div>
-
+        
         <!-- Manage Library Units -->
-        <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-4">
             <a asp-area="" asp-controller="LibraryUnit" asp-action="AllLibraryUnits" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-archive admin-icon"></i>
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-wrapper mb-2">
+                            <i class="fa fa-archive admin-icon"></i>
+                        </div>
                         <h5 class="card-title">Управление на библиотечни единици</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на библиотечни единици.</p>
+                        <p class="card-text small">Добавяне, редактиране и премахване на библиотечни единици.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <span class="btn btn-sm btn-outline-primary">Преглед</span>
                     </div>
                 </div>
             </a>
         </div>
-
+        
         <!-- Borrow/Return Units -->
-        <div class="col-sm-12 col-md-5 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-4">
             <a asp-area="" asp-controller="Movement" asp-action="Register" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-hand-holding-book admin-icon"></i>
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="icon-wrapper mb-2">
+                            <i class="fa fa-exchange-alt admin-icon"></i>
+                        </div>
                         <h5 class="card-title">Заемане/Връщане на единица</h5>
-                        <p class="card-text">Управление на заемането и връщането на книги.</p>
+                        <p class="card-text small">Управление на заемането и връщането на книги.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <span class="btn btn-sm btn-outline-primary">Преглед</span>
                     </div>
                 </div>
             </a>
@@ -73,30 +103,113 @@
     </div>
 </div>
 
+<!-- Font Awesome CDN - Make sure this is in your _Layout or add it here -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <style>
     .admin-card {
         text-decoration: none;
         color: inherit;
-        transition: transform 0.2s, box-shadow 0.2s;
+        display: block;
+        height: 100%;
+        transition: all 0.3s ease;
     }
-
-        .admin-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
+    
+    .admin-card:hover {
+        transform: translateY(-5px);
+        color: inherit;
+    }
+    
+    .admin-card:hover .card {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 123, 255, 0.3);
+    }
+    
     .card {
-        border: none;
-        border-radius: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
     }
-
+    
+    .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+    }
+    
     .admin-icon {
-        font-size: 2rem;
-        color: #007bff;
-        margin-bottom: 10px;
+        font-size: 1.5rem;
+        color: #0d6efd;
+        transition: all 0.3s ease;
     }
-
-    h5 {
-        font-weight: bold;
+    
+    .admin-card:hover .admin-icon {
+        transform: scale(1.1);
+    }
+    
+    .card-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-text {
+        color: #6c757d;
+    }
+    
+    .card-footer {
+        padding-top: 0;
+    }
+    
+    .admin-card:hover .btn-outline-primary {
+        background-color: #0d6efd;
+        color: white;
+    }
+    
+    @@media (max-width: 767.98px) {
+        .container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 </style>
+
+<!-- JavaScript for Navbar Dropdown -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all dropdown toggles
+        const dropdowns = document.querySelectorAll('.dropdown-toggle');
+        
+        // Add click event listeners to dropdown toggles
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle the dropdown menu
+                const dropdownMenu = this.nextElementSibling;
+                dropdownMenu.classList.toggle('show');
+                
+                // Close other open dropdowns
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== this) {
+                        const menu = otherDropdown.nextElementSibling;
+                        if (menu && menu.classList.contains('show')) {
+                            menu.classList.remove('show');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        });
+    });
+</script>

@@ -2,34 +2,80 @@
     ViewData["Title"] = "Управление на потребители";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center fw-bold mb-4">⚙️ Управление на потребители</h2>
+<!-- Make sure Font Awesome is properly loaded -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">
+        <i class="fas fa-users-cog me-2"></i>Управление на потребители
+    </h2>
+    
     <div class="row g-4 justify-content-center">
         <!-- Manage Librarians -->
-        <div class="col-md-5 col-sm-12">
-            <a asp-controller="Admin" asp-action="ManageLibrarians" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-users admin-icon"></i>
-                        <h5 class="card-title">Управление на библиотекари</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на библиотекари.</p>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <a asp-controller="Admin" asp-action="ManageLibrarians" class="card-link text-decoration-none text-dark">
+                <div class="card text-center shadow-sm h-100 border-0 transition-card">
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="icon-container mb-3">
+                            <i class="fas fa-user-tie fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Управление на библиотекари</h5>
+                        <p class="card-text text-muted">Добавяне, редактиране и премахване на библиотекари.</p>
+                        <div class="mt-auto pt-3">
+                            <span class="btn btn-outline-primary">
+                                <i class="fas fa-user-edit me-2"></i>Управление
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
-
+        
         <!-- Manage Readers -->
-        <div class="col-md-5 col-sm-12">
-            <a asp-controller="Admin" asp-action="ManageReaders" class="admin-card">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <i class="fas fa-users admin-icon"></i>
-                        <h5 class="card-title">Управление на читатели</h5>
-                        <p class="card-text">Добавяне, редактиране и премахване на читатели.</p>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <a asp-controller="Admin" asp-action="ManageReaders" class="card-link text-decoration-none text-dark">
+                <div class="card text-center shadow-sm h-100 border-0 transition-card">
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="icon-container mb-3">
+                            <i class="fas fa-book-reader fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Управление на читатели</h5>
+                        <p class="card-text text-muted">Добавяне, редактиране и премахване на читатели.</p>
+                        <div class="mt-auto pt-3">
+                            <span class="btn btn-outline-success">
+                                <i class="fas fa-user-edit me-2"></i>Управление
+                                <i class="fas fa-arrow-right ms-2"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
+
+<style>
+    .transition-card {
+        transition: all 0.3s ease;
+        border-radius: 12px;
+    }
+    
+    .card-link:hover .transition-card {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .icon-container {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    @@media (max-width: 767.98px) {
+        .icon-container {
+            height: 60px;
+        }
+    }
+</style>

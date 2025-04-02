@@ -1,29 +1,96 @@
 ﻿@using LibrarySystem.Models
 @model Author
-
 @{
     ViewData["Title"] = "Добавяне на автор";
 }
 
-@{
-    <head>
-        <title>@ViewData["Title"] - Библиотечна система</title>
-    </head>
+<!-- Make sure Font Awesome is properly loaded -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <h1 class="mb-4 text-center">Добавяне на автор</h1>
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-primary text-white py-3 rounded-top-4">
+                    <h2 class="mb-0 text-center">
+                        <i class="fas fa-feather-alt me-2"></i>Добавяне на автор
+                    </h2>
+                </div>
+                <div class="card-body p-4 p-lg-5">
+                    <div class="text-center mb-4">
+                        <div class="icon-circle mx-auto">
+                            <i class="fas fa-user-edit fa-3x text-primary"></i>
+                        </div>
+                    </div>
 
-    <form method="post" class="w-100 w-md-50 mx-auto p-4 border rounded shadow-sm bg-light">
-        <!-- Name Field -->
-        <div class="mb-3">
-            <label for="nameInput" class="form-label fw-bold">Име</label>
-            <input type="text" id="nameInput" asp-for="FullName" class="form-control" placeholder="Въведи пълното име на автор">
-            <span asp-validation-for="FullName" class="text-danger"></span>
+                    <form method="post">
+                        <!-- Name Field -->
+                        <div class="mb-4 form-floating">
+                            <input type="text" id="nameInput" asp-for="FullName" class="form-control form-control-lg border-primary-subtle"
+                                   placeholder="Въведи пълното име на автор">
+                            <label for="nameInput">
+                                <i class="fas fa-signature me-2"></i>Име на автор
+                            </label>
+                            <small class="form-text text-muted mt-1">
+                                <i class="fas fa-info-circle me-1"></i>Въведете пълното име на автора
+                            </small>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-between mt-5">
+                            <a asp-action="AllAuthors" class="btn btn-outline-secondary btn-lg px-4 transition-btn">
+                                <i class="fas fa-times me-2"></i>Откажи
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg px-4 transition-btn">
+                                <i class="fas fa-plus-circle me-2"></i>Добави автор
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
 
-        <!-- Submit Button -->
-        <div class="d-flex justify-content-between mt-4">
-            <a asp-action="AllAuthors" class="btn btn-secondary btn-lg px-4">Откажи</a>
-            <input type="submit" value="Добави автор" class="btn btn-primary btn-lg px-4">
-        </div>
-    </form>
-}
+<style>
+    .icon-circle {
+        width: 90px;
+        height: 90px;
+        background-color: #f0f8ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #0d6efd;
+    }
+
+    .transition-btn {
+        transition: all 0.3s ease;
+    }
+
+    .transition-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+
+    .form-floating label {
+        padding-left: 1rem;
+    }
+
+    .form-floating > .form-control-lg {
+        height: calc(3.5rem + 2px);
+        line-height: 1.25;
+    }
+
+    @@media (max-width: 767.98px) {
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+        }
+    }
+</style>

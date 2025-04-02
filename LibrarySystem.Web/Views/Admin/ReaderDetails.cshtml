@@ -1,29 +1,100 @@
 ﻿@model UserViewModel
-
 @{
-    //ViewData["Title"] = "Детайли за Читател";
+    ViewData["Title"] = "Детайли за читател";
 }
 
-<div class="card shadow-lg p-4 rounded-4 mt-4">
-    <h3 class="mb-4 text-primary text-center">Детайли за читател</h3>
+<!-- Make sure Font Awesome is properly loaded -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <dl class="row">
-        <dt class="col-sm-3 col-4">Име</dt>
-        <dd class="col-sm-9 col-8">@Model.FirstName</dd>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-header bg-primary text-white py-3 rounded-top-4">
+                    <h3 class="mb-0 text-center">
+                        <i class="fas fa-user-circle me-2"></i>Детайли за читател
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="avatar-circle mx-auto">
+                            <i class="fas fa-user-alt fa-3x text-primary"></i>
+                        </div>
+                    </div>
 
-        <dt class="col-sm-3 col-4">Презиме</dt>
-        <dd class="col-sm-9 col-8">@Model.MiddleName</dd>
+                    <dl class="row">
+                        <dt class="col-sm-3 col-4">
+                            <i class="fas fa-user-tag me-2 text-primary"></i>Име
+                        </dt>
+                        <dd class="col-sm-9 col-8 fw-bold">@Model.FirstName</dd>
 
-        <dt class="col-sm-3 col-4">Фамилия</dt>
-        <dd class="col-sm-9 col-8">@Model.LastName</dd>
+                        <dt class="col-sm-3 col-4">
+                            <i class="fas fa-user-tag me-2 text-primary"></i>Презиме
+                        </dt>
+                        <dd class="col-sm-9 col-8 fw-bold">@Model.MiddleName</dd>
 
-        <dt class="col-sm-3 col-4">Имейл</dt>
-        <dd class="col-sm-9 col-8">@Model.Email</dd>
-    </dl>
+                        <dt class="col-sm-3 col-4">
+                            <i class="fas fa-user-tag me-2 text-primary"></i>Фамилия
+                        </dt>
+                        <dd class="col-sm-9 col-8 fw-bold">@Model.LastName</dd>
 
-    <div class="mt-4 text-center">
-        <a asp-action="ManageReaders" class="btn btn-secondary">
-            ⬅ Назад
-        </a>
+                        <dt class="col-sm-3 col-4">
+                            <i class="fas fa-envelope me-2 text-primary"></i>Имейл
+                        </dt>
+                        <dd class="col-sm-9 col-8">
+                            <a href="mailto:@Model.Email" class="text-decoration-none">@Model.Email</a>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-4 text-center">
+                    <a asp-action="ManageReaders" class="btn btn-outline-secondary btn-lg transition-btn">
+                        <i class="fas fa-arrow-left me-2"></i>Назад към списъка
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .avatar-circle {
+        width: 100px;
+        height: 100px;
+        background-color: #f0f8ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        border: 2px solid #0d6efd;
+    }
+
+    .transition-btn {
+        transition: all 0.3s ease;
+    }
+
+    .transition-btn:hover {
+        transform: translateX(-5px);
+    }
+
+    dl.row {
+        margin-bottom: 0;
+    }
+
+    dl.row dt, dl.row dd {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    dl.row dt:last-of-type, dl.row dd:last-of-type {
+        border-bottom: none;
+    }
+
+    @@media (max-width: 767.98px) {
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+        }
+    }
+</style>

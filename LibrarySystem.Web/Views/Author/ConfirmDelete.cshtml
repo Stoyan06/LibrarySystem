@@ -1,32 +1,90 @@
 ﻿@using LibrarySystem.Models
 @model Author
-
 @{
     ViewData["Title"] = "Потвърждение за изтриване на автор";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-</head>
+<!-- Make sure Font Awesome is properly loaded -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<h1 class="mb-4 text-center text-danger">Потвърждение за изтриване на автор</h1>
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-danger text-white py-3 rounded-top-4">
+                    <h2 class="mb-0 text-center">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Потвърждение за изтриване
+                    </h2>
+                </div>
 
-<!-- Container for Delete Confirmation -->
-<div class="w-75 w-md-50 mx-auto p-4 border rounded shadow-sm bg-light">
-    <p class="text-center fw-bold">
-        Сигурни ли сте, че искате да изтриете автор: <span class="text-danger">"@Model.FullName"</span>?
-    </p>
+                <div class="card-body p-4 p-lg-5">
+                    <div class="text-center mb-4">
+                        <div class="warning-circle mx-auto">
+                            <i class="fas fa-trash-alt fa-3x text-danger"></i>
+                        </div>
+                    </div>
 
-    <!-- Form with Buttons -->
-    <form method="post" class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
-        <!-- Confirm Delete Button -->
-        <button type="submit" class="btn btn-danger btn-lg mb-3 mb-sm-0 me-sm-3 px-4 w-100 w-sm-auto">
-            Изтрий
-        </button>
+                    <div class="alert alert-danger border-danger mb-4">
+                        <p class="mb-0 text-center fs-5">
+                            <i class="fas fa-info-circle me-2"></i>Това действие <strong>не може</strong> да бъде отменено!
+                        </p>
+                    </div>
 
-        <!-- Cancel Button -->
-        <a asp-action="AllAuthors" class="btn btn-secondary btn-lg px-4 w-100 w-sm-auto">
-            Откажи
-        </a>
-    </form>
+                    <div class="text-center mb-4">
+                        <p class="fs-5">
+                            Сигурни ли сте, че искате да изтриете автора:
+                        </p>
+                        <h3 class="text-danger fw-bold mb-4">
+                            "<i class="fas fa-user me-2"></i>@Model.FullName"
+                        </h3>
+                    </div>
+
+                    <form method="post">
+                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
+                            <a asp-action="AllAuthors" class="btn btn-outline-secondary btn-lg px-4 transition-btn">
+                                <i class="fas fa-times me-2"></i>Откажи
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg px-4 transition-btn">
+                                <i class="fas fa-trash-alt me-2"></i>Изтрий
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .warning-circle {
+        width: 100px;
+        height: 100px;
+        background-color: #fff5f5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        border: 2px solid #dc3545;
+    }
+
+    .transition-btn {
+        transition: all 0.3s ease;
+    }
+
+    .transition-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .alert-danger {
+        background-color: rgba(220, 53, 69, 0.1);
+    }
+
+    @@media (max-width: 767.98px) {
+        .warning-circle {
+            width: 80px;
+            height: 80px;
+        }
+    }
+</style>

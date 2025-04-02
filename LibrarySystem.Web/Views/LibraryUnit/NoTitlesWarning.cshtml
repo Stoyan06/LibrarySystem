@@ -1,57 +1,105 @@
 ﻿@{
     ViewData["Title"] = "Предупреждение";
 }
-
 <head>
     <title>@ViewData["Title"] - Библиотечна система</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .container {
+        .warning-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 80vh;
+            padding: 1rem;
         }
-
         .warning-box {
             width: 100%;
-            max-width: 500px;
-            padding: 2rem;
-            border-radius: 10px;
+            max-width: 550px;
+            padding: 2.5rem;
+            border-radius: 12px;
             background-color: #f8f9fa;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
             text-align: center;
+            transition: all 0.3s ease;
         }
-
-        .warning-box p {
-            font-size: 1.2rem;
+        .warning-box:hover {
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+        }
+        .warning-icon {
+            font-size: 3.5rem;
             color: #dc3545;
+            margin-bottom: 1rem;
         }
-
-        .warning-box .btn {
+        .warning-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #dc3545;
+            margin-bottom: 1.5rem;
+        }
+        .warning-message {
+            font-size: 1.2rem;
+            color: #495057;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .btn-action {
             font-size: 1.1rem;
-            padding: 10px 30px;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
         /* Responsive Design */
         @@media (max-width: 768px) {
             .warning-box {
-                width: 90%;
+                width: 95%;
+                padding: 2rem 1.5rem;
+            }
+            .warning-title {
+                font-size: 1.5rem;
+            }
+            .warning-message {
+                font-size: 1.1rem;
+            }
+        }
+        @@media (max-width: 480px) {
+            .warning-icon {
+                font-size: 2.8rem;
+            }
+            .warning-title {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            .warning-message {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .btn-action {
+                font-size: 1rem;
+                padding: 0.6rem 1.5rem;
             }
         }
     </style>
 </head>
 
-<h1 class="mb-4 text-center text-warning">Невалидна операция</h1>
-
-<div class="container">
+<div class="warning-container">
     <div class="warning-box">
-        <p class="fw-bold text-danger">
-            В системата няма въведени заглавия. Моля, добавате заглавия преди да добавите библиотечни единици!
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <h1 class="warning-title">Невалидна операция</h1>
+        <p class="warning-message">
+            В системата няма въведени заглавия. Моля, добавете заглавия преди да добавите библиотечни единици!
         </p>
-
         <div class="d-flex justify-content-center">
-            <!-- Go Back Button -->
-            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-lg px-4">Назад</a>
+            <!-- Go Back Button with icon -->
+            <a asp-action="AllLibraryUnits" class="btn btn-secondary btn-action">
+                <i class="fas fa-arrow-left"></i>
+                <span>Назад</span>
+            </a>
         </div>
     </div>
 </div>

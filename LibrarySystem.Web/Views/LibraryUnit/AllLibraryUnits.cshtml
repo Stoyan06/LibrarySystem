@@ -1,91 +1,358 @@
 ﻿@using LibrarySystem.Models
 @using LibrarySystem.Utility
 @model IEnumerable<LibraryUnitViewModel>
-
 @{
     ViewData["Title"] = "Библиотечни единици";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <style>
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 15px;
-        }
-
-        .card-footer {
-            padding: 10px 15px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
-</head>
-
-<h1 class="text-center mb-4">Библиотечни единици</h1>
-
-<div class="text-center mb-3">
-    <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary">
-        <i class="bi bi-plus-square"></i> Добави библиотечна единица
-    </a>
-    <a asp-action="ExtendedSearch" asp-controller="Search" class="btn btn-primary">
-        <i class="bi bi-search"></i> Търсене на единици
-    </a>
-    <a asp-action="ScrappedLibraryUnits" asp-controller="LibraryUnit" class="btn btn-primary">
-        <i class="bi bi-trash"></i> Бракувани единици
-    </a>
-</div>
-
-@if (Model == null || !Model.Any())
-{
-    <h2 class="text-center">Няма съществуващи библиотечни единици в системата</h2>
-}
-else
-{
-    <div class="row">
-        @foreach (var unit in Model)
-        {
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card h-100">
-                    <img src="@unit.Image.DestinationLink" class="card-img-top" alt="Изображение на @unit.TitleName">
-                    <div class="card-body">
-                        <h5 class="card-title">@unit.TitleName</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Инвентарен номер: @unit.InventoryNumber</h6>
-                        <p class="card-text">Състояние: @unit.Condition</p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <div class="btn-group">
-                            <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" class="btn btn-info btn-sm">
-                                <i class="bi bi-eye"></i> Детайли
-                            </a>
-                            <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" class="btn btn-primary btn-sm">
-                                <i class="bi bi-pen"></i> Редактирай
-                            </a>
-                            <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id" class="btn btn-danger btn-sm">
-                                <i class="bi bi-trash3"></i> Бракувай
-                            </a>
-
-                            @if (User.IsInRole(SD.UserRole))
-                            {
-                                <a href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })" class="btn btn-success btn-sm">Резервирай</a>
-                            }
-                        </div>
+<div class="container-fluid py-4">
+    <!-- Header Section with Title and Action Buttons -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">
+                        <i class="fas fa-books me-2"></i>Библиотечни единици
+                    </h1>
+                    
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                        <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-2"></i>Добави библиотечна единица
+                        </a>
+                        <a asp-action="ExtendedSearch" asp-controller="Search" class="btn btn-info">
+                            <i class="fas fa-search me-2"></i>Търсене на единици
+                        </a>
+                        <a asp-action="ScrappedLibraryUnits" asp-controller="LibraryUnit" class="btn btn-secondary">
+                            <i class="fas fa-archive me-2"></i>Бракувани единици
+                        </a>
                     </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
+
+    <!-- No Items Message -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm text-center p-5">
+                    <div class="card-body">
+                        <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                        <h2>Няма съществуващи библиотечни единици в системата</h2>
+                        <p class="text-muted">Добавете нови единици, за да ги видите тук.</p>
+                        <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary mt-3">
+                            <i class="fas fa-plus-circle me-2"></i>Добави първата единица
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Filter and Sort Controls (Optional) -->
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <div class="input-group">
+                    <span class="input-group-text bg-light">
+                        <i class="fas fa-filter"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Филтрирай по заглавие или инв. номер...">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 text-md-end">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary active" id="gridView">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" id="listView">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Library Units Grid -->
+        <div class="row" id="unitsGrid">
+            @foreach (var unit in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4 unit-item">
+                    <div class="card h-100 shadow-sm hover-shadow transition-all">
+                        <!-- Image with Fallback -->
+                        <div class="position-relative card-img-container">
+                            @if (!string.IsNullOrEmpty(unit.Image?.DestinationLink))
+                            {
+                                <img src="@unit.Image.DestinationLink" class="card-img-top" 
+                                     alt="Изображение на @unit.TitleName" 
+                                     onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                            }
+                            else
+                            {
+                                <img src="/images/default-book.jpg" class="card-img-top" alt="Изображение по подразбиране">
+                            }
+                            
+                            <!-- Condition Badge -->
+                            <span class="position-absolute top-0 end-0 m-2 badge @GetConditionBadgeClass(unit.Condition)">
+                                @unit.Condition
+                            </span>
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate" title="@unit.TitleName">@unit.TitleName</h5>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-hashtag text-secondary me-2"></i>
+                                <span class="text-muted">@unit.InventoryNumber</span>
+                            </div>
+                            @if (!string.IsNullOrEmpty(unit.Isbn))
+                            {
+                                <div class="d-flex align-items-center small">
+                                    <i class="fas fa-barcode text-secondary me-2"></i>
+                                    <span class="text-muted">@unit.Isbn</span>
+                                </div>
+                            }
+                            @if (unit.Year.HasValue)
+                            {
+                                <div class="d-flex align-items-center small mt-1">
+                                    <i class="fas fa-calendar-alt text-secondary me-2"></i>
+                                    <span class="text-muted">@unit.Year</span>
+                                </div>
+                            }
+                        </div>
+                        
+                        <!-- Card Actions -->
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex flex-wrap gap-1 justify-content-between">
+                                <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" 
+                                   class="btn btn-outline-primary btn-sm flex-grow-1" title="Детайли">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="d-none d-sm-inline ms-1">Детайли</span>
+                                </a>
+                                <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" 
+                                   class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
+                                    <i class="fas fa-edit"></i>
+                                    <span class="d-none d-sm-inline ms-1">Редактирай</span>
+                                </a>
+                                <div class="dropdown flex-grow-1">
+                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle w-100" type="button" 
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id">
+                                                <i class="fas fa-archive text-danger me-2"></i>Бракувай
+                                            </a>
+                                        </li>
+                                        @if (User.IsInRole(SD.UserRole))
+                                        {
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })">
+                                                    <i class="fas fa-bookmark text-success me-2"></i>Резервирай
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Library Units List (Hidden by Default) -->
+        <div class="row d-none" id="unitsList">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Изображение</th>
+                                <th>Заглавие</th>
+                                <th>Инв. номер</th>
+                                <th>Състояние</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var unit in Model)
+                            {
+                                <tr class="align-middle unit-item">
+                                    <td style="width: 70px">
+                                        @if (!string.IsNullOrEmpty(unit.Image?.DestinationLink))
+                                        {
+                                            <img src="@unit.Image.DestinationLink" class="img-thumbnail" 
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="Изображение на @unit.TitleName" 
+                                                 onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/default-book.jpg" class="img-thumbnail" 
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="Изображение по подразбиране">
+                                        }
+                                    </td>
+                                    <td>@unit.TitleName</td>
+                                    <td>@unit.InventoryNumber</td>
+                                    <td>
+                                        <span class="badge @GetConditionBadgeClass(unit.Condition)">@unit.Condition</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" 
+                                               class="btn btn-outline-primary" title="Детайли">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" 
+                                               class="btn btn-outline-secondary" title="Редактирай">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id" 
+                                               class="btn btn-outline-danger" title="Бракувай">
+                                                <i class="fas fa-archive"></i>
+                                            </a>
+                                            @if (User.IsInRole(SD.UserRole))
+                                            {
+                                                <a href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })" 
+                                                   class="btn btn-outline-success" title="Резервирай">
+                                                    <i class="fas fa-bookmark"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Font Awesome CSS - Add to _Layout or add here if not in _Layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    /* Card Styles */
+    .card {
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+    
+    .card-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    /* Improve Responsiveness */
+    @@media (max-width: 767px) {
+        .btn-group {
+            flex-wrap: wrap;
+        }
+        
+        .card-img-container,
+        .card-img-top {
+            height: 180px;
+        }
+    }
+    
+    /* Active Button Styles */
+    .btn-outline-secondary.active {
+        background-color: #6c757d;
+        color: white;
+    }
+</style>
+
+<script>
+    // Function to handle grid/list view toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const gridViewBtn = document.getElementById('gridView');
+        const listViewBtn = document.getElementById('listView');
+        const unitsGrid = document.getElementById('unitsGrid');
+        const unitsList = document.getElementById('unitsList');
+        const searchInput = document.getElementById('searchInput');
+        
+        // Grid/List View Toggle
+        if (gridViewBtn && listViewBtn) {
+            gridViewBtn.addEventListener('click', function() {
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                unitsGrid.classList.remove('d-none');
+                unitsList.classList.add('d-none');
+            });
+            
+            listViewBtn.addEventListener('click', function() {
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+                unitsList.classList.remove('d-none');
+                unitsGrid.classList.add('d-none');
+            });
+        }
+        
+        // Filter Function
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                const unitItems = document.querySelectorAll('.unit-item');
+                
+                unitItems.forEach(function(item) {
+                    const title = item.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                    const inventoryNumber = item.querySelector('.text-muted')?.textContent.toLowerCase() || '';
+                    
+                    if (title.includes(searchTerm) || inventoryNumber.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+    });
+</script>
+
+@functions {
+    public string GetConditionBadgeClass(string condition)
+    {
+        if (string.IsNullOrEmpty(condition))
+            return "bg-secondary";
+            
+        condition = condition.ToLower();
+        
+        if (condition.Contains("нов") || condition.Contains("отлич"))
+            return "bg-success";
+        else if (condition.Contains("добро"))
+            return "bg-info";
+        else if (condition.Contains("задоволит"))
+            return "bg-warning";
+        else if (condition.Contains("лош"))
+            return "bg-danger";
+        else
+            return "bg-secondary";
+    }
 }

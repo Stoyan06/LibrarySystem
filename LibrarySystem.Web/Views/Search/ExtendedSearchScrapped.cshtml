@@ -1,90 +1,236 @@
 ﻿@model ExtendedSearchViewModel
-
-<div class="container mt-5">
-    <h2 class="text-center fw-bold mb-4">🔍 Extended Search - Scrapped</h2>
-
-    <form asp-action="ExtendedSearchScrapped" method="post">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="Section">Section</label>
-                    <select asp-for="Section" class="form-control">
-                        <option value="">-- Select Section --</option>
-                        @foreach (var sec in ViewBag.Sections)
-                        {
-                            <option value="@sec">@sec</option>
-                        }
-                    </select>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Разширено Търсене - Scrapped</title>
+    <style>
+        :root {
+            --primary-color: #4169E1;
+            --secondary-color: #6c757d;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --hover-color: #e9ecef;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        .search-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-label i {
+            margin-right: 0.5rem;
+            color: #666;
+        }
+        
+        .form-control {
+            padding: 0.6rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(65, 105, 225, 0.25);
+        }
+        
+        .form-select {
+            padding: 0.6rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            cursor: pointer;
+        }
+        
+        .search-btn {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.7rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            width: auto;
+            min-width: 180px;
+        }
+        
+        .search-btn:hover {
+            background-color: #3456bb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .clear-btn {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 0.7rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            color: white;
+            width: auto;
+            min-width: 180px;
+        }
+        
+        .clear-btn:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .footer {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .btn-container {
+                flex-direction: column;
+            }
+            
+            .search-btn, .clear-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <h2 class="text-center page-title">
+                <i class="fas fa-search me-2"></i>Разширено Търсене - Scrapped
+            </h2>
+            
+            <form asp-action="ExtendedSearchScrapped" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Section" class="form-label">
+                                <i class="fas fa-layer-group"></i> Секция
+                            </label>
+                            <select asp-for="Section" class="form-select">
+                                <option value="">-- Изберете Секция --</option>
+                                @foreach (var sec in ViewBag.Sections)
+                                {
+                                    <option value="@sec">@sec</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Title" class="form-label">
+                                <i class="fas fa-heading"></i> Заглавие
+                            </label>
+                            <input asp-for="Title" class="form-control" placeholder="Въведете заглавие" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Author" class="form-label">
+                                <i class="fas fa-user-edit"></i> Автор
+                            </label>
+                            <input asp-for="Author" class="form-control" placeholder="Въведете автор" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Condition" class="form-label">
+                                <i class="fas fa-star-half-alt"></i> Състояние
+                            </label>
+                            <input asp-for="Condition" class="form-control" placeholder="Въведете състояние" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Medium" class="form-label">
+                                <i class="fas fa-compact-disc"></i> Формат
+                            </label>
+                            <input asp-for="Medium" class="form-control" placeholder="Въведете формат" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label asp-for="PublishingHouse" class="form-label">
+                                <i class="fas fa-building"></i> Издателство
+                            </label>
+                            <input asp-for="PublishingHouse" class="form-control" placeholder="Въведете издателство" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="Title">Title</label>
-                    <input asp-for="Title" class="form-control" />
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn search-btn">
+                        <i class="fas fa-search me-2"></i>Търсене
+                    </button>
+                    <button type="reset" class="btn clear-btn">
+                        <i class="fas fa-undo me-2"></i>Изчисти
+                    </button>
                 </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="Author">Author</label>
-                    <input asp-for="Author" class="form-control" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="Condition">Condition</label>
-                    <input asp-for="Condition" class="form-control" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="Medium">Medium</label>
-                    <input asp-for="Medium" class="form-control" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label asp-for="PublishingHouse">Publishing House</label>
-                    <input asp-for="PublishingHouse" class="form-control" />
-                </div>
-            </div>
-
-            <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
 
-<style>
-    .container {
-        max-width: 800px;
-    }
-
-    .form-group label {
-        font-weight: bold;
-    }
-
-    .form-control {
-        font-size: 1rem;
-        padding: 10px;
-    }
-
-    .btn-primary {
-        font-size: 1.1rem;
-        padding: 10px 20px;
-        width: 100%;
-    }
-
-    .mb-3 {
-        margin-bottom: 1.5rem;
-    }
-
-    .row {
-        margin-bottom: 2rem;
-    }
-</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
