@@ -1,12 +1,136 @@
-﻿@model List<SearchResults>
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+﻿@using LibrarySystem.Utility
+@model List<SearchResults>
+@{
+    ViewData["Title"] = "Резултати";
+}
+<div class="main-content">
+    <div class="container">
+        <div class="results-container">
+            <h2 class="text-center page-title">
+                <i class="fas fa-search me-2"></i>Резултати от търсенето
+            </h2>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4 unit-item">
+                            <div class="card h-100 shadow-sm hover-shadow transition-all">
+                                <!-- Image with Fallback -->
+                                <div class="position-relative card-img-container">
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" class="card-img-top"
+                                             alt="Изображение на @item.Title"
+                                             onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                                    }
+                                    else
+                                    {
+                                        <img src="/images/default-book.jpg" class="card-img-top" alt="Изображение по подразбиране">
+                                    }
+
+                                    <!-- Year Badge -->
+                                    @if (item.Year.HasValue)
+                                    {
+                                        <span class="position-absolute top-0 end-0 m-2 badge bg-primary">
+                                            @item.Year г.
+                                        </span>
+                                    }
+                                </div>
+
+                                <!-- Card Content -->
+                                <div class="card-body">
+                                    <h5 class="card-title text-truncate" title="@item.Title">@item.Title</h5>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-hashtag text-secondary me-2"></i>
+                                        <span class="text-muted">@(string.IsNullOrEmpty(item.InventoryNumber) ? "Няма" : item.InventoryNumber)</span>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(item.Isbn))
+                                    {
+                                        <div class="d-flex align-items-center small">
+                                            <i class="fas fa-barcode text-secondary me-2"></i>
+                                            <span class="text-muted">@item.Isbn</span>
+                                        </div>
+                                    }
+                                    @if (item.Year.HasValue)
+                                    {
+                                        <div class="d-flex align-items-center small mt-1">
+                                            <i class="fas fa-calendar-alt text-secondary me-2"></i>
+                                            <span class="text-muted">@item.Year</span>
+                                        </div>
+                                    }
+                                </div>
+
+                                <!-- Card Actions - Updated to match the second page -->
+                                <div class="card-footer bg-white border-top-0">
+                                    <div class="d-flex flex-wrap gap-1 justify-content-between">
+                                        <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@item.Id"
+                                           class="btn btn-outline-primary btn-sm flex-grow-1" title="Детайли">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span class="d-none d-sm-inline ms-1">Детайли</span>
+                                        </a>
+                                        @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                                        {
+                                            <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@item.Id"
+                                               class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
+                                                <i class="fas fa-edit"></i>
+                                                <span class="d-none d-sm-inline ms-1">Редактирай</span>
+                                            </a>
+                                        }
+                                        @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                                        {
+                                            <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@item.Id"
+                                               class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
+                                                <i class="fas fa-archive text-danger me-2"></i>
+                                                <span class="d-none d-sm-inline ms-1">Бракувай</span>
+                                            </a>
+                                            
+                                        }
+                                        @if (User.IsInRole(SD.UserRole))
+                                        {
+                                            <a asp-controller="LibraryUnit" asp-action="Reserve" asp-route-id="@item.Id"
+                                               class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
+                                                <i class="fas fa-bookmark text-success me-2"></i>Запази
+                                            </a>
+                                            
+                                                
+                                            
+                                        }
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="@Url.Action("AllLibraryUnits", "LibraryUnit")" class="btn-back">
+                        <i class="fas fa-arrow-left"></i>Всички материали
+                    </a>
+                </div>
+
+            }
+            else
+            {
+                <div class="empty-results">
+                    <div class="empty-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>Не са намерени резултати</h4>
+                    <p class="text-muted">Моля, опитайте отново с различни критерии за търсене.</p>
+                    <a href="@Url.Action("AllLibraryUnits", "LibraryUnit")" class="btn-back">
+                        <i class="fas fa-arrow-left"></i>Всички материали
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Резултати от търсенето</title>
     <style>
         :root {
             --primary-color: #4169E1;
@@ -15,23 +139,6 @@
             --border-color: #dee2e6;
             --text-color: #333;
             --text-muted: #6c757d;
-        }
-        
-        body {
-            background-color: var(--accent-color);
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            color: var(--text-color);
-            /* Fix 1: Add min-height to ensure the body fills the viewport */
-            min-height: 100vh;
-            /* Fix 2: Use flexbox to ensure proper layout */
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .main-content {
-            /* Fix 3: Make the main content area flex-grow to push footer down */
-            flex: 1 0 auto;
-            padding-bottom: 2rem; /* Add padding to prevent content being too close to footer */
         }
         
         .results-container {
@@ -62,119 +169,63 @@
             left: 0;
         }
         
-        .book-card {
+        /* Card styles that match the second document */
+        .card-img-container {
+            height: 300px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .card {
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.3s ease;
-            height: 100%;
-            border: 1px solid var(--border-color);
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .book-card:hover {
+        .hover-shadow:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
         }
         
-        .card-img-container {
-            position: relative;
-            height: 220px;
-            overflow: hidden;
-            background-color: #f8f9fa;
-        }
-        
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .transition-all {
             transition: all 0.3s ease;
         }
         
-        .book-card:hover .card-img {
+        .card:hover .card-img-top {
             transform: scale(1.05);
         }
         
-        .card-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--primary-color);
+        /* Responsive adjustments */
+        @@media (max-width: 992px) {
+            .card {
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        @@media (max-width: 767px) {
+            .btn-group {
+                flex-wrap: wrap;
+            }
+            
+            .card-img-container,
+            .card-img-top {
+                height: 250px; /* Adjusted for better mobile viewing */
+            }
+        }
+        
+        /* Active Button Styles */
+        .btn-outline-secondary.active {
+            background-color: #6c757d;
             color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            z-index: 1;
-        }
-        
-        .card-content {
-            padding: 1.2rem;
-        }
-        
-        .card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            line-height: 1.3;
-            height: 2.8rem;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-        
-        .card-author {
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-            font-style: italic;
-            color: #555;
-        }
-        
-        .card-details {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .card-details i {
-            width: 16px;
-            margin-right: 0.4rem;
-            color: #888;
-        }
-        
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .view-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-        
-        .view-btn:hover {
-            background-color: #3456bb;
-            transform: translateY(-2px);
-        }
-        
-        .view-btn i {
-            margin-right: 0.4rem;
         }
         
         .empty-results {
@@ -214,133 +265,5 @@
         .btn-back i {
             margin-right: 0.5rem;
         }
-        
-        .footer {
-            /* Fix 4: Make footer properly positioned */
-            flex-shrink: 0;
-            font-size: 0.8rem;
-            color: #888;
-            text-align: center;
-            padding: 1rem 0;
-            background-color: var(--accent-color);
-            border-top: 1px solid #eee;
-            width: 100%;
-            /* Fix 5: Ensure footer stays at bottom */
-            margin-top: auto;
-        }
-        
-        /* Responsive adjustments */
-        @@media (max-width: 992px) {
-            .book-card {
-                margin-bottom: 1.5rem;
-            }
-        }
-        
-        @@media (max-width: 576px) {
-            .card-img-container {
-                height: 180px;
-            }
-            
-            .card-content {
-                padding: 1rem;
-            }
-            
-            .card-title {
-                font-size: 1rem;
-            }
-        }
     </style>
-</head>
-<body>
-    <div class="main-content">
-        <div class="container">
-            <div class="results-container">
-                <h2 class="text-center page-title">
-                    <i class="fas fa-search me-2"></i>Резултати от търсенето
-                </h2>
-                
-                @if (Model != null && Model.Any())
-                {
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="book-card">
-                                    <div class="card-img-container">
-                                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/default.jpg" : item.ImageUrl)" 
-                                             alt="Изображение на книга" class="card-img" />
-                                        @if (item.Year.HasValue)
-                                        {
-                                            <span class="card-badge">@item.Year г.</span>
-                                        }
-                                    </div>
-                                    <div class="card-content">
-                                        <h5 class="card-title">@item.Title</h5>
-                                        <p class="card-author">
-                                            <i class="fas fa-user-edit me-1"></i>
-                                            @(string.IsNullOrEmpty(item.Author) ? "Неизвестен автор" : item.Author)
-                                        </p>
-                                        
-                                        <div class="card-details">
-                                            <i class="fas fa-layer-group"></i>
-                                            <span>Секция: @(string.IsNullOrEmpty(item.Section) ? "Не е посочена" : item.Section)</span>
-                                        </div>
-                                        
-                                        <div class="card-details">
-                                            <i class="fas fa-building"></i>
-                                            <span>Издателство: @(string.IsNullOrEmpty(item.PublishingHouse) ? "Неизвестно" : item.PublishingHouse)</span>
-                                        </div>
-                                        
-                                        <div class="card-details">
-                                            <i class="fas fa-fingerprint"></i>
-                                            <span>Инв. №: @(string.IsNullOrEmpty(item.InventoryNumber) ? "Няма" : item.InventoryNumber)</span>
-                                        </div>
-                                        
-                                        <div class="card-details">
-                                            <i class="fas fa-barcode"></i>
-                                            <span>ISBN: @(string.IsNullOrEmpty(item.Isbn) ? "Няма" : item.Isbn)</span>
-                                        </div>
-                                        
-                                        <div class="card-footer">
-                                            <a href="@Url.Action("Details", "LibraryUnit", new { id = item.Id })" class="view-btn">
-                                                <i class="fas fa-info-circle"></i>Детайли
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                    
-                    <div class="text-center mt-4">
-                        <a href="javascript:history.back()" class="btn-back">
-                            <i class="fas fa-arrow-left"></i>Назад към търсене
-                        </a>
-                    </div>
-                }
-                else
-                {
-                    <div class="empty-results">
-                        <div class="empty-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h4>Не са намерени резултати</h4>
-                        <p class="text-muted">Моля, опитайте отново с различни критерии за търсене.</p>
-                        <a href="javascript:history.back()" class="btn-back">
-                            <i class="fas fa-arrow-left"></i>Назад към търсене
-                        </a>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            © @DateTime.Now.Year - Библиотечна система
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+}

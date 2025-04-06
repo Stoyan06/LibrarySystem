@@ -216,7 +216,7 @@
                         <label asp-for="FirstName" class="form-label">
                             <i class="bi bi-person-fill"></i> Име
                         </label>
-                        <input asp-for="FirstName" class="form-control" placeholder="Иван" />
+                        <input asp-for="FirstName" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     
@@ -224,7 +224,7 @@
                         <label asp-for="MiddleName" class="form-label">
                             <i class="bi bi-person-fill"></i> Презиме
                         </label>
-                        <input asp-for="MiddleName" class="form-control" placeholder="Петров" />
+                        <input asp-for="MiddleName" class="form-control" />
                         <span asp-validation-for="MiddleName" class="text-danger"></span>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                     <label asp-for="LastName" class="form-label">
                         <i class="bi bi-person-fill"></i> Фамилия
                     </label>
-                    <input asp-for="LastName" class="form-control" placeholder="Димитров" />
+                    <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 
@@ -241,7 +241,7 @@
                     <label asp-for="Email" class="form-label">
                         <i class="bi bi-envelope-fill"></i> Имейл
                     </label>
-                    <input asp-for="Email" class="form-control" placeholder="your@email.com" />
+                    <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 
@@ -250,7 +250,7 @@
                         <i class="bi bi-lock-fill"></i> Парола
                     </label>
                     <div class="password-input-group">
-                        <input asp-for="Password" type="password" class="form-control" id="passwordInput" placeholder="••••••••" />
+                        <input asp-for="Password" type="password" class="form-control" id="passwordInput" />
                         <button type="button" class="password-toggle" onclick="togglePassword('passwordInput', 'toggleIcon1')">
                             <i class="bi bi-eye" id="toggleIcon1"></i>
                         </button>
@@ -263,7 +263,7 @@
                         <i class="bi bi-shield-lock-fill"></i> Потвърди паролата
                     </label>
                     <div class="password-input-group">
-                        <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPasswordInput" placeholder="••••••••" />
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPasswordInput"  />
                         <button type="button" class="password-toggle" onclick="togglePassword('confirmPasswordInput', 'toggleIcon2')">
                             <i class="bi bi-eye" id="toggleIcon2"></i>
                         </button>

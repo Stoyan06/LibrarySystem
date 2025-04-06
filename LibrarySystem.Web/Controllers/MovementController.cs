@@ -17,17 +17,19 @@ namespace LibrarySystem.Controllers
         private readonly IService<LibraryUnit> _libraryUnitService;
         private readonly IService<MovementOfLibraryUnit> _movementService;
         private readonly ISearchService _searchService;
+        private readonly IService<Title> _titleService;
 
         public MovementController(UserManager<IdentityUser> userManager,
             IService<User> userService, 
             IService<LibraryUnit> libraryUnitService,
-            IService<MovementOfLibraryUnit> movementService, ISearchService searchService)
+            IService<MovementOfLibraryUnit> movementService, ISearchService searchService, IService<Title> titleService)
         {
             _userManager = userManager;
             _userService = userService;
             _libraryUnitService = libraryUnitService;
             _movementService = movementService;
             _searchService = searchService;
+            _titleService = titleService;
         }
 
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
@@ -46,6 +48,12 @@ namespace LibrarySystem.Controllers
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RegisterGiving(MovementViewModel model)
         {
+            if(model.DeadLine <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                TempData["error"] = "Крайният срок не е валиден.";
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var identityUser = await _userManager.GetUserAsync(User);
@@ -116,21 +124,22 @@ namespace LibrarySystem.Controllers
 
         [HttpGet]
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
-        public IActionResult SearchAvailableLibraryUnits(string query)
+        public async Task<IActionResult> SearchAvailableLibraryUnits(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return Json(new { });
 
-            var results = _libraryUnitService.GetWhere(u => u.IsAvailable &&
-                (u.InventoryNumber.Contains(query) ||
-                 (u.Isbn != null && u.Isbn.Contains(query)) ||
-                 u.Title.Name.Contains(query)))
-            .Select(u => new
-            {
-              id = u.Id,
-              text = $"{u.InventoryNumber} - {u.Title.Name}"
-             })
-             .ToList();
+            var results = (from u in await _libraryUnitService.GetAllAsync()
+                           join t in await _titleService.GetAllAsync() on u.TitleId equals t.Id
+                           where u.IsAvailable && (
+                               u.InventoryNumber.Contains(query) ||
+                               (u.Isbn != null && u.Isbn.Contains(query)) ||
+                               t.Name.Contains(query))
+                           select new
+                           {
+                               id = u.Id,
+                               text = u.InventoryNumber + " - " + t.Name
+                           }).ToList();
 
 
             return Json(results);
@@ -138,22 +147,23 @@ namespace LibrarySystem.Controllers
 
         [HttpGet]
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
-        public IActionResult SearchUnavailableLibraryUnits(string query)
+        public async Task<IActionResult> SearchUnavailableLibraryUnits(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return Json(new { });
 
-            var results = _libraryUnitService.GetWhere(u => !u.IsAvailable && !u.IsScrapped &&
-                (u.InventoryNumber.Contains(query) ||
-                 (u.Isbn != null && u.Isbn.Contains(query)) ||
-                 u.Title.Name.Contains(query)))
-            .Select(u => new
-            {
-                id = u.Id,
-                text = $"{u.InventoryNumber} - {u.Title.Name}"
-             })
-             .ToList();
-          
+            var results = (from u in await _libraryUnitService.GetAllAsync()
+                           join t in await _titleService.GetAllAsync() on u.TitleId equals t.Id
+                           where !u.IsAvailable && (
+                               u.InventoryNumber.Contains(query) ||
+                               (u.Isbn != null && u.Isbn.Contains(query)) ||
+                               t.Name.Contains(query))
+                           select new
+                           {
+                               id = u.Id,
+                               text = u.InventoryNumber + " - " + t.Name
+                           }).ToList();
+
             return Json(results);
         }
 

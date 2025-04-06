@@ -1,0 +1,83 @@
+﻿@model List<SavedLibraryUnitViewModel>
+@{
+    ViewData["Title"] = "Моите запазени единици";
+}
+<div class="container-fluid py-4">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <a asp-action="Dashboard" asp-controller="User" class="btn btn-outline-primary me-3">
+                    <i class="bi bi-arrow-left me-1"></i>Назад
+                </a>
+                <h2 class="m-0 fw-bold text-primary">
+                    <i class="bi bi-bookmark-star me-2"></i>@ViewData["Title"]
+                </h2>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model == null || !Model.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>Нямате запазени библиотечни единици.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th><i class="bi bi-book me-1"></i>Заглавие</th>
+                                <th><i class="bi bi-check-circle me-1"></i>Наличност</th>
+                                <th><i class="bi bi-upc-scan me-1"></i>Инвентарен номер</th>
+                                <th class="text-center"><i class="bi bi-gear me-1"></i>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var unit in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle">
+                                        <span class="fw-medium">@unit.Title</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        @if (unit.IsAvailable)
+                                        {
+                                            <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Налична</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Заета</span>
+                                        }
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="text-muted">@unit.InventoryNumber</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Details" asp-controller="LibraryUnit" asp-route-id="@unit.UnitId" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-info-circle me-1"></i>Преглед
+                                            </a>
+                                            <form asp-controller="LibraryUnit" asp-action="RemoveFromSaved" asp-route-id="@unit.UnitId" method="post" style="display:inline;">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                    <i class="bi bi-trash me-1"></i>Премахни
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Already have Toastr settings in _Layout
+        });
+    </script>
+}

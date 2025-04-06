@@ -1,5 +1,7 @@
 ﻿using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
+using LibrarySystem.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,24 @@ namespace LibrarySystem.Web.Controllers
             _sectionService = sectionService;
         }
 
+        public async Task<IActionResult> AllSectionsList(string SearchTerm)
+        {
+            ViewData["SearchTerm"] = SearchTerm;
+
+            var sections = await _sectionService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                sections = sections
+                    .Where(x => x.Name != null && x.Name.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
+                    || x.Description.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View(sections);
+        }
+
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AllSections(string SearchTerm)
         {
             ViewData["SearchTerm"] = SearchTerm;

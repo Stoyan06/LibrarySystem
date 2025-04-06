@@ -55,6 +55,17 @@
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
 
+            // Add session configuration
+            builder.Services.AddDistributedMemoryCache(); // Use in-memory session storage
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Optional: Set session timeout
+                options.Cookie.HttpOnly = true;  // Security feature, ensures cookies are not accessed via client-side scripts
+                options.Cookie.IsEssential = true; // This ensures the session cookie is essential, meaning it will be sent even if the user hasn't accepted cookies
+            });
+            
+
+
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
@@ -70,6 +81,7 @@
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseSession();
 
             // Create roles and admin user on startup
             using (var scope = app.Services.CreateScope())

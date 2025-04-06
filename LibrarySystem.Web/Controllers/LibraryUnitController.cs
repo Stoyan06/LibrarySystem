@@ -214,8 +214,23 @@ namespace LibrarySystem.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
+            // Try to get the referer (previous page)
+            var referer = Request.Headers["Referer"].ToString();
+
+            // Store the referer in session only if it's not the details page itself
+            if (!string.IsNullOrEmpty(referer) && !referer.Contains("Details"))
+            {
+                HttpContext.Session.SetString("PreviousUrl", referer);
+            }
+
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
             Title title = _titleService.GetWhere(x => x.Id == unit.TitleId).FirstOrDefault();
+
+            // Retrieve the previous URL from session, or fallback to the AllLibraryUnits page if not available
+            var previousUrl = HttpContext.Session.GetString("PreviousUrl") ?? Url.Action("AllLibraryUnits");
+
+            // Pass the previous URL to the view via ViewBag
+            ViewBag.PreviousUrl = previousUrl;
 
             LibraryUnitViewModel model = new LibraryUnitViewModel
             {
@@ -227,23 +242,18 @@ namespace LibrarySystem.Web.Controllers
                 TitleId = unit.TitleId,
                 TitleName = title.Name,
                 TypeLibraryUnit = unit.TypeLibraryUnit,
-                Image = await _imageService.GetByIdAsync(unit.ImageId)
+                Image = await _imageService.GetByIdAsync(unit.ImageId),
+                Isbn = unit.Isbn,
+                Year = unit.Year,
+                PublishingHouse = unit.PublishingHouse
             };
-
-            if (unit.Isbn == null) model.Isbn = null;
-            else model.Isbn = unit.Isbn;
-
-
-            if (unit.Year == null) model.Year = null;
-            else model.Year = unit.Year;
-
-
-            if (unit.PublishingHouse == null) model.PublishingHouse = null;
-            else model.PublishingHouse = unit.PublishingHouse;
-
 
             return View(model);
         }
+
+
+
+
 
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateLibraryUnit(int id)
@@ -325,6 +335,8 @@ namespace LibrarySystem.Web.Controllers
                         Image image = await _imageService.GetByIdAsync(unit.ImageId);
                         image.DestinationLink = ImageLink;
                         await _imageService.UpdateAsync(image);
+                        unit.ImageId = image.Id;
+                        unit.Image = image;
                     }
                     await _libraryUnitService.UpdateAsync(unit);
                     TempData["success"] = "Библиотечната единица е редактирана успешно.";
@@ -389,6 +401,8 @@ namespace LibrarySystem.Web.Controllers
 
             unit.IsScrapped = true;
             unit.IsAvailable = false;
+            unit.IsSavedByUser = false;
+            unit.SavedByReaderId = null;
             await _libraryUnitService.UpdateAsync (unit);
             var identityUser = await _userManager.GetUserAsync(User);
             string identityUserId = identityUser.Id;
@@ -396,6 +410,96 @@ namespace LibrarySystem.Web.Controllers
             await _scrappedUnitService.AddAsync(new ScrappedUnit { LibrarianId = user.Id, DateTimeOfScrapping = DateTime.Now, LibraryUnitId = unit.Id });
             TempData["success"] = "Единицата е бракувана успешно.";
             return RedirectToAction("AllLibraryUnits");
+        }
+
+        [Authorize(Roles = $"{SD.UserRole}")]
+        public async Task<IActionResult> Reserve(int id)
+        {
+            var unit = await _libraryUnitService.GetByIdAsync(id);
+            var identityUser = await _userManager.GetUserAsync(User);
+            var user = _userService.GetWhere(x => x.IdentityUserId == identityUser.Id).FirstOrDefault();
+
+            string message;
+            string status;
+
+            if (unit.IsSavedByUser)
+            {
+                if (unit.SavedByReaderId == user.Id)
+                    message = "Вече сте запазили тази единица.";
+                else
+                    message = "Тази единица вече е запазена от друг потребител.";
+
+                status = "error";
+            }
+            else if (!unit.IsAvailable)
+            {
+                message = "Тази единица е заета от читател.";
+                status = "error";
+            }
+            else
+            {
+                unit.IsSavedByUser = true;
+                unit.SavedByReaderId = user.Id;
+                await _libraryUnitService.UpdateAsync(unit);
+                message = "Успешно запазихте единицата.";
+                status = "success";
+            }
+
+            TempData[status] = message;
+
+            // Redirect to same page using the Referer + #reserved anchor
+            var referer = Request.Headers["Referer"].ToString();
+            if (!string.IsNullOrWhiteSpace(referer) && !referer.Contains("#reserved"))
+                referer += "#reserved";
+
+            return Redirect(referer);
+        }
+
+        public async Task<IActionResult> SavedUnits()
+        {
+            // Get the current logged-in user
+            var identityUser = await _userManager.GetUserAsync(User);
+            var user = _userService.GetWhere(x => x.IdentityUserId == identityUser.Id).ToList().First();
+
+            // Get the list of library units saved by the user
+            var savedUnits = _libraryUnitService.GetWhere(x => x.SavedByReaderId == user.Id).ToList();
+
+            List<SavedLibraryUnitViewModel> viewModel = new List<SavedLibraryUnitViewModel>();
+
+            foreach (LibraryUnit unit in savedUnits)
+            {
+                Title title = await _titleService.GetByIdAsync(unit.TitleId);
+
+                viewModel.Add(
+                    new SavedLibraryUnitViewModel
+                    {
+                        InventoryNumber = unit.InventoryNumber,
+                        IsAvailable = unit.IsAvailable,
+                        Title = title.Name,
+                        UnitId = unit.Id
+                    });
+            }
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> RemoveFromSaved(int id)
+        {
+            // Get the current logged-in user
+            var identityUser = await _userManager.GetUserAsync(User);
+            var user = _userService.GetWhere(x => x.IdentityUserId == identityUser.Id).First();
+
+            // Find the saved unit and remove it
+            var unit = await _libraryUnitService.GetByIdAsync(id);
+            if (unit != null && unit.SavedByReaderId == user.Id)
+            {
+                unit.IsSavedByUser = false;
+                unit.SavedByReaderId = null;
+                await _libraryUnitService.UpdateAsync(unit);
+
+                TempData["success"] = "Успешно премахнато от запазените единици.";
+            }
+            return RedirectToAction("SavedUnits");
         }
     }
 }

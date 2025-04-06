@@ -12,19 +12,29 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h1 class="card-title text-center mb-4">
-                        <i class="fas fa-books me-2"></i>Библиотечни единици
+                        <i class="fas fa-books me-2"></i>Всички материали
                     </h1>
-                    
                     <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-                        <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary">
-                            <i class="fas fa-plus-circle me-2"></i>Добави библиотечна единица
-                        </a>
+                        @if (User.IsInRole(SD.LibrarianRole) || User.IsInRole(SD.AdminRole))
+                        {
+                            <a asp-action="Dashboard" asp-controller="Librarian" class="btn btn-primary">
+                                <i class="bi bi-book-half"></i> Библиотекарски панел
+                            </a>
+                            
+                            <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary">
+                                <i class="fas fa-plus-circle me-2"></i>Добави библиотечна единица
+                            </a>
+                        }
                         <a asp-action="ExtendedSearch" asp-controller="Search" class="btn btn-info">
-                            <i class="fas fa-search me-2"></i>Търсене на единици
+                            <i class="fas fa-search me-2"></i>Разширено търсене
                         </a>
-                        <a asp-action="ScrappedLibraryUnits" asp-controller="LibraryUnit" class="btn btn-secondary">
-                            <i class="fas fa-archive me-2"></i>Бракувани единици
-                        </a>
+
+                        @if (User.IsInRole(SD.LibrarianRole) || User.IsInRole(SD.AdminRole))
+                        {
+                            <a asp-action="ScrappedLibraryUnits" asp-controller="LibraryUnit" class="btn btn-secondary">
+                                <i class="fas fa-archive me-2"></i>Бракувани единици
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
@@ -40,10 +50,7 @@
                     <div class="card-body">
                         <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
                         <h2>Няма съществуващи библиотечни единици в системата</h2>
-                        <p class="text-muted">Добавете нови единици, за да ги видите тук.</p>
-                        <a asp-action="AddLibraryUnit" asp-controller="LibraryUnit" class="btn btn-primary mt-3">
-                            <i class="fas fa-plus-circle me-2"></i>Добави първата единица
-                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -72,6 +79,15 @@
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-center d-none" id="noResultsMessage">
+            <div class="col-auto">
+                <div class="alert alert-warning text-center">
+                    Няма резултати, които отговарят на филтрирането.
+                </div>
+            </div>
+        </div>
+
 
         <!-- Library Units Grid -->
         <div class="row" id="unitsGrid">
@@ -129,32 +145,41 @@
                                     <i class="fas fa-info-circle"></i>
                                     <span class="d-none d-sm-inline ms-1">Детайли</span>
                                 </a>
-                                <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" 
-                                   class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
-                                    <i class="fas fa-edit"></i>
-                                    <span class="d-none d-sm-inline ms-1">Редактирай</span>
-                                </a>
-                                <div class="dropdown flex-grow-1">
-                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle w-100" type="button" 
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a class="dropdown-item" asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id">
-                                                <i class="fas fa-archive text-danger me-2"></i>Бракувай
-                                            </a>
-                                        </li>
-                                        @if (User.IsInRole(SD.UserRole))
-                                        {
-                                            <li>
-                                                <a class="dropdown-item" href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })">
-                                                    <i class="fas fa-bookmark text-success me-2"></i>Резервирай
-                                                </a>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                                @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                                {
+                                    <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id"
+                                       class="btn btn-outline-secondary btn-sm flex-grow-1" title="Редактирай">
+                                        <i class="fas fa-edit"></i>
+                                        <span class="d-none d-sm-inline ms-1">Редактирай</span>
+                                    </a>
+                                }
+                                @if (User.IsInRole(SD.UserRole) || User.IsInRole(SD.LibrarianRole) || User.IsInRole(SD.AdminRole))
+                                {
+                                    <div class="dropdown flex-grow-1">
+                                        <button class="btn btn-outline-dark btn-sm dropdown-toggle w-100" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id">
+                                                        <i class="fas fa-archive text-danger me-2"></i>Бракувай
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (User.IsInRole(SD.UserRole))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" asp-action="Reserve" asp-controller="LibraryUnit" asp-route-id="@unit.Id">
+                                                        <i class="fas fa-bookmark text-success me-2"></i>Запази
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -201,27 +226,32 @@
                                         <span class="badge @GetConditionBadgeClass(unit.Condition)">@unit.Condition</span>
                                     </td>
                                     <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" 
-                                               class="btn btn-outline-primary" title="Детайли">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id" 
-                                               class="btn btn-outline-secondary" title="Редактирай">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id" 
-                                               class="btn btn-outline-danger" title="Бракувай">
-                                                <i class="fas fa-archive"></i>
-                                            </a>
+                                            <div class="btn-group btn-group-sm">
+                                                <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id"
+                                                   class="btn btn-outline-primary" title="Детайли">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            @if(User.IsInRole(SD.UserRole) || User.IsInRole(SD.LibrarianRole) || User.IsInRole(SD.AdminRole)){
+                                                @if(User.IsInRole(SD.AdminRole) || User.IsInRole(SD.LibrarianRole))
+                                                {
+                                                    <a asp-controller="LibraryUnit" asp-action="UpdateLibraryUnit" asp-route-id="@unit.Id"
+                                                       class="btn btn-outline-secondary" title="Редактирай">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a asp-controller="LibraryUnit" asp-action="Scrape" asp-route-id="@unit.Id"
+                                                       class="btn btn-outline-danger" title="Бракувай">
+                                                        <i class="fas fa-archive"></i>
+                                                    </a>
+                                                }
                                             @if (User.IsInRole(SD.UserRole))
                                             {
-                                                <a href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })" 
-                                                   class="btn btn-outline-success" title="Резервирай">
+                                                <a href="@Url.Action("Reserve", "LibraryUnit", new { id = unit.Id })"
+                                                   class="btn btn-outline-success" title="Запази">
                                                     <i class="fas fa-bookmark"></i>
                                                 </a>
                                             }
-                                        </div>
+                                            }
+                                            </div>
                                     </td>
                                 </tr>
                             }
@@ -239,7 +269,35 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-    /* Card Styles */
+    /* Fixed Image Container */
+    .card-img-container {
+        height: 300px;  /* Height matches your specified image height */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-img-top {
+        width: 100%;      /* Ensure the image takes the full width of container */
+        height: 300px;    /* Match the height of the container */
+        object-fit: contain; /* Changed from 'cover' to 'contain' to show the whole image */
+        transition: transform 0.5s ease;
+    }
+
+    /* Remove the conflicting style that had incorrect dimensions */
+    /* .card-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    } */
+    
+    /* The rest of your styles remain the same */
     .card {
         border-radius: 8px;
         overflow: hidden;
@@ -255,17 +313,6 @@
         transition: all 0.3s ease;
     }
     
-    .card-img-container {
-        height: 200px;
-        overflow: hidden;
-    }
-    
-    .card-img-top {
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-    
     .card:hover .card-img-top {
         transform: scale(1.05);
     }
@@ -278,7 +325,7 @@
         
         .card-img-container,
         .card-img-top {
-            height: 180px;
+            height: 250px; /* Adjusted for better mobile viewing */
         }
     }
     
@@ -317,22 +364,45 @@
         
         // Filter Function
         if (searchInput) {
-            searchInput.addEventListener('keyup', function() {
+            searchInput.addEventListener('keyup', function () {
                 const searchTerm = this.value.toLowerCase();
                 const unitItems = document.querySelectorAll('.unit-item');
-                
-                unitItems.forEach(function(item) {
-                    const title = item.querySelector('.card-title')?.textContent.toLowerCase() || '';
-                    const inventoryNumber = item.querySelector('.text-muted')?.textContent.toLowerCase() || '';
-                    
+                let hasResults = false;
+
+                unitItems.forEach(function (item) {
+                    let title = '';
+                    let inventoryNumber = '';
+
+                    // Check if it's a grid view item or a list view item
+                    if (item.querySelector('.card-title')) {
+                        // Grid view
+                        title = item.querySelector('.card-title').textContent.toLowerCase();
+                        inventoryNumber = item.querySelector('.text-muted').textContent.toLowerCase();
+                    } else if (item.querySelector('td:nth-child(2)')) {
+                        // List view
+                        title = item.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                        inventoryNumber = item.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                    }
+
+                    // Check if the item matches the search term
                     if (title.includes(searchTerm) || inventoryNumber.includes(searchTerm)) {
                         item.style.display = '';
+                        hasResults = true;
                     } else {
                         item.style.display = 'none';
                     }
                 });
+
+                // Toggle "No Results" message
+                const noResultsMessage = document.getElementById('noResultsMessage');
+                if (hasResults) {
+                    noResultsMessage.classList.add('d-none');
+                } else {
+                    noResultsMessage.classList.remove('d-none');
+                }
             });
         }
+
     });
 </script>
 

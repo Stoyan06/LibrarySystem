@@ -23,7 +23,7 @@
                     <!-- Search Form -->
                     <div class="row mb-4">
                         <div class="col-lg-8 col-md-10 mx-auto">
-                            <form method="get" asp-action="AllAuthors" class="d-flex">
+                            <form method="get" asp-action="AllAuthorsList" class="d-flex">
                                 <div class="input-group">
                                     <span class="input-group-text bg-white border-end-0">
                                         <i class="fas fa-search text-primary"></i>
@@ -33,7 +33,7 @@
                                     <button type="submit" class="btn btn-primary px-4">
                                         Търси
                                     </button>
-                                    <a asp-action="AllAuthors" class="btn btn-outline-secondary">
+                                    <a asp-action="AllAuthorsList" class="btn btn-outline-secondary">
                                         <i class="fas fa-times me-1"></i>Нулирай
                                     </a>
                                 </div>
@@ -46,15 +46,11 @@
                         <h5 class="mb-0 text-muted">
                             <i class="fas fa-list-ul me-2"></i>Списък с автори
                         </h5>
-                            <a asp-action="AddAuthor" asp-controller="Author" class="btn btn-success transition-btn">
-                                <i class="fas fa-plus-circle me-2"></i>Добави автор
-                            </a>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Dashboard", "Librarian")'">
+                            <button type="button" class="btn btn-secondary" onclick="history.back();">
                                 <i class="fas fa-arrow-left me-2"></i>Назад
                             </button>
                         </div>
-
 
                     </div>
 
@@ -75,9 +71,6 @@
                                         <th style="width: 65%" class="ps-3">
                                             <i class="fas fa-user me-2"></i>Име на автор
                                         </th>
-                                        <th style="width: 35%" class="text-center">
-                                            <i class="fas fa-tools me-2"></i>Операции
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,21 +78,6 @@
                                     {
                                         <tr>
                                             <td class="ps-3 fw-medium">@aut.FullName</td>
-                                            <td class="text-center">
-                                                <div class="btn-group" role="group">
-                                                   
-                                                        <a asp-controller="Author" asp-action="UpdateAuthor" asp-route-id="@aut.Id"
-                                                           class="btn btn-outline-primary btn-sm transition-btn">
-                                                            <i class="fas fa-edit me-1"></i>Редактирай
-                                                        </a>
-                                                        <a asp-controller="Author" asp-action="RemoveAuthor" asp-route-id="@aut.Id"
-                                                           class="btn btn-outline-danger btn-sm transition-btn">
-                                                            <i class="fas fa-trash-alt me-1"></i>Изтрий
-                                                        </a>
-                                                    
-                                                   
-                                                </div>
-                                            </td>
                                         </tr>
                                     }
                                 </tbody>

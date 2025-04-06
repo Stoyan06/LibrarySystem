@@ -3,224 +3,305 @@
 @{
     ViewData["Title"] = "Бракувани единици";
 }
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .page-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #343a40;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-        .page-title:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: #dc3545;
-            border-radius: 2px;
-        }
-        .library-card {
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: none;
-            height: 100%;
-        }
-        .library-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        }
-        .card-img-container {
-            position: relative;
-            overflow: hidden;
-            height: 220px;
-        }
-        .card-img-top {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .library-card:hover .card-img-top {
-            transform: scale(1.05);
-        }
-        .scrapped-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #dc3545;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .card-body {
-            padding: 1.5rem;
-        }
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #212529;
-        }
-        .card-subtitle {
-            font-size: 0.95rem;
-            color: #6c757d;
-            margin-bottom: 1rem;
-        }
-        .card-text {
-            color: #495057;
-            margin-bottom: 1rem;
-        }
-        .card-footer {
-            background-color: rgba(0, 0, 0, 0.03);
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-            padding: 1rem;
-        }
-        .action-button {
-            border-radius: 50px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .action-button:hover {
-            transform: translateY(-2px);
-        }
-        .search-button {
-            border-radius: 50px;
-            padding: 0.75rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background-color: #007bff;
-            border-color: #007bff;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.25);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-        .search-button:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-            box-shadow: 0 6px 14px rgba(0, 123, 255, 0.35);
-            transform: translateY(-3px);
-        }
-        .empty-message {
-            text-align: center;
-            padding: 3rem 1rem;
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            margin: 2rem auto;
-            max-width: 600px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        .empty-message i {
-            font-size: 3.5rem;
-            color: #6c757d;
-            margin-bottom: 1.5rem;
-        }
-        .empty-message h2 {
-            font-size: 1.5rem;
-            color: #495057;
-            margin-bottom: 1rem;
-        }
-        /* Responsive Design */
-        @@media (max-width: 992px) {
-            .card-img-container {
-                height: 200px;
-            }
-        }
-        @@media (max-width: 768px) {
-            .card-img-container {
-                height: 180px;
-            }
-            .page-title {
-                font-size: 1.8rem;
-            }
-            .search-button {
-                padding: 0.6rem 1.3rem;
-                font-size: 1rem;
-            }
-        }
-        @@media (max-width: 576px) {
-            .page-title {
-                font-size: 1.6rem;
-            }
-            .card-img-container {
-                height: 160px;
-            }
-            .card-body {
-                padding: 1.2rem;
-            }
-            .card-title {
-                font-size: 1.15rem;
-            }
-            .action-button {
-                padding: 0.4rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-</head>
 
-<h1 class="text-center page-title">Бракувани единици</h1>
-
-<div class="d-flex justify-content-center mb-4">
-    <!-- Search Scrapped Units Button -->
-    <a asp-action="ExtendedSearchScrapped" asp-controller="Search" class="btn btn-primary search-button">
-        <i class="fas fa-search"></i> Търсене на бракувани единици
-    </a>
-</div>
-
-@if (Model == null || !Model.Any())
-{
-    <div class="empty-message">
-        <i class="fas fa-exclamation-circle"></i>
-        <h2>Няма бракувани единици в системата</h2>
-        <p class="text-muted">В момента няма регистрирани бракувани библиотечни единици.</p>
-    </div>
-}
-else
-{
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        @foreach (var unit in Model)
-        {
-            <div class="col">
-                <div class="library-card">
-                    <div class="card-img-container">
-                        <img src="@unit.Image.DestinationLink" class="card-img-top" alt="Изображение на @unit.TitleName">
-                        <span class="scrapped-badge">
-                            <i class="fas fa-archive"></i> Бракувано
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@unit.TitleName</h5>
-                        <h6 class="card-subtitle">
-                            <i class="fas fa-barcode"></i> Инв. №: @unit.InventoryNumber
-                        </h6>
-                        <p class="card-text">
-                            <i class="fas fa-info-circle"></i> Състояние: @unit.Condition
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" class="btn btn-info action-button">
-                            <i class="fas fa-eye"></i> Детайли
+<div class="container-fluid py-4">
+    <!-- Header Section with Title and Action Buttons -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">
+                        <i class="fas fa-archive me-2"></i>Бракувани единици
+                    </h1>
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                        <a asp-action="AllLibraryUnits" asp-controller="LibraryUnit" class="btn btn-info">
+                           Назад
                         </a>
                     </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
-}
+
+    <!-- No Items Message -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm text-center p-5">
+                    <div class="card-body">
+                        <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                        <h2>Няма бракувани единици в системата</h2>
+                        <p class="text-muted">В момента няма регистрирани бракувани библиотечни единици.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Filter and Sort Controls -->
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <div class="input-group">
+                    <span class="input-group-text bg-light">
+                        <i class="fas fa-filter"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Филтрирай по заглавие или инв. номер...">
+                </div>
+            </div>
+            <div class="col-md-6 mb-2 text-md-end">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary active" id="gridView">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" id="listView">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center d-none" id="noResultsMessage">
+            <div class="col-auto">
+                <div class="alert alert-warning text-center">
+                    Няма резултати, които отговарят на филтрирането.
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrapped Library Units Grid -->
+        <div class="row" id="unitsGrid">
+            @foreach (var unit in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4 unit-item">
+                    <div class="card h-100 shadow-sm hover-shadow transition-all">
+                        <!-- Image with Fallback -->
+                        <div class="position-relative card-img-container">
+                            @if (!string.IsNullOrEmpty(unit.Image?.DestinationLink))
+                            {
+                                <img src="@unit.Image.DestinationLink" class="card-img-top" 
+                                     alt="Изображение на @unit.TitleName" 
+                                     onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                            }
+                            else
+                            {
+                                <img src="/images/default-book.jpg" class="card-img-top" alt="Изображение по подразбиране">
+                            }
+                            
+                            <!-- Scrapped Badge -->
+                            <span class="position-absolute top-0 end-0 m-2 badge bg-danger">
+                                <i class="fas fa-archive me-1"></i> Бракувано
+                            </span>
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate" title="@unit.TitleName">@unit.TitleName</h5>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-hashtag text-secondary me-2"></i>
+                                <span class="text-muted">@unit.InventoryNumber</span>
+                            </div>
+                            <div class="d-flex align-items-center small mt-1">
+                                <i class="fas fa-info-circle text-secondary me-2"></i>
+                                <span class="text-muted">Състояние: @unit.Condition</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Card Actions -->
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-flex justify-content-center">
+                                <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id" 
+                                   class="btn btn-outline-primary btn-sm" title="Детайли">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    <span>Детайли</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Scrapped Library Units List (Hidden by Default) -->
+        <div class="row d-none" id="unitsList">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Изображение</th>
+                                <th>Заглавие</th>
+                                <th>Инв. номер</th>
+                                <th>Състояние</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var unit in Model)
+                            {
+                                <tr class="align-middle unit-item">
+                                    <td style="width: 70px">
+                                        @if (!string.IsNullOrEmpty(unit.Image?.DestinationLink))
+                                        {
+                                            <img src="@unit.Image.DestinationLink" class="img-thumbnail" 
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="Изображение на @unit.TitleName" 
+                                                 onerror="this.onerror=null;this.src='/images/default-book.jpg';">
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/default-book.jpg" class="img-thumbnail" 
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="Изображение по подразбиране">
+                                        }
+                                    </td>
+                                    <td>@unit.TitleName</td>
+                                    <td>@unit.InventoryNumber</td>
+                                    <td>@unit.Condition</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-controller="LibraryUnit" asp-action="Details" asp-route-id="@unit.Id"
+                                               class="btn btn-outline-primary" title="Детайли">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    /* Fixed Image Container */
+    .card-img-container {
+        height: 300px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+    }
+    
+    .card {
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    /* Improve Responsiveness */
+    @@media (max-width: 767px) {
+        .btn-group {
+            flex-wrap: wrap;
+        }
+        
+        .card-img-container,
+        .card-img-top {
+            height: 250px; /* Adjusted for better mobile viewing */
+        }
+    }
+    
+    /* Active Button Styles */
+    .btn-outline-secondary.active {
+        background-color: #6c757d;
+        color: white;
+    }
+</style>
+
+<script>
+    // Function to handle grid/list view toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const gridViewBtn = document.getElementById('gridView');
+        const listViewBtn = document.getElementById('listView');
+        const unitsGrid = document.getElementById('unitsGrid');
+        const unitsList = document.getElementById('unitsList');
+        const searchInput = document.getElementById('searchInput');
+        
+        // Grid/List View Toggle
+        if (gridViewBtn && listViewBtn) {
+            gridViewBtn.addEventListener('click', function() {
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                unitsGrid.classList.remove('d-none');
+                unitsList.classList.add('d-none');
+            });
+            
+            listViewBtn.addEventListener('click', function() {
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+                unitsList.classList.remove('d-none');
+                unitsGrid.classList.add('d-none');
+            });
+        }
+        
+        // Filter Function
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function () {
+                const searchTerm = this.value.toLowerCase();
+                const unitItems = document.querySelectorAll('.unit-item');
+                let hasResults = false;
+
+                unitItems.forEach(function (item) {
+                    let title = '';
+                    let inventoryNumber = '';
+
+                    // Check if it's a grid view item or a list view item
+                    if (item.querySelector('.card-title')) {
+                        // Grid view
+                        title = item.querySelector('.card-title').textContent.toLowerCase();
+                        inventoryNumber = item.querySelector('.text-muted').textContent.toLowerCase();
+                    } else if (item.querySelector('td:nth-child(2)')) {
+                        // List view
+                        title = item.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                        inventoryNumber = item.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                    }
+
+                    // Check if the item matches the search term
+                    if (title.includes(searchTerm) || inventoryNumber.includes(searchTerm)) {
+                        item.style.display = '';
+                        hasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Toggle "No Results" message
+                const noResultsMessage = document.getElementById('noResultsMessage');
+                if (hasResults) {
+                    noResultsMessage.classList.add('d-none');
+                } else {
+                    noResultsMessage.classList.remove('d-none');
+                }
+            });
+        }
+    });
+</script>

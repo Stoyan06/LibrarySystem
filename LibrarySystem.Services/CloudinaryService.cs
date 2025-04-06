@@ -51,7 +51,12 @@ public class CloudinaryService
 
             File = new FileDescription(file.FileName, stream),
 
-            Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+            Transformation = new Transformation()
+                 .Width(300)
+                 .Height(460)
+                 .Crop("fit")
+                 
+
 
         };
 

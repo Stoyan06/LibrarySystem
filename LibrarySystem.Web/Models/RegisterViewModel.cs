@@ -3,6 +3,7 @@
 public class RegisterViewModel
 {
     [Required(ErrorMessage ="Полето е задължително")]
+    [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Полето е задължително")]
@@ -17,11 +18,14 @@ public class RegisterViewModel
     public string ConfirmPassword { get; set; }
 
     [Required(ErrorMessage = "Полето е задължително")]
+    [MinLength(3,ErrorMessage ="Изискват се минимум 3 символа")]
     public string FirstName { get; set; }
 
     [Required(ErrorMessage = "Полето е задължително")]
+    [MinLength(3, ErrorMessage = "Изискват се минимум 3 символа")]
     public string MiddleName { get; set; }
 
     [Required(ErrorMessage = "Полето е задължително")]
+    [MinLength(3, ErrorMessage = "Изискват се минимум 3 символа")]
     public string LastName { get; set; }
 }

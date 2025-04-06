@@ -1,112 +1,117 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+﻿@{
+    ViewData["Title"] = "Детайли за библиотекар";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="text-center mb-0 fs-4">
+                        <i class="bi bi-person-gear me-2"></i>
+                        Детайли за библиотекар
+                    </h1>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="row detail-row align-items-center">
+                        <div class="col-md-3 col-sm-4 detail-label">
+                            <i class="bi bi-person detail-icon"></i>Име
+                        </div>
+                        <div class="col-md-9 col-sm-8 detail-value">
+                            @Model.FirstName
+                        </div>
+                    </div>
+                    
+                    <div class="row detail-row align-items-center">
+                        <div class="col-md-3 col-sm-4 detail-label">
+                            <i class="bi bi-person detail-icon"></i>Презиме
+                        </div>
+                        <div class="col-md-9 col-sm-8 detail-value">
+                            @Model.MiddleName
+                        </div>
+                    </div>
+                    
+                    <div class="row detail-row align-items-center">
+                        <div class="col-md-3 col-sm-4 detail-label">
+                            <i class="bi bi-person detail-icon"></i>Фамилия
+                        </div>
+                        <div class="col-md-9 col-sm-8 detail-value">
+                            @Model.LastName
+                        </div>
+                    </div>
+                    
+                    <div class="row detail-row align-items-center">
+                        <div class="col-md-3 col-sm-4 detail-label">
+                            <i class="bi bi-envelope detail-icon"></i>Имейл
+                        </div>
+                        <div class="col-md-9 col-sm-8 detail-value">
+                            <a href="mailto:@Model.Email">@Model.Email</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-light text-center p-3">
+                    <a asp-action="ManageLibrarians" class="btn btn-primary">
+                        <i class="bi bi-arrow-left me-2"></i>Назад
+                    </a>
+                    <a asp-action="EditLibrarian" asp-route-UserId="@Model.Id" class="btn btn-warning ms-2">
+                        <i class="bi bi-pencil-fill me-2"></i>Редактирай
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        .page-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .form-icon {
-            margin-right: 8px;
-        }
-        .card-header-custom {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-            padding: 15px 20px;
-        }
         .detail-label {
             font-weight: 600;
             color: #495057;
         }
+        
         .detail-value {
             color: #212529;
         }
+        
         .detail-row {
             padding: 10px 0;
             border-bottom: 1px solid #f0f0f0;
         }
+        
         .detail-row:last-child {
             border-bottom: none;
         }
+        
         .detail-icon {
             color: #6c757d;
             width: 24px;
             text-align: center;
             margin-right: 10px;
         }
-        .btn-action {
+        
+        .btn {
             min-width: 120px;
+            padding: 0.5rem 1rem;
         }
+        
         @@media (max-width: 576px) {
             .detail-row {
                 padding: 15px 0;
             }
+            
+            .card-footer .btn {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+            
+            .card-footer .ms-2 {
+                margin-left: 0 !important;
+            }
         }
     </style>
-</head>
-<body>
-    <div class="page-container">
-        <div class="card shadow-lg rounded-4 mt-4">
-            <div class="card-header-custom rounded-top-4">
-                <h3 class="mb-0 text-primary text-center">
-                    <i class="bi bi-person-gear form-icon"></i>Детайли за библиотекар
-                </h3>
-            </div>
-            <div class="card-body p-4">
-                <div class="row detail-row align-items-center">
-                    <div class="col-md-3 col-sm-4 detail-label">
-                        <i class="bi bi-person detail-icon"></i>Име
-                    </div>
-                    <div class="col-md-9 col-sm-8 detail-value">
-                        @Model.FirstName
-                    </div>
-                </div>
-
-                <div class="row detail-row align-items-center">
-                    <div class="col-md-3 col-sm-4 detail-label">
-                        <i class="bi bi-person detail-icon"></i>Презиме
-                    </div>
-                    <div class="col-md-9 col-sm-8 detail-value">
-                        @Model.MiddleName
-                    </div>
-                </div>
-
-                <div class="row detail-row align-items-center">
-                    <div class="col-md-3 col-sm-4 detail-label">
-                        <i class="bi bi-person detail-icon"></i>Фамилия
-                    </div>
-                    <div class="col-md-9 col-sm-8 detail-value">
-                        @Model.LastName
-                    </div>
-                </div>
-
-                <div class="row detail-row align-items-center">
-                    <div class="col-md-3 col-sm-4 detail-label">
-                        <i class="bi bi-envelope detail-icon"></i>Имейл
-                    </div>
-                    <div class="col-md-9 col-sm-8 detail-value">
-                        <a href="mailto:@Model.Email">@Model.Email</a>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center mt-4">
-                    <a asp-action="ManageLibrarians" class="btn btn-primary btn-action">
-                        <i class="bi bi-arrow-left form-icon"></i>Назад
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap Icons CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+}

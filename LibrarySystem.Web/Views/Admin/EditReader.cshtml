@@ -1,133 +1,105 @@
 ﻿@model EditReaderViewModel
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .page-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .form-icon {
-            margin-right: 8px;
-        }
-        .card-header-custom {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-            padding: 15px 20px;
-        }
-        .input-group-icon {
-            position: absolute;
-            top: 50%;
-            left: 12px;
-            transform: translateY(-50%);
-            color: #6c757d;
-            z-index: 4;
-        }
-        .input-with-icon {
-            padding-left: 35px;
-        }
-        .btn-action {
-            min-width: 120px;
-        }
-        @@media (max-width: 576px) {
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .btn-action {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="page-container">
-        <div class="card shadow-lg rounded-4 mt-4">
-            <div class="card-header-custom rounded-top-4">
-                <h3 class="mb-0 text-primary text-center"><i class="bi bi-person-badge form-icon"></i>Редактиране на читател</h3>
-            </div>
-            <div class="card-body p-4">
-                <form asp-action="EditReader" method="post">
-                    <input type="hidden" asp-for="Id" />
+@{
+    ViewData["Title"] = "Редактиране на читател";
+}
 
-                    <div class="row mb-3">
-                        <label asp-for="FirstName" class="col-form-label col-md-3 col-sm-12">
-                            <i class="bi bi-person form-icon"></i>Име
-                        </label>
-                        <div class="col-md-9 col-sm-12">
-                            <div class="position-relative">
-                                <input asp-for="FirstName" class="form-control" placeholder="Въведете име" />
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-white border-0 pt-4">
+                    <h2 class="text-center text-primary">
+                        <i class="bi bi-pencil-square me-2"></i>Редактиране на читател
+                    </h2>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="EditReader" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row mb-3">
+                            <label for="FirstName" class="col-form-label col-sm-3">
+                                <i class="bi bi-person me-2 text-muted"></i>Име:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="FirstName" class="form-control" required />
                                 <span asp-validation-for="FirstName" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <label asp-for="MiddleName" class="col-form-label col-md-3 col-sm-12">
-                            <i class="bi bi-person form-icon"></i>Презиме
-                        </label>
-                        <div class="col-md-9 col-sm-12">
-                            <div class="position-relative">
-                                <input asp-for="MiddleName" class="form-control" placeholder="Въведете презиме" />
+                        <div class="row mb-3">
+                            <label for="MiddleName" class="col-form-label col-sm-3">
+                                <i class="bi bi-person me-2 text-muted"></i>Презиме:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="MiddleName" class="form-control" />
                                 <span asp-validation-for="MiddleName" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <label asp-for="LastName" class="col-form-label col-md-3 col-sm-12">
-                            <i class="bi bi-person form-icon"></i>Фамилия
-                        </label>
-                        <div class="col-md-9 col-sm-12">
-                            <div class="position-relative">
-                                <input asp-for="LastName" class="form-control" placeholder="Въведете фамилия" />
+                        <div class="row mb-3">
+                            <label for="LastName" class="col-form-label col-sm-3">
+                                <i class="bi bi-person me-2 text-muted"></i>Фамилия:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="LastName" class="form-control" required />
                                 <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mb-4">
-                        <label asp-for="Email" class="col-form-label col-md-3 col-sm-12">
-                            <i class="bi bi-envelope form-icon"></i>Имейл
-                        </label>
-                        <div class="col-md-9 col-sm-12">
-                            <div class="position-relative">
-                                <input asp-for="Email" class="form-control" placeholder="Въведете имейл адрес" />
+                        <div class="row mb-4">
+                            <label for="Email" class="col-form-label col-sm-3">
+                                <i class="bi bi-envelope me-2 text-muted"></i>Имейл:
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="email" asp-for="Email" class="form-control" required />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <hr />
-
-                    <div class="d-flex justify-content-between action-buttons mt-4">
-                        <button type="submit" class="btn btn-success btn-action">
-                            <i class="bi bi-save form-icon"></i>Запази
-                        </button>
-                        <a asp-action="ChangeReaderPassword" asp-route-UserId="@Model.Id" class="btn btn-warning btn-action">
-                            <i class="bi bi-key form-icon"></i>Смяна на парола
-                        </a>
-                        <a asp-action="ManageReaders" class="btn btn-secondary btn-action">
-                            <i class="bi bi-arrow-left form-icon"></i>Отказ
-                        </a>
-                    </div>
-                </form>
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="ManageReaders" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Назад
+                            </a>
+                            <div>
+                                <a asp-action="ChangeReaderPassword" asp-route-UserId="@Model.Id" class="btn btn-outline-warning me-2">
+                                    <i class="bi bi-key me-2"></i>Смяна на парола
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-check2 me-2"></i>Запази промените
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Bootstrap Icons CDN Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Validation Scripts -->
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
-</body>
-</html>
+    <script>
+        $(document).ready(function () {
+            // Add floating label effect
+            $('.form-control').on('focus blur', function (e) {
+                $(this).parents('.form-control').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+            }).trigger('blur');
+
+            // Form validation visual feedback
+            $('form').on('submit', function () {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                $(this).addClass('was-validated');
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+}

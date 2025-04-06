@@ -1,58 +1,114 @@
 ﻿@using LibrarySystem.Models
 @model Section
-
 @{
     ViewData["Title"] = "Редактиране на раздел";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-</head>
-
-<div class="container mt-5">
-    <h1 class="mb-4 text-center">Редактиране на раздел</h1>
-
-    <form method="post" class="w-50 mx-auto p-4 border rounded shadow-sm bg-light">
-        <!-- Name Field -->
-        <div class="mb-3">
-            <label for="nameInput" class="form-label fw-bold">Име</label>
-            <input type="text" id="nameInput" asp-for="Name" class="form-control" placeholder="Въведи име на раздел">
-            <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">
+                        <i class="fas fa-edit me-2"></i>Редактиране на раздел
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        <!-- Name Field -->
+                        <div class="mb-4">
+                            <label for="nameInput" class="form-label fw-bold">
+                                <i class="fas fa-bookmark me-2 text-primary"></i>Име
+                            </label>
+                            <input type="text" id="nameInput" asp-for="Name" class="form-control form-control-lg" 
+                                placeholder="Въведи име на раздел" required>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Description Field -->
+                        <div class="mb-4">
+                            <label for="descriptionInput" class="form-label fw-bold">
+                                <i class="fas fa-info-circle me-2 text-primary"></i>Описание
+                            </label>
+                            <textarea id="descriptionInput" asp-for="Description" class="form-control" 
+                                placeholder="Въведи описание" rows="3"></textarea>
+                        </div>
+                        
+                        <!-- Submit and Cancel Buttons -->
+                        <div class="d-flex justify-content-between mt-5">
+                            <!-- Go Back Button -->
+                            <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Откажи
+                            </a>
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-success btn-lg px-4">
+                                <i class="fas fa-save me-2"></i>Редактирай раздел
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Description Field -->
-        <div class="mb-3">
-            <label for="descriptionInput" class="form-label fw-bold">Описание</label>
-            <input type="text" id="descriptionInput" asp-for="Description" class="form-control" placeholder="Въведи описание">
-        </div>
-
-        <!-- Submit and Cancel Buttons -->
-        <div class="d-flex justify-content-between mt-4">
-            <!-- Go Back Button -->
-            <a asp-action="AllSections" class="btn btn-secondary btn-lg px-4">Откажи</a>
-            <!-- Submit Button -->
-            <input type="submit" value="Редактирай раздел" class="btn btn-primary btn-lg px-4">
-        </div>
-    </form>
+    </div>
 </div>
 
-<style>
-    /* Responsive Design */
-    .container {
-        max-width: 600px;
-    }
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
 
-    /* Button adjustments for mobile */
+<style>
+    /* Card styling */
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        border-bottom: none;
+    }
+    
+    /* Input field styling */
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    /* Button styling */
+    .btn {
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive adjustments */
     @@media (max-width: 768px) {
-        .w-50 {
-            width: 100%;
+        .btn {
+            padding: 0.5rem 1rem;
         }
+        
         .d-flex {
             flex-direction: column;
+            gap: 1rem;
         }
+        
         .btn {
             width: 100%;
-            margin-bottom: 10px;
+        }
+    }
+    
+    @@media (max-width: 576px) {
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
         }
     }
 </style>

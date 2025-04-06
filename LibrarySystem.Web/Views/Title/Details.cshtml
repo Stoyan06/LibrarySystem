@@ -5,56 +5,131 @@
     ViewData["Title"] = "Детайли за заглавие";
 }
 
-<head>
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <!-- Include Bootstrap CSS for better styling -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="text-center mb-0 fs-4">
+                        <i class="bi bi-book me-2"></i>
+                        Детайли за заглавие
+                    </h1>
+                </div>
 
-<h1 class="mb-4 text-center">Детайли за заглавие</h1>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <i class="bi bi-bookmark-fill me-2 text-primary"></i>
+                                    Име
+                                </label>
+                                <div class="p-3 bg-light rounded border">@Model.Name</div>
+                            </div>
 
-<div class="w-75 mx-auto p-4 border rounded shadow-sm bg-light">
-    <!-- Name Field -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Име</label>
-        <p class="form-control bg-light" readonly>@Model.Name</p>
-    </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <i class="bi bi-grid-3x3-gap-fill me-2 text-primary"></i>
+                                    Раздел
+                                </label>
+                                <div class="p-3 bg-light rounded border">
+                                    @if (!string.IsNullOrEmpty(Model.SectionName))
+                                    {
+                                        @Model.SectionName
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Няма посочен раздел</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
 
-    <!-- Description Field -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Описание (Анотация)</label>
-        <p class="form-control bg-light" readonly>@Model.Description</p>
-    </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3 h-100">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <i class="bi bi-people-fill me-2 text-primary"></i>
+                                    Автор(и)
+                                </label>
+                                <div class="p-3 bg-light rounded border h-75 overflow-auto">
+                                    @if (Model.SelectedAuthorsNames != null && Model.SelectedAuthorsNames.Any())
+                                    {
+                                        <ul class="list-group list-group-flush">
+                                            @foreach (var author in Model.SelectedAuthorsNames)
+                                            {
+                                                <li class="list-group-item bg-transparent px-2 py-1 border-bottom">
+                                                    <i class="bi bi-person me-2"></i>@author
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+                                            <i class="bi bi-exclamation-circle me-2"></i>
+                                            Няма избрани автори
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Section Field -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Раздел</label>
-        <p class="form-control bg-light" readonly>@Model.SectionName</p>
-    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold d-flex align-items-center">
+                            <i class="bi bi-card-text me-2 text-primary"></i>
+                            Описание (Анотация)
+                        </label>
+                        <div class="p-3 bg-light rounded border" style="min-height: 100px;">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                @Model.Description
+                            }
+                            else
+                            {
+                                <div class="text-muted">Няма описание</div>
+                            }
+                        </div>
+                    </div>
 
-    <!-- Authors Field -->
-    <div class="mb-3">
-        <label class="form-label fw-bold">Автор(и)</label>
-        @if (Model.SelectedAuthorsNames.Any())
-        {
-            <ul class="list-group">
-                @foreach (var author in Model.SelectedAuthorsNames)
-                {
-                    <li class="list-group-item">@author</li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p class="text-muted">Няма избрани автори</p>
-        }
-    </div>
+                    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                        <a href="javascript:window.history.back();" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Назад
+                        </a>
 
-    <!-- Buttons -->
-    <div class="d-flex justify-content-center mt-4">
-        <a asp-action="AllTitles" class="btn btn-secondary btn-lg px-4">Назад</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Include Bootstrap JS for responsiveness and interactivity -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+@section Styles {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        /* Custom styling for the details page */
+        .card {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        }
+
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 767.98px) {
+            .btn {
+                padding: 0.5rem 1rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+}

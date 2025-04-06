@@ -114,6 +114,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEFsbEF1dGhvcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Author/AllAuthorsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXEFsbEF1dGhvcnNMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Author/ConfirmDelete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aG9yXENvbmZpcm1EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -148,6 +152,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/LibraryUnit/NoTitlesWarning.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVVuaXRcTm9UaXRsZXNXYXJuaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/LibraryUnit/SavedUnits.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlicmFyeVVuaXRcU2F2ZWRVbml0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/LibraryUnit/ScrappedLibraryUnits.cshtml]
@@ -196,6 +204,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Section/AllSections.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvblxBbGxTZWN0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Section/AllSectionsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvblxBbGxTZWN0aW9uc0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LibrarySystem-DiplomenProekt/LibrarySystem/LibrarySystem.Web/Views/Section/ConfirmDelete.cshtml]

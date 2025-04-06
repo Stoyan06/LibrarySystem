@@ -299,6 +299,26 @@
                 justify-content: center;
             }
         }
+
+        .image-container {
+            display: flex;
+            flex-direction: column; /* Stack the items vertically */
+            justify-content: center; /* Vertically center the content */
+            align-items: center; /* Horizontally center the content */
+            height: 100%; /* Make sure the container takes the full height of its parent */
+            position: relative;
+        }
+
+        .image-zoom-hint {
+            position: absolute;
+            bottom: 20px; /* Adjust the distance from the bottom if needed */
+        }
+
+        .image-label {
+            position: absolute;
+            top: 20px; /* Adjust the distance from the top if needed */
+        }
+
     </style>
 </head>
 
@@ -313,10 +333,7 @@
             @if (!string.IsNullOrEmpty(Model.Image.DestinationLink))
             {
                 <div class="image-container">
-                    <img src="@Model.Image.DestinationLink" id="currentImage" class="img-thumbnail" alt="Текущо изображение" onclick="openImageModal(this.src)">
-                    <div class="image-zoom-hint">
-                        <i class="fas fa-search-plus"></i> Увеличи
-                    </div>
+                    <img src="@Model.Image.DestinationLink" id="currentImage" class="img-thumbnail" alt="Текущо изображение">
                     <span class="image-label">Текущо изображение</span>
                 </div>
             }
@@ -327,22 +344,6 @@
                     <p class="text-muted">Няма налично изображение</p>
                 </div>
             }
-            
-            <div class="image-divider"></div>
-            
-            <div class="file-upload-container">
-                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
-                <label class="file-input-label">Качи ново изображение</label>
-                <label for="UploadedImage" class="file-input-button">
-                    <i class="fas fa-file-image"></i> Избери файл
-                </label>
-                <input asp-for="UploadedImage" type="file" class="file-input" id="UploadedImage" name="UploadedImage" accept="image/*" onchange="previewNewImage(event)">
-                
-                <div id="previewContainer" class="preview-container">
-                    <img id="newImagePreview" class="preview-image" alt="Ново изображение">
-                    <span class="image-label">Преглед на новото изображение</span>
-                </div>
-            </div>
         </div>
 
         <!-- Form Section (Right Side) -->
@@ -438,6 +439,22 @@
                         <i class="fas fa-save"></i> Запази промените
                     </button>
                 </div>
+
+                <div class="image-divider"></div>
+
+                <div class="file-upload-container">
+                    <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                    <label class="file-input-label">Качи ново изображение</label>
+                    <label for="UploadedImage" class="file-input-button">
+                        <i class="fas fa-file-image"></i> Избери файл
+                    </label>
+                    <input asp-for="UploadedImage" type="file" class="file-input" id="UploadedImage" name="UploadedImage" accept="image/*" onchange="previewNewImage(event)">
+
+                    <div id="previewContainer" class="preview-container">
+                        <img id="newImagePreview" class="preview-image" alt="Ново изображение">
+                        <span class="image-label">Преглед на новото изображение</span>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -453,45 +470,20 @@
     </div>
 </div>
 
-<!-- JavaScript for Image Zoom and Preview -->
+<!-- JavaScript for Image Preview -->
 <script>
-    function openImageModal(imgSrc) {
-        var modal = document.getElementById('imageModal');
-        var modalImg = document.getElementById('modalImage');
-        modal.style.display = 'flex';
-        modalImg.src = imgSrc;
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-    }
-    
-    function closeImageModal() {
-        document.getElementById('imageModal').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    }
-    
-    // Close modal when pressing Escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            closeImageModal();
-        }
-    });
-    
-    // Stop propagation on modal content
-    document.querySelector('.modal-content').addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
     function previewNewImage(event) {
         var output = document.getElementById('newImagePreview');
         var container = document.getElementById('previewContainer');
-        
+
         if (event.target.files && event.target.files[0]) {
             var reader = new FileReader();
-            
-            reader.onload = function(e) {
+
+            reader.onload = function (e) {
                 output.src = e.target.result;
                 container.classList.add('active');
             };
-            
+
             reader.readAsDataURL(event.target.files[0]);
         }
     }

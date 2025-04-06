@@ -11,21 +11,21 @@
         <div class="card-header bg-primary text-white py-3">
             <h2 class="text-center mb-0"><i class="fas fa-folder-open me-2"></i>Раздели</h2>
         </div>
-        
+
         <div class="card-body">
             <!-- Search and Filter Controls -->
             <div class="row mb-4">
                 <div class="col-md-12">
-                    <form method="get" asp-action="AllSections" class="d-flex flex-wrap gap-2">
+                    <form method="get" asp-action="AllSectionsList" class="d-flex flex-wrap gap-2">
                         <div class="input-group flex-grow-1">
                             <span class="input-group-text bg-light"><i class="fas fa-search"></i></span>
-                            <input type="text" name="SearchTerm" value="@ViewData["SearchTerm"]" 
+                            <input type="text" name="SearchTerm" value="@ViewData["SearchTerm"]"
                                    placeholder="Търси раздел" class="form-control" />
                             <button type="submit" class="btn btn-primary">
                                 Търси
                             </button>
                         </div>
-                        <a asp-action="AllSections" class="btn btn-outline-secondary">
+                        <a asp-action="AllSectionsList" class="btn btn-outline-secondary">
                             <i class="fas fa-undo me-1"></i> Нулирай
                         </a>
                     </form>
@@ -34,19 +34,15 @@
 
             <!-- Add Section Button -->
             <div class="mb-4">
-                  <a asp-action="AddSection" asp-controller="Section" class="btn btn-success">
-                        <i class="fas fa-plus-circle me-2"></i>Добави раздел
-                    </a>
+                
 
-
-               
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Dashboard", "Librarian")'">
-                        <i class="fas fa-arrow-left me-2"></i>Назад
-                    </button>
+                <button type="button" class="btn btn-secondary" onclick="history.back();">
+                    <i class="fas fa-arrow-left me-2"></i>Назад
+                </button>
             </div>
 
             <!-- Display Message if No Results -->
-            @if(Model.ToList().Count == 0)
+            @if (Model.ToList().Count == 0)
             {
                 <div class="alert alert-info text-center py-4 mt-3">
                     <i class="fas fa-info-circle fa-2x mb-3"></i>
@@ -63,7 +59,7 @@
                             <tr>
                                 <th class="text-start" style="width: 25%">Име</th>
                                 <th class="text-start" style="width: 45%">Описание</th>
-                                <th class="text-center" style="width: 30%">Операции</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -72,21 +68,7 @@
                                 <tr>
                                     <td class="align-middle fw-medium">@sec.Name</td>
                                     <td class="align-middle">@(string.IsNullOrEmpty(sec.Description) ? "-" : sec.Description)</td>
-                                    <td class="text-center align-middle">
-                                        <div class="btn-group" role="group">
-                                            
-                                                <a asp-controller="Section" asp-action="UpdateSection" asp-route-id="@sec.Id"
-                                                   class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Редактирай">
-                                                    <i class="fas fa-edit me-md-2"></i><span class="d-none d-md-inline">Редактирай</span>
-                                                </a>
-                                                <a asp-controller="Section" asp-action="RemoveSection" asp-route-id="@sec.Id"
-                                                   class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Изтрий">
-                                                    <i class="fas fa-trash-alt me-md-2"></i><span class="d-none d-md-inline">Изтрий</span>
-                                                </a>
-                                            
-                                          
-                                        </div>
-                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>
@@ -102,57 +84,57 @@
         border-radius: 0.5rem;
         border: none;
     }
-    
+
     .card-header {
         border-radius: 0.5rem 0.5rem 0 0 !important;
     }
-    
+
     .table thead th {
         font-weight: 600;
     }
-    
+
     .btn {
         font-weight: 500;
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
         transition: all 0.3s;
     }
-    
+
     .table-responsive {
         border-radius: 0.25rem;
         overflow: hidden;
     }
-    
+
     /* Responsive adjustments */
     @@media (max-width: 768px) {
         .container {
             width: 100%;
-            padding: 0 12px; 
+            padding: 0 12px;
         }
-        
+
         .btn-group {
             display: flex;
             flex-wrap: nowrap;
             width: 100%;
         }
-        
+
         .btn-group .btn {
             flex: 1;
             padding: 0.4rem 0.5rem;
         }
-        
+
         .table th, .table td {
             font-size: 0.875rem;
             padding: 0.5rem;
         }
     }
-    
+
     @@media (max-width: 576px) {
         .d-flex {
             flex-direction: column;
             width: 100%;
         }
-        
+
         .input-group {
             width: 100%;
             margin-bottom: 0.5rem;

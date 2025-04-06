@@ -41,14 +41,18 @@
 
                     <!-- Buttons Stack -->
                     <div class="d-grid gap-2">
-                        <a href="@Url.Action("AllLibraryUnits", "LibraryUnit")" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Назад към списъка
+                        <a href="@ViewBag.PreviousUrl" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Назад
                         </a>
+
+
+
+
 
                         @if (User.IsInRole(SD.UserRole))
                         {
                             <a href="@Url.Action("Reserve", "LibraryUnit", new { id = Model.Id })" class="btn btn-primary">
-                                <i class="bi bi-bookmark-plus me-1"></i> Резервирай
+                                <i class="bi bi-bookmark-plus me-1"></i> Запази
                             </a>
                         }
                     </div>
@@ -62,7 +66,12 @@
                         <!-- Title -->
                         <div class="mb-3">
                             <label class="form-label fw-bold mb-1">Заглавие</label>
-                            <div class="form-control bg-light">@Model.TitleName</div>
+                            <div class="p-3 bg-light rounded border">
+                                <a asp-action="Details" asp-controller="Title" asp-route-id="@Model.TitleId" class="text-decoration-none">
+                                    @Model.TitleName
+                                </a>
+                            </div>
+
                         </div>
 
                         <div class="row mb-3">

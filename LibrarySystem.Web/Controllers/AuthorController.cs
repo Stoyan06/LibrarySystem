@@ -16,6 +16,23 @@ namespace LibrarySystem.Web.Controllers
             _authorService = authorService;
         }
 
+        public async Task<IActionResult> AllAuthorsList(string SearchTerm)
+        {
+            ViewData["SearchTerm"] = SearchTerm;
+
+            var authors = await _authorService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                authors = authors
+                    .Where(x => x.FullName != null && x.FullName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View(authors);
+        }
+
+
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AllAuthors(string SearchTerm)
         {

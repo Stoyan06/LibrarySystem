@@ -9,18 +9,7 @@
             <div class="bg-primary bg-gradient text-white rounded-3 shadow p-4 p-md-5 mb-4">
                 <div class="text-center">
                     <h1 class="display-4 fw-bold mb-3">Добре дошли</h1>
-                    <p class="lead mb-4">в библиотечната информационна система</p>
-                    <div class="d-flex justify-content-center flex-wrap gap-2">
-                        <a asp-controller="Book" asp-action="AllBooks" class="btn btn-light btn-lg px-4">
-                            <i class="bi bi-book"></i> Книги
-                        </a>
-                        <a asp-controller="Author" asp-action="AllAuthors" class="btn btn-outline-light btn-lg px-4">
-                            <i class="bi bi-person-lines-fill"></i> Автори
-                        </a>
-                        <a asp-controller="Section" asp-action="AllSections" class="btn btn-outline-light btn-lg px-4">
-                            <i class="bi bi-grid-3x3-gap"></i> Раздели
-                        </a>
-                    </div>
+                    <p class="lead mb-4">в библиотечната информационна система!</p>
                 </div>
             </div>
 
@@ -31,11 +20,11 @@
                     <div class="card h-100 shadow-sm border-0">
                         <div class="card-body text-center p-4">
                             <i class="bi bi-journals text-primary" style="font-size: 3rem;"></i>
-                            <h2 class="card-title mt-3">Книги</h2>
-                            <p class="card-text mb-4">Преглед и управление на книгите в библиотечната система</p>
+                            <h2 class="card-title mt-3">Материали</h2>
+                            <p class="card-text mb-4">Преглед на материалите в библиотечната система</p>
                             <div class="d-grid">
-                                <a asp-controller="Book" asp-action="AllBooks" class="btn btn-primary btn-lg">
-                                    <i class="bi bi-journal-text"></i> Преглед на всички книги
+                                <a asp-controller="LibraryUnit" asp-action="AllLibraryUnits" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-journal-text"></i> Преглед на всички материали
                                 </a>
                             </div>
                         </div>
@@ -48,9 +37,9 @@
                         <div class="card-body text-center p-4">
                             <i class="bi bi-people text-success" style="font-size: 3rem;"></i>
                             <h2 class="card-title mt-3">Автори</h2>
-                            <p class="card-text mb-4">Преглед и управление на авторите в библиотечната система</p>
+                            <p class="card-text mb-4">Преглед на авторите в библиотечната система</p>
                             <div class="d-grid">
-                                <a asp-controller="Author" asp-action="AllAuthors" class="btn btn-success btn-lg">
+                                <a asp-controller="Author" asp-action="AllAuthorsList" class="btn btn-success btn-lg">
                                     <i class="bi bi-person-lines-fill"></i> Преглед на всички автори
                                 </a>
                             </div>
@@ -64,9 +53,9 @@
                         <div class="card-body text-center p-4">
                             <i class="bi bi-grid-3x3-gap text-warning" style="font-size: 3rem;"></i>
                             <h2 class="card-title mt-3">Раздели</h2>
-                            <p class="card-text mb-4">Преглед и управление на разделите в библиотечната система</p>
+                            <p class="card-text mb-4">Преглед на разделите в библиотечната система</p>
                             <div class="d-grid">
-                                <a asp-controller="Section" asp-action="AllSections" class="btn btn-warning btn-lg">
+                                <a asp-controller="Section" asp-action="AllSectionsList" class="btn btn-warning btn-lg">
                                     <i class="bi bi-grid-3x3-gap-fill"></i> Преглед на всички раздели
                                 </a>
                             </div>
@@ -81,8 +70,7 @@
                     <h3 class="card-title text-center mb-4">
                         <i class="bi bi-info-circle"></i> Информация за системата
                     </h3>
-                    <p class="card-text">
-                        Библиотечната информационна система предоставя удобен интерфейс за управление на книги, автори и раздели.
+                    <p class="card-text" style="text-align: center;">
                         Системата позволява бързо търсене, добавяне, редактиране и изтриване на информация съгласно правата
                         на потребителя.
                     </p>
@@ -90,8 +78,8 @@
                         <div class="col-md-3">
                             <div class="p-3 bg-light rounded">
                                 <i class="bi bi-book text-primary mb-2" style="font-size: 2rem;"></i>
-                                <h5>Управление на книги</h5>
-                                <p class="small mb-0">Добавяне, редактиране и изтриване на книги от библиотечния фонд</p>
+                                <h5>Управление на материали</h5>
+                                <p class="small mb-0">Добавяне, редактиране и изтриване на материали от библиотечния фонд</p>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -105,7 +93,7 @@
                             <div class="p-3 bg-light rounded">
                                 <i class="bi bi-grid-3x3-gap text-warning mb-2" style="font-size: 2rem;"></i>
                                 <h5>Управление на раздели</h5>
-                                <p class="small mb-0">Категоризиране на книги по различни теми и жанрове</p>
+                                <p class="small mb-0">Категоризиране на книги по различни жанрове</p>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -116,12 +104,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer bg-white text-center p-3">
-                    <p class="mb-0">
-                        <i class="bi bi-clock"></i> Версия на системата: 1.0 &middot;
-                        <i class="bi bi-calendar3"></i> Последно обновяване: Април 2025
-                    </p>
                 </div>
             </div>
         </div>
