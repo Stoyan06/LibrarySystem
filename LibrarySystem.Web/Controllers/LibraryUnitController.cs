@@ -456,6 +456,11 @@ namespace LibrarySystem.Web.Controllers
         public async Task<IActionResult> Reserve(int id)
         {
             var unit = await _libraryUnitService.GetByIdAsync(id);
+            if (unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             var identityUser = await _userManager.GetUserAsync(User);
             var user = _userService.GetWhere(x => x.IdentityUserId == identityUser.Id).FirstOrDefault();
 
@@ -495,6 +500,7 @@ namespace LibrarySystem.Web.Controllers
             return Redirect(referer);
         }
 
+        [Authorize(Roles = $"{SD.UserRole}")]
         public async Task<IActionResult> SavedUnits()
         {
             // Get the current logged-in user
@@ -523,6 +529,7 @@ namespace LibrarySystem.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = $"{SD.UserRole}")]
         public async Task<IActionResult> RemoveFromSaved(int id)
         {
             // Get the current logged-in user

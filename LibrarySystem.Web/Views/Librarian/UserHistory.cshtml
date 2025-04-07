@@ -1,7 +1,7 @@
 ﻿@model List<UserHistoryViewModel>
 
 @{
-    ViewData["Title"] = "История на потребителя";
+    ViewData["Title"] = "История на читателя";
 }
 
 @section Styles {
@@ -319,15 +319,15 @@
 
 <div class="py-5">
     <h1 class="text-center fw-bold page-header">
-        <i class="fas fa-history me-2"></i>История на потребителя
+        <i class="fas fa-history me-2"></i>История на читателя
     </h1>
 
     @if (!Model.Any())
     {
         <div class="empty-history">
             <i class="fas fa-book-open"></i>
-            <h3 style="color: #2c3e50; font-weight: 600;">Потребителят няма история</h3>
-            <p style="color: #6c757d; font-weight: 400;">Все още няма регистрирани операции за този потребител в системата.</p>
+            <h3 style="color: #2c3e50; font-weight: 600;">Читателят няма история</h3>
+            <p style="color: #6c757d; font-weight: 400;">Все още няма регистрирани операции за този читател в системата.</p>
 
             <div class="mt-4">
                 <button type="button" class="btn btn-secondary btn-sm" onclick="history.back();" style="padding: 0.3rem 0.75rem; font-size: 0.85rem; font-weight: 400; display: flex; align-items: center; gap: 0.5rem;">

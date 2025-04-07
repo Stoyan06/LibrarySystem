@@ -1,115 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Отказан достъп";
 }
-<!DOCTYPE html>
-<html lang="bg">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Библиотечна система</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4 text-danger">
+                        <i class="bi bi-exclamation-circle-fill" style="font-size: 4rem;"></i>
+                    </div>
 
-        .center-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-        }
+                    <h1 class="display-5 fw-bold text-danger mb-3">Достъпът е отказан</h1>
 
-        .access-denied {
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2.5rem;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+                    <p class="lead text-muted mb-4">
+                        Нямате необходимите права за достъп до тази страница.
+                    </p>
 
-        .error-icon {
-            font-size: 4rem;
-            color: #dc3545;
-            margin-bottom: 1.5rem;
-        }
-
-        h1 {
-            color: #dc3545;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .lead {
-            color: #6c757d;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn-primary {
-            background-color: #0d6efd;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
-        }
-
-            .btn-primary:hover {
-                background-color: #0b5ed7;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(13, 110, 253, 0.3);
-            }
-
-        @@media (max-width: 576px) {
-            .access-denied {
-                padding: 1.5rem;
-                width: 95%;
-            }
-
-            .error-icon {
-                font-size: 3rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .lead {
-                font-size: 1rem;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="center-container">
-        <div class="access-denied">
-            <div class="error-icon">
-                <i class="fas fa-exclamation-circle"></i>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary px-4 py-2">
+                            <i class="bi bi-house-door me-2"></i>Обратно към началната страница
+                        </a>
+                    </div>
+                </div>
             </div>
-            <h1>Достъпът е отказан</h1>
-            <p class="lead">Нямате необходимите права за достъп до тази страница.</p>
-            <a href="/" class="btn btn-primary">
-                <i class="fas fa-home me-2"></i>Обратно към началната страница
-            </a>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+</div>

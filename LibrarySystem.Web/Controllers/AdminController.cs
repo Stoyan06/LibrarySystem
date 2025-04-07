@@ -31,21 +31,21 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> AdminInfo()
     {
-            var user = await _userManager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
-            var userDetails = _userService.GetWhere
-                (u => u.IdentityUserId == user.Id)
-                .Select(u => new UserViewModel
-                {
-                    Username = user.UserName,
-                    Email = user.Email,
-                    FirstName = u.FirstName,
-                    MiddleName = u.MiddleName,
-                    LastName = u.LastName
-                })
-                .FirstOrDefault();
+        var userDetails = _userService.GetWhere
+            (u => u.IdentityUserId == user.Id)
+            .Select(u => new UserViewModel
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                FirstName = u.FirstName,
+                MiddleName = u.MiddleName,
+                LastName = u.LastName
+            })
+            .FirstOrDefault();
 
-            return View(userDetails);
+        return View(userDetails);
     }
 
 
@@ -140,8 +140,8 @@ public class AdminController : Controller
                 Role = userRole
             };
 
-            if(userRole != SD.LibrarianRole && userRole != SD.AdminRole)
-            list.Add(model);
+            if (userRole != SD.LibrarianRole && userRole != SD.AdminRole)
+                list.Add(model);
         }
         return View(list);
     }
@@ -231,15 +231,25 @@ public class AdminController : Controller
     public async Task<IActionResult> ReaderDetails(int userId)
     {
         User user = await _userService.GetByIdAsync(userId);
+        if (user == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
-        return View(new UserViewModel 
-        { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email});
+        return View(new UserViewModel
+        { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email });
     }
 
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> EditReader(int userId)
     {
         User user = await _userService.GetByIdAsync(userId);
+        if (user == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new EditReaderViewModel
         { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email, Id = userId });
@@ -275,23 +285,34 @@ public class AdminController : Controller
     public async Task<IActionResult> ConfirmDeleteReader(int userId)
     {
         User reader = await _userService.GetByIdAsync(userId);
+        if (reader == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
-        return View(new ReaderViewModel 
-        { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id});
+        return View(new ReaderViewModel
+        { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id });
     }
 
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteReader(int userId)
     {
+        User reader = await _userService.GetByIdAsync(userId);
+        if (reader == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         var userHistory = _movementService.GetWhere(x => x.ReaderId == userId && x.Deadline != null);
         var userHistoryCheck = _movementService.GetWhere(x => x.ReaderId == userId && x.Deadline == null);
-        
-        if(userHistory.Count() == userHistoryCheck.Count())
+
+        if (userHistory.Count() == userHistoryCheck.Count())
         {
             User user = await _userService.GetByIdAsync(userId);
             IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
             var savedByUser = _libraryUnitService.GetWhere(x => x.SavedByReaderId == userId);
-            foreach(LibraryUnit unit in savedByUser)
+            foreach (LibraryUnit unit in savedByUser)
             {
                 unit.IsSavedByUser = false;
                 unit.SavedByReaderId = null;
@@ -310,7 +331,7 @@ public class AdminController : Controller
             return RedirectToAction("ManageReaders");
         }
     }
-        
+
 
     [Authorize(Roles = SD.AdminRole)]
     public IActionResult CreateLibrarian()
@@ -358,6 +379,11 @@ public class AdminController : Controller
     public async Task<IActionResult> LibrarianDetails(int userId)
     {
         User user = await _userService.GetByIdAsync(userId);
+        if (user == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new UserViewModel
         { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email });
@@ -367,6 +393,11 @@ public class AdminController : Controller
     public async Task<IActionResult> EditLibrarian(int userId)
     {
         User user = await _userService.GetByIdAsync(userId);
+        if (user == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         return View(new EditLibrarianViewModel
         { FirstName = user.FirstName, LastName = user.LastName, MiddleName = user.MiddleName, Email = identityUser.Email, Id = userId });
@@ -406,16 +437,32 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ConfirmDeleteLibrarian(int userId)
     {
-        User reader = await _userService.GetByIdAsync(userId);
-        IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
+        User librarian = await _userService.GetByIdAsync(userId);
+        if (librarian == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
+        IdentityUser identityUser = await _userManager.FindByIdAsync(librarian.IdentityUserId);
         return View(new LibrarianViewModel
-        { Email = identityUser.Email, FirstName = reader.FirstName, MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id });
+        {
+            Email = identityUser.Email,
+            FirstName = librarian.FirstName,
+            MiddleName = librarian.MiddleName,
+            LastName = librarian.LastName,
+            Id = librarian.Id
+        });
     }
 
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteLibrarian(int userId)
     {
         User user = await _userService.GetByIdAsync(userId);
+        if (user == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
         await _userService.DeleteAsync(user.Id);
         await _userManager.RemoveFromRoleAsync(identityUser, SD.LibrarianRole);
@@ -428,11 +475,20 @@ public class AdminController : Controller
     public async Task<IActionResult> ChangeReaderPassword(int userId)
     {
         User reader = await _userService.GetByIdAsync(userId);
+        if (reader == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
         IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
-        return View(new ChangePasswordViewModel 
-        { Email = identityUser.Email, 
+        return View(new ChangePasswordViewModel
+        {
+            Email = identityUser.Email,
             FirstName = reader.FirstName,
-            MiddleName = reader.MiddleName, LastName = reader.LastName, Id = reader.Id});
+            MiddleName = reader.MiddleName,
+            LastName = reader.LastName,
+            Id = reader.Id
+        });
     }
 
     [HttpPost]
@@ -446,7 +502,7 @@ public class AdminController : Controller
             await _userManager.RemovePasswordAsync(identityUser);
             await _userManager.AddPasswordAsync(identityUser, model.ConfirmNewPassword);
             TempData["success"] = "Паролата е сменена успешно.";
-            return RedirectToAction("EditReader", new {userId = model.Id});
+            return RedirectToAction("EditReader", new { userId = model.Id });
         }
         else return View(model);
     }
@@ -454,15 +510,20 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> ChangeLibrarianPassword(int userId)
     {
-        User reader = await _userService.GetByIdAsync(userId);
-        IdentityUser identityUser = await _userManager.FindByIdAsync(reader.IdentityUserId);
+        User librarian = await _userService.GetByIdAsync(userId);
+        if (librarian == null)
+        {
+            return View("~/Views/Shared/NotFound.cshtml");
+
+        }
+        IdentityUser identityUser = await _userManager.FindByIdAsync(librarian.IdentityUserId);
         return View(new ChangePasswordViewModel
         {
             Email = identityUser.Email,
-            FirstName = reader.FirstName,
-            MiddleName = reader.MiddleName,
-            LastName = reader.LastName,
-            Id = reader.Id
+            FirstName = librarian.FirstName,
+            MiddleName = librarian.MiddleName,
+            LastName = librarian.LastName,
+            Id = librarian.Id
         });
     }
 
@@ -478,7 +539,7 @@ public class AdminController : Controller
             await _userManager.AddPasswordAsync(identityUser, model.ConfirmNewPassword);
 
             TempData["success"] = "Паролата е сменена успешно.";
-            return RedirectToAction("EditLibrarian",new { userId = model.Id });
+            return RedirectToAction("EditLibrarian", new { userId = model.Id });
         }
         else return View(model);
     }
@@ -521,5 +582,4 @@ public class AdminController : Controller
             return View(model);
         }
     }
-
 }

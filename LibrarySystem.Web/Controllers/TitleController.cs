@@ -2,6 +2,7 @@
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
 using LibrarySystem.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ServiceStack;
@@ -29,6 +30,7 @@ namespace LibrarySystem.Web.Controllers
             _libraryUnitService = libraryUnitService;
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AllTitles(string SearchTerm)
         {
             ViewData["SearchTerm"] = SearchTerm;
@@ -47,6 +49,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddTitle()
         {
             IEnumerable<Section> sections = await _sectionService.GetAllAsync();
@@ -56,7 +59,7 @@ namespace LibrarySystem.Web.Controllers
             if (authors.Count() == 0) return View("NoAuthorsWarning");
             var model = new TitleViewModel
             {
-                Sections = _sectionService.GetAllAsync().Result.Select(e => new SelectListItem
+                Sections =  _sectionService.GetAllAsync().Result.Select(e => new SelectListItem
                 {
                     Value = e.Id.ToString(),
                     Text = e.Name
@@ -71,6 +74,7 @@ namespace LibrarySystem.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddTitle(TitleViewModel model)
         {
             if (model.Name != null && model.Description != null && model.SelectedAuthors.Count != 0)
@@ -130,9 +134,15 @@ namespace LibrarySystem.Web.Controllers
             } 
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateTitle(int id)
         {
-            var entity = await _titleService.GetByIdAsync(id);
+            Title entity = await _titleService.GetByIdAsync(id);
+            if (entity == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             IEnumerable<Author> allAuthors = await _authorService.GetAllAsync();
             IEnumerable<TitleAuthor> titleAuthors = await _title_author_service.GetAllAsync();
             List<TitleAuthor> titleAut = titleAuthors.Where(x => x.TitleId == id).ToList();
@@ -169,6 +179,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateTitle(TitleViewModel model)
         {
             if (model.Name != null && model.Description != null && model.SelectedAuthors.Count != 0)
@@ -231,12 +242,20 @@ namespace LibrarySystem.Web.Controllers
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveTitle(int id)
         {
-            return View("ConfirmDelete", await _titleService.GetByIdAsync(id));
+            Title title = await _titleService.GetByIdAsync(id);
+            if (title == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            return View("ConfirmDelete", title);
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveTitle(Title title)
         {
             LibraryUnit unit =  _libraryUnitService.GetWhere(x => x.TitleId == title.Id).FirstOrDefault();
@@ -253,9 +272,15 @@ namespace LibrarySystem.Web.Controllers
             return RedirectToAction("AllTitles");
         }
 
+      
         public async Task<IActionResult> Details(int id)
         {
             Title title = await _titleService.GetByIdAsync(id);
+            if (title == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             Section section = await _sectionService.GetByIdAsync(title.SectionId);
 
             IEnumerable<TitleAuthor> titleAuthors = await _title_author_service.GetAllAsync();

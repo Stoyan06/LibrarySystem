@@ -78,7 +78,13 @@ namespace LibrarySystem.Web.Controllers
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateAuthor(int id)
         {
-            return View(await _authorService.GetByIdAsync(id));
+            Author author = await _authorService.GetByIdAsync(id);
+            if (author == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            return View(author);
         }
 
         [HttpPost]
@@ -106,6 +112,11 @@ namespace LibrarySystem.Web.Controllers
         public async Task<IActionResult> RemoveAuthor(int id)
         {
             Author aut = await _authorService.GetByIdAsync(id);
+            if (aut == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             return View("ConfirmDelete",aut);
         }
 

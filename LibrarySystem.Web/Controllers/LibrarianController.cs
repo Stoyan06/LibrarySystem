@@ -33,6 +33,7 @@ namespace LibrarySystem.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles = $"{SD.AdminRole}, {SD.LibrarianRole}")]
         public async Task<IActionResult> AllReaders(string searchTerm)
         {
             var users = await _userService.GetAllAsync();
@@ -72,10 +73,16 @@ namespace LibrarySystem.Web.Controllers
             return View(list);
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UserHistory(int id)
         {
             List<UserHistoryViewModel> userHistoryViewModels = new List<UserHistoryViewModel>();
             User user = await _userService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             IEnumerable<MovementOfLibraryUnit> movements = _movementOfLibraryUnitService.GetWhere(x => x.ReaderId == user.Id).ToList();
 
             foreach (MovementOfLibraryUnit movement in movements)

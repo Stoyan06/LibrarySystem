@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Web.Mvc;
 
-public class UserController : Controller
+public class UserController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
@@ -29,6 +30,7 @@ public class UserController : Controller
         _libraryUnitService = libraryUnitService;
     }
 
+    [Authorize(Roles = $"{SD.UserRole}")]
     public async Task<IActionResult> UserInfo()
     {
         
@@ -49,6 +51,7 @@ public class UserController : Controller
             return View(userDetails);
         
     }
+    [Authorize(Roles = $"{SD.UserRole}")]
     public async Task<IActionResult> EditUser()
     {
 
@@ -68,7 +71,8 @@ public class UserController : Controller
         return View(userDetails);
     }
 
-    [HttpPost]
+    [Microsoft.AspNetCore.Mvc.HttpPost]
+    [Authorize(Roles = $"{SD.UserRole}")]
     public async Task<IActionResult> EditUser(EditUserViewModel model)
     {
         if (!ModelState.IsValid)
@@ -92,18 +96,20 @@ public class UserController : Controller
         return RedirectToAction("UserInfo");
     }
 
+    [Authorize(Roles =$"{SD.UserRole}")]
     public IActionResult Dashboard()
     {
         return View();
     }
 
-    
-    public async Task<IActionResult> ChangeUserPassword()
+    [Authorize(Roles = $"{SD.UserRole}")]
+    public IActionResult ChangeUserPassword()
     {
         return View();
     }
 
-    [HttpPost]
+    [Microsoft.AspNetCore.Mvc.HttpPost]
+    [Authorize(Roles = $"{SD.UserRole}")]
     public async Task<IActionResult> ChangeUserPassword(ChangeUserPasswordViewModel model)
     {
         
@@ -136,6 +142,7 @@ public class UserController : Controller
         }
     }
 
+    [Authorize(Roles = $"{SD.UserRole}")]
     public async Task<IActionResult> UserHistory()
     {
         List<UserHistoryViewModel> userHistoryViewModels = new List<UserHistoryViewModel>();

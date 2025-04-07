@@ -51,12 +51,14 @@ namespace LibrarySystem.Web.Controllers
             return View(sections);
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public IActionResult AddSection()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> AddSection(Section section)
         {
             if(section.Name == null || section.Name == string.Empty)
@@ -67,7 +69,7 @@ namespace LibrarySystem.Web.Controllers
             if (section.Description == null || section.Description == string.Empty)
                 section.Description = "Няма описание";
 
-            if(_sectionService.ExisisSection(section.Name).Result == false)
+            if(await _sectionService.ExisisSection(section.Name) == false)
             {
                 await _sectionService.AddAsync(section);
                 TempData["success"] = "Успешно добавен раздел.";
@@ -80,12 +82,20 @@ namespace LibrarySystem.Web.Controllers
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateSection(int id)
         {
-            return View(await _sectionService.GetByIdAsync(id));
+            Section sec = await _sectionService.GetByIdAsync(id);
+            if (sec == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            return View(sec);
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateSection(Section section)
         {
 
@@ -99,7 +109,7 @@ namespace LibrarySystem.Web.Controllers
 
             Section check = await _sectionService.GetByIdAsync(section.Id);
 
-            if (_sectionService.ExisisSection(section.Name).Result == false 
+            if (await _sectionService.ExisisSection(section.Name) == false 
                 || check.Name == section.Name)
             {
                 await _sectionService.UpdateAsync(section);
@@ -113,13 +123,20 @@ namespace LibrarySystem.Web.Controllers
             }
         }
 
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveSection(int id)
         {
             Section sec = await _sectionService.GetByIdAsync(id);
+            if (sec == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             return View("ConfirmDelete", sec);
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> RemoveSection(Section section)
         {
             try
