@@ -14,7 +14,7 @@
                         Управление на библиотекари
                     </h1>
                 </div>
-                
+
                 <div class="card-body p-4">
                     <!-- Search Form -->
                     <form method="get" asp-action="ManageLibrarians" class="mb-4">
@@ -104,6 +104,15 @@
                     }
                 </div>
             </div>
+
+            <!-- Back button added below the card -->
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <a asp-controller="Admin" asp-action="ManageUsers" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-2"></i>Назад
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -116,23 +125,23 @@
             border-radius: 0.5rem;
             overflow: hidden;
         }
-        
+
         .table th {
             background-color: #f8f9fa;
             border-bottom: 2px solid #dee2e6;
         }
-        
+
         @@media (max-width: 768px) {
             .d-flex.justify-content-center {
                 flex-direction: column;
                 gap: 0.5rem !important;
             }
-            
+
             .btn-sm {
                 width: 100%;
                 margin-bottom: 0.25rem;
             }
-            
+
             .table-responsive {
                 border-radius: 0;
             }

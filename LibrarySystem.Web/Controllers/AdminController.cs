@@ -1,4 +1,5 @@
-﻿using LibrarySystem.Data;
+﻿using LibrarySystem.Controllers;
+using LibrarySystem.Data;
 using LibrarySystem.Models;
 using LibrarySystem.Services.IService;
 using LibrarySystem.Utility;
@@ -13,14 +14,18 @@ public class AdminController : Controller
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private IService<User> _userService;
+    private IService<MovementOfLibraryUnit> _movementService;
+    private IService<LibraryUnit> _libraryUnitService;
 
     public AdminController(UserManager<IdentityUser> userManager,
         IService<User> userService,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager, IService<MovementOfLibraryUnit> movementService, IService<LibraryUnit> libraryUnitService)
     {
         _userManager = userManager;
         _userService = userService;
         _roleManager = roleManager;
+        _movementService = movementService;
+        _libraryUnitService = libraryUnitService;
     }
 
     [Authorize(Roles = SD.AdminRole)]
@@ -278,14 +283,34 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteReader(int userId)
     {
-        User user = await _userService.GetByIdAsync(userId);
-        IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
-        await _userService.DeleteAsync(user.Id);
-        await _userManager.RemoveFromRoleAsync(identityUser, SD.UserRole);
-        await _userManager.DeleteAsync(identityUser);
-        TempData["success"] = "Читателят е премахнат успешно.";
-        return RedirectToAction("ManageReaders");
+        var userHistory = _movementService.GetWhere(x => x.ReaderId == userId && x.Deadline != null);
+        var userHistoryCheck = _movementService.GetWhere(x => x.ReaderId == userId && x.Deadline == null);
+        
+        if(userHistory.Count() == userHistoryCheck.Count())
+        {
+            User user = await _userService.GetByIdAsync(userId);
+            IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
+            var savedByUser = _libraryUnitService.GetWhere(x => x.SavedByReaderId == userId);
+            foreach(LibraryUnit unit in savedByUser)
+            {
+                unit.IsSavedByUser = false;
+                unit.SavedByReaderId = null;
+                await _libraryUnitService.UpdateAsync(unit);
+            }
+            await _movementService.DeleteWhere(x => x.ReaderId == userId);
+            await _userService.DeleteAsync(user.Id);
+            await _userManager.RemoveFromRoleAsync(identityUser, SD.UserRole);
+            await _userManager.DeleteAsync(identityUser);
+            TempData["success"] = "Читателят е премахнат успешно.";
+            return RedirectToAction("ManageReaders");
+        }
+        else
+        {
+            TempData["error"] = "Читателят не може да бъде премахнат, защото има заети материали, които трябва да върне.";
+            return RedirectToAction("ManageReaders");
+        }
     }
+        
 
     [Authorize(Roles = SD.AdminRole)]
     public IActionResult CreateLibrarian()

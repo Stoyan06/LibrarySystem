@@ -13,14 +13,14 @@
 
                         <div class="form-group mb-3">
                             <label asp-for="LibraryUnitId" class="control-label">Библиотечна единица</label>
-                            <select id="LibraryUnitId" name="LibraryUnitId" class="form-control select2" required>
+                            <select id="LibraryUnitId" name="LibraryUnitId" class="form-control select2" required data-val-required="Това поле е задължително.">
                                 @if (Model?.LibraryUnitId > 0)
                                 {
                                     <option value="@Model.LibraryUnitId" selected="selected">Текущ избор</option>
                                 }
                             </select>
                             <span asp-validation-for="LibraryUnitId" class="text-danger"></span>
-                            <div id="libraryUnitError" class="text-danger d-none">Моля, изберете валидна библиотечна единица</div>
+                            <div id="libraryUnitError" class="text-danger d-none">Моля, изберете валидна библиотечна единица.</div>
                         </div>
 
                         <div class="form-group mb-3">
@@ -47,6 +47,11 @@
 
     <script>
         $(document).ready(function () {
+            // Override the default validation messages
+            $.extend($.validator.messages, {
+                required: "Това поле е задължително."
+            });
+
             // Set Select2 language settings for Bulgarian
             $.fn.select2.defaults.set('language', {
                 errorLoading: function () { return 'Резултатите не могат да бъдат заредени.'; },

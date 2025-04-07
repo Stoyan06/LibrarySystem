@@ -213,7 +213,7 @@ namespace LibrarySystem.Web.Controllers
         }
 
         public async Task<IActionResult> Details(int id)
-        {
+        {   
             // Try to get the referer (previous page)
             var referer = Request.Headers["Referer"].ToString();
 
@@ -224,6 +224,11 @@ namespace LibrarySystem.Web.Controllers
             }
 
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
+            if(unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
             Title title = _titleService.GetWhere(x => x.Id == unit.TitleId).FirstOrDefault();
 
             // Retrieve the previous URL from session, or fallback to the AllLibraryUnits page if not available
@@ -259,6 +264,16 @@ namespace LibrarySystem.Web.Controllers
         public async Task<IActionResult> UpdateLibraryUnit(int id)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
+            if (unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            if (unit.IsScrapped)
+            {
+                return View("ScrappedWarning");
+            }
+
             Title title = _titleService.GetWhere(x => x.Id == unit.TitleId).FirstOrDefault();
 
             IEnumerable<Title> allTitles = await _titleService.GetAllAsync();
@@ -300,7 +315,17 @@ namespace LibrarySystem.Web.Controllers
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> UpdateLibraryUnit(LibraryUnitUpdateViewModel model)
         {
+           
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(model.Id);
+            if (unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            if (unit.IsScrapped)
+            {
+                return View("ScrappedWarning");
+            }
             IEnumerable<LibraryUnit> libraryUnits = _libraryUnitService.GetWhere(x => x.InventoryNumber == model.InventoryNumber);
             libraryUnits = libraryUnits.Where(x => x.Id != model.Id);
 
@@ -359,7 +384,17 @@ namespace LibrarySystem.Web.Controllers
         [Authorize(Roles = $"{SD.AdminRole},{SD.LibrarianRole}")]
         public async Task<IActionResult> Scrape(int id)
         {
+
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync(id);
+            if (unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            if (unit.IsScrapped)
+            {
+                return View("ScrappedWarning");
+            }
             Title title = _titleService.GetWhere(x => x.Id == unit.TitleId).FirstOrDefault();
 
             LibraryUnitViewModel model = new LibraryUnitViewModel
@@ -393,7 +428,12 @@ namespace LibrarySystem.Web.Controllers
         public async Task<IActionResult> Scrape(LibraryUnitViewModel model)
         {
             LibraryUnit unit = await _libraryUnitService.GetByIdAsync (model.Id);
-            if(unit.IsAvailable == false)
+            if (unit == null)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+
+            }
+            if (unit.IsAvailable == false)
             {
                 TempData["error"] = "Единицата не може да бъде бракувана, защото е заета от читател.";
                 return RedirectToAction("AllLibraryUnits");
