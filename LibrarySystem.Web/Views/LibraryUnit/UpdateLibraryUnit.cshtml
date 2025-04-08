@@ -450,11 +450,16 @@
                     </label>
                     <input asp-for="UploadedImage" type="file" class="file-input" id="UploadedImage" name="UploadedImage" accept="image/*" onchange="previewNewImage(event)">
 
+                    <div class="text-center">
+                        <span asp-validation-for="UploadedImage" class="text-danger"></span>
+                    </div>
+
                     <div id="previewContainer" class="preview-container">
                         <img id="newImagePreview" class="preview-image" alt="Ново изображение">
                         <span class="image-label">Преглед на новото изображение</span>
                     </div>
                 </div>
+               
             </form>
         </div>
     </div>

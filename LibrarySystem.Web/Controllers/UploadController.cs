@@ -28,17 +28,27 @@ namespace LibrarySystem.Controllers
                 return View("Upload");
             }
 
-            var imageUrl = await _cloudinaryService.UploadImageAsync(file);
 
-            if (imageUrl == null)
 
+            try
             {
-                ViewBag.Error = "Грешка при качването!";
+                var imageUrl = await _cloudinaryService.UploadImageAsync(file);
+
+                if (imageUrl == null)
+
+                {
+                    ViewBag.Error = "Грешка при качването!";
+                    return View("Upload");
+                }
+                ViewBag.ImageUrl = imageUrl;
+
                 return View("Upload");
             }
-            ViewBag.ImageUrl = imageUrl;
-
-            return View("Upload");
+            catch (Exception ex)
+            {
+                TempData["error"] = "Възникна грешка при обработка на изображението.";
+                return View("Upload");
+            }
         }
     }
 }

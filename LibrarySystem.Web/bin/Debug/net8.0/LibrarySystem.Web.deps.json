@@ -12,6 +12,7 @@
           "LibrarySystem.Data": "1.0.0",
           "LibrarySystem.Services": "1.0.0",
           "LibrarySystem.Utility": "1.0.0",
+          "LibrarySystem.Validation": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.13",
           "Microsoft.EntityFrameworkCore.Design": "9.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.0",
@@ -2642,6 +2643,17 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "LibrarySystem.Validation/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+        },
+        "runtime": {
+          "LibrarySystem.Validation.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -4205,6 +4217,11 @@
       "sha512": ""
     },
     "LibrarySystem.Utility/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LibrarySystem.Validation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

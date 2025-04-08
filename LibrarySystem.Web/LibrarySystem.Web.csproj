@@ -25,6 +25,7 @@
     <ProjectReference Include="..\LibrarySystem.Data\LibrarySystem.Data.csproj" />
     <ProjectReference Include="..\LibrarySystem.Services\LibrarySystem.Services.csproj" />
     <ProjectReference Include="..\LibrarySystem.Utility\LibrarySystem.Utility.csproj" />
+    <ProjectReference Include="..\LibrarySystem.Validation\LibrarySystem.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

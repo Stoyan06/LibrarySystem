@@ -1,4 +1,5 @@
 ﻿using LibrarySystem.Models;
+using LibrarySystem.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ServiceStack;
 using System.ComponentModel.DataAnnotations;
@@ -41,5 +42,6 @@ public class LibraryUnitUpdateViewModel
 
     public int? ImageId { get; set; }
     public Image? Image { get; set; }
+    [ValidateImage]
     public IFormFile? UploadedImage { get; set; }
 }

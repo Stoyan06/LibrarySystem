@@ -41,43 +41,48 @@ public class CloudinaryService
 
             return null;
 
-
-
-        using var stream = file.OpenReadStream();
-
-        var uploadParams = new ImageUploadParams
-
+        try
         {
 
-            File = new FileDescription(file.FileName, stream),
+            using var stream = file.OpenReadStream();
 
-            Transformation = new Transformation()
-                 .Width(300)
-                 .Height(460)
-                 .Crop("fit")
-                 
+            var uploadParams = new ImageUploadParams
 
+            {
 
-        };
+                File = new FileDescription(file.FileName, stream),
 
-
-
-        var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                Transformation = new Transformation()
+                     .Width(300)
+                     .Height(460)
+                     .Crop("fit")
 
 
 
-        if (uploadResult == null || uploadResult.SecureUrl == null)
+            };
 
-        {
 
-            return null;
 
+            var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+
+
+            if (uploadResult == null || uploadResult.SecureUrl == null)
+
+            {
+
+                return null;
+
+            }
+
+
+
+            return uploadResult.SecureUrl.ToString();
         }
-
-
-
-        return uploadResult.SecureUrl.ToString();
-
+        catch (HttpRequestException ex)
+        {
+            return "NoInternetCustomWarning";
+        }
     }
 
 } 

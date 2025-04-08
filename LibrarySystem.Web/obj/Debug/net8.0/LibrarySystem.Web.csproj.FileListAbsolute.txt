@@ -309,3 +309,5 @@ D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\LibrarySystem.Shared.dll
 D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\LibrarySystem.Shared.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\LibrarySystem.Validation.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Web\bin\Debug\net8.0\LibrarySystem.Validation.pdb

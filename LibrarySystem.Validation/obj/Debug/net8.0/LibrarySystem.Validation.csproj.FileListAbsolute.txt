@@ -1,0 +1,12 @@
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\bin\Debug\net8.0\LibrarySystem.Validation.deps.json
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\bin\Debug\net8.0\LibrarySystem.Validation.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\bin\Debug\net8.0\LibrarySystem.Validation.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.csproj.AssemblyReference.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.GeneratedMSBuildEditorConfig.editorconfig
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.AssemblyInfoInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.AssemblyInfo.cs
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.csproj.CoreCompileInputs.cache
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\refint\LibrarySystem.Validation.dll
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\LibrarySystem.Validation.pdb
+D:\LibrarySystem-DiplomenProekt\LibrarySystem\LibrarySystem.Validation\obj\Debug\net8.0\ref\LibrarySystem.Validation.dll

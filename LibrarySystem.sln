@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Services", "L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Utility", "LibrarySystem.Utility\LibrarySystem.Utility.csproj", "{951412CF-AA74-452C-BD64-BA262C5B1170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Shared", "LibrarySystem.Shared\LibrarySystem.Shared.csproj", "{B66C97C4-1A24-44CC-9320-ECCFBACE5517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarySystem.Shared", "LibrarySystem.Shared\LibrarySystem.Shared.csproj", "{B66C97C4-1A24-44CC-9320-ECCFBACE5517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Validation", "LibrarySystem.Validation\LibrarySystem.Validation.csproj", "{17AC2BDB-EB74-400E-AF47-1208ED7DA862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B66C97C4-1A24-44CC-9320-ECCFBACE5517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17AC2BDB-EB74-400E-AF47-1208ED7DA862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17AC2BDB-EB74-400E-AF47-1208ED7DA862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17AC2BDB-EB74-400E-AF47-1208ED7DA862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17AC2BDB-EB74-400E-AF47-1208ED7DA862}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

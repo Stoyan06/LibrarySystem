@@ -3857,6 +3857,19 @@
         "runtime": {
           "bin/placeholder/LibrarySystem.Utility.dll": {}
         }
+      },
+      "LibrarySystem.Validation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+        },
+        "compile": {
+          "bin/placeholder/LibrarySystem.Validation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LibrarySystem.Validation.dll": {}
+        }
       }
     }
   },
@@ -10996,6 +11009,11 @@
       "type": "project",
       "path": "../LibrarySystem.Utility/LibrarySystem.Utility.csproj",
       "msbuildProject": "../LibrarySystem.Utility/LibrarySystem.Utility.csproj"
+    },
+    "LibrarySystem.Validation/1.0.0": {
+      "type": "project",
+      "path": "../LibrarySystem.Validation/LibrarySystem.Validation.csproj",
+      "msbuildProject": "../LibrarySystem.Validation/LibrarySystem.Validation.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -11004,6 +11022,7 @@
       "LibrarySystem.Data >= 1.0.0",
       "LibrarySystem.Services >= 1.0.0",
       "LibrarySystem.Utility >= 1.0.0",
+      "LibrarySystem.Validation >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.13",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.0",
@@ -11047,6 +11066,9 @@
             },
             "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Utility\\LibrarySystem.Utility.csproj": {
               "projectPath": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Utility\\LibrarySystem.Utility.csproj"
+            },
+            "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Validation\\LibrarySystem.Validation.csproj": {
+              "projectPath": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Validation\\LibrarySystem.Validation.csproj"
             }
           }
         }

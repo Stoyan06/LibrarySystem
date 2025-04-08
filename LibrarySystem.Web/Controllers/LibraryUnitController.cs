@@ -170,6 +170,10 @@ namespace LibrarySystem.Web.Controllers
                 else
                 {
                     var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
+                    if(ImageLink == "NoInternetCustomWarning")
+                    {
+                        return View("~/Views/Shared/NoInternet.cshtml");
+                    }
                     await _imageService.AddAsync(new Image { DestinationLink = ImageLink });
                     Image image = _imageService.GetWhere(x => x.DestinationLink == ImageLink).First();
 
@@ -357,6 +361,10 @@ namespace LibrarySystem.Web.Controllers
                     if(model.UploadedImage != null)
                     {
                         var ImageLink = await _cloudinaryService.UploadImageAsync(model.UploadedImage);
+                        if (ImageLink == "NoInternetCustomWarning")
+                        {
+                            return View("~/Views/Shared/NoInternet.cshtml");
+                        }
                         Image image = await _imageService.GetByIdAsync(unit.ImageId);
                         image.DestinationLink = ImageLink;
                         await _imageService.UpdateAsync(image);
