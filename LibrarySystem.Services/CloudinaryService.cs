@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class CloudinaryService
 
 {

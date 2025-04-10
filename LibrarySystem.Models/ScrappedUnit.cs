@@ -18,9 +18,5 @@ namespace LibrarySystem.Models
         [Required]
         public DateTime DateTimeOfScrapping {  get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(User))]
-        public int LibrarianId { get; set; }
-
-        public User Librarian {  get; set; }
     }
 }

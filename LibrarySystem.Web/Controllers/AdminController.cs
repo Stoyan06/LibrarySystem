@@ -457,6 +457,13 @@ public class AdminController : Controller
     [Authorize(Roles = SD.AdminRole)]
     public async Task<IActionResult> DeleteLibrarian(int userId)
     {
+        MovementOfLibraryUnit movement = _movementService.GetWhere(x => x.LibrarianId == userId).FirstOrDefault();
+        if(movement != null)
+        {
+            TempData["error"] = "Библиотекарят не може да бъде изтрит, защото към него има обвързани регистри.";
+            return RedirectToAction("ManageLibrarians");
+        }
+
         User user = await _userService.GetByIdAsync(userId);
         if (user == null)
         {

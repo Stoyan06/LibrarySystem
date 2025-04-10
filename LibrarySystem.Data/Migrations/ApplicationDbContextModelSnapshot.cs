@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibrarySystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -127,15 +128,10 @@ namespace LibrarySystem.Data.Migrations
                     b.Property<DateTime>("DateTimeOfScrapping")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LibrarianId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LibraryUnitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LibrarianId");
 
                     b.HasIndex("LibraryUnitId");
 
@@ -499,17 +495,10 @@ namespace LibrarySystem.Data.Migrations
 
             modelBuilder.Entity("LibrarySystem.Models.ScrappedUnit", b =>
                 {
-                    b.HasOne("LibrarySystem.Models.User", "Librarian")
-                        .WithMany()
-                        .HasForeignKey("LibrarianId")
-                        .IsRequired();
-
                     b.HasOne("LibrarySystem.Models.LibraryUnit", "LibraryUnit")
                         .WithMany()
                         .HasForeignKey("LibraryUnitId")
                         .IsRequired();
-
-                    b.Navigation("Librarian");
 
                     b.Navigation("LibraryUnit");
                 });

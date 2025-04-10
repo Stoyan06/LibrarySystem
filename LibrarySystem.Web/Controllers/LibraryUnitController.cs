@@ -452,10 +452,7 @@ namespace LibrarySystem.Web.Controllers
             unit.IsSavedByUser = false;
             unit.SavedByReaderId = null;
             await _libraryUnitService.UpdateAsync (unit);
-            var identityUser = await _userManager.GetUserAsync(User);
-            string identityUserId = identityUser.Id;
-            User user = _userService.GetWhere(x => x.IdentityUserId == identityUserId).First();
-            await _scrappedUnitService.AddAsync(new ScrappedUnit { LibrarianId = user.Id, DateTimeOfScrapping = DateTime.Now, LibraryUnitId = unit.Id });
+            await _scrappedUnitService.AddAsync(new ScrappedUnit {DateTimeOfScrapping = DateTime.Now, LibraryUnitId = unit.Id });
             TempData["success"] = "Единицата е бракувана успешно.";
             return RedirectToAction("AllLibraryUnits");
         }
