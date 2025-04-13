@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|solutionrelative:librarysystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17AC2BDB-EB74-400E-AF47-1208ED7DA862}|LibrarySystem.Validation\\LibrarySystem.Validation.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.validation\\validateimageatribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17AC2BDB-EB74-400E-AF47-1208ED7DA862}|LibrarySystem.Validation\\LibrarySystem.Validation.csproj|solutionrelative:librarysystem.validation\\validateimageatribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|solutionrelative:librarysystem.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D2063E30-17AA-4F02-B602-02DF2916D20A}|LibrarySystem.Models\\LibrarySystem.Models.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.models\\scrappedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D2063E30-17AA-4F02-B602-02DF2916D20A}|LibrarySystem.Models\\LibrarySystem.Models.csproj|solutionrelative:librarysystem.models\\scrappedunit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|solutionrelative:librarysystem.web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\views\\admin\\confirmdeletelibrarian.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -161,10 +165,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\models\\libraryunitupdateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|solutionrelative:librarysystem.web\\models\\libraryunitupdateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{17AC2BDB-EB74-400E-AF47-1208ED7DA862}|LibrarySystem.Validation\\LibrarySystem.Validation.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.validation\\validateimageatribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{17AC2BDB-EB74-400E-AF47-1208ED7DA862}|LibrarySystem.Validation\\LibrarySystem.Validation.csproj|solutionrelative:librarysystem.validation\\validateimageatribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C91FD488-0ECB-4AAF-811E-401DAE81258C}|LibrarySystem.Web\\LibrarySystem.Web.csproj|d:\\librarysystem-diplomenproekt\\librarysystem\\librarysystem.web\\views\\librarian\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -582,7 +582,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 32,
+          "SelectedChildIndex": 53,
           "Children": [
             {
               "$type": "Bookmark",
@@ -590,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -598,12 +598,11 @@
               "RelativeToolTip": "LibrarySystem.Data\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T07:24:47.372Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-10T07:24:47.372Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "20250410071548_InitialCreate.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Data\\Migrations\\20250410071548_InitialCreate.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Data\\Migrations\\20250410071548_InitialCreate.cs",
@@ -611,12 +610,11 @@
               "RelativeToolTip": "LibrarySystem.Data\\Migrations\\20250410071548_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T07:15:48.716Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-10T07:15:48.716Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "ServiceTests.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\ServiceTests.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\ServiceTests.cs",
@@ -624,12 +622,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\ServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T09:48:21.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T09:48:21.133Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "SectionServiceTests.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\SectionServiceTests.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\SectionServiceTests.cs",
@@ -637,12 +634,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\SectionServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T09:44:59.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T09:44:59.877Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "SearchServiceTests.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\SearchServiceTests.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\SearchServiceTests.cs",
@@ -650,12 +646,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\SearchServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T08:30:09.648Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T08:30:09.648Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "AuthorServiceTestDbContext.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\TestDbContexts\\AuthorServiceTestDbContext.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\TestDbContexts\\AuthorServiceTestDbContext.cs",
@@ -663,12 +658,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\TestDbContexts\\AuthorServiceTestDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T07:58:39.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T07:58:39.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "AuthorServiceTests.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\AuthorServiceTests.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\AuthorServiceTests.cs",
@@ -676,25 +670,23 @@
               "RelativeToolTip": "LibrarySystem.Tests\\AuthorServiceTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T07:28:11.601Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T07:28:11.601Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "LibrarySystem.Tests",
+              "DocumentIndex": 29,
+              "Title": "LibrarySystem.Tests.csproj",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\LibrarySystem.Tests.csproj",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\LibrarySystem.Tests.csproj",
               "ToolTip": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\LibrarySystem.Tests.csproj",
               "RelativeToolTip": "LibrarySystem.Tests\\LibrarySystem.Tests.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-09T07:26:30.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T07:26:30.339Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "RepositoryTestDbContext.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\TestDbContexts\\RepositoryTestDbContext.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\TestDbContexts\\RepositoryTestDbContext.cs",
@@ -702,12 +694,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\TestDbContexts\\RepositoryTestDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T07:13:18.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-09T07:13:18.773Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "RepositoryTests.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Tests\\RepositoryTests.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Tests\\RepositoryTests.cs",
@@ -715,12 +706,11 @@
               "RelativeToolTip": "LibrarySystem.Tests\\RepositoryTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T15:35:47.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-08T15:35:47.553Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "UploadController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\UploadController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\UploadController.cs",
@@ -728,12 +718,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\UploadController.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAgwCkAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:20:29.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:20:29.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "LibraryUnitController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\LibraryUnitController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\LibraryUnitController.cs",
@@ -741,12 +730,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\LibraryUnitController.cs",
               "ViewState": "AgIAAMUBAAAAAAAAAAAuwMUBAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:18:37.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:18:37.816Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "TitleController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\TitleController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\TitleController.cs",
@@ -754,12 +742,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\TitleController.cs",
               "ViewState": "AgIAAO8AAAAAAAAAAAAwwPoAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:19:45.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:19:45.276Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "NoInternet.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\Shared\\NoInternet.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\Shared\\NoInternet.cshtml",
@@ -767,12 +754,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\NoInternet.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-08T05:14:04.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-08T05:14:04.098Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "Upload.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\Upload\\Upload.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\Upload\\Upload.cshtml",
@@ -780,12 +766,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Upload\\Upload.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:16:20.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:16:20.064Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\UserController.cs",
@@ -793,12 +778,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\UserController.cs",
               "ViewState": "AgIAADIAAAAAAAAAAADgvzgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T10:14:22.269Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:14:22.269Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "Service.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Services\\Service.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Services\\Service.cs",
@@ -806,12 +790,11 @@
               "RelativeToolTip": "LibrarySystem.Services\\Service.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAA4wDcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:31:26.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:31:26.39Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Repository.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Data\\Repository\\Repository.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Data\\Repository\\Repository.cs",
@@ -819,12 +802,11 @@
               "RelativeToolTip": "LibrarySystem.Data\\Repository\\Repository.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAawCEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:28:13.383Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:28:13.383Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "CloudinaryService.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Services\\CloudinaryService.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Services\\CloudinaryService.cs",
@@ -832,12 +814,11 @@
               "RelativeToolTip": "LibrarySystem.Services\\CloudinaryService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:31:11.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:31:11.843Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "SectionController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\SectionController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\SectionController.cs",
@@ -845,12 +826,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\SectionController.cs",
               "ViewState": "AgIAAHQAAAAAAAAAAAASwIMAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:19:37.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:19:37.507Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "UpdateLibraryUnit.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\LibraryUnit\\UpdateLibraryUnit.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\LibraryUnit\\UpdateLibraryUnit.cshtml",
@@ -858,12 +838,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\UpdateLibraryUnit.cshtml",
               "ViewState": "AgIAALEBAAAAAAAAAAAUwMwBAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:19:20.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:19:20.754Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "LibraryUnitUpdateViewModel.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Models\\LibraryUnitUpdateViewModel.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Models\\LibraryUnitUpdateViewModel.cs",
@@ -871,8 +850,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\LibraryUnitUpdateViewModel.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAIwCwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T06:39:38.533Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-06T06:39:38.533Z"
             },
             {
               "$type": "Document",
@@ -884,12 +862,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\UserViewModel.cs",
               "ViewState": "AgIAABkAAAAAAAAAAADwvyMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T07:15:27.927Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:15:27.927Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "NotFound.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\Shared\\NotFound.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\Shared\\NotFound.cshtml",
@@ -897,12 +874,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\NotFound.cshtml",
               "ViewState": "AgIAABgAAAAAAAAAAAAYwEAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-07T08:44:15.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T08:44:15.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "SavedLibraryUnitViewModel.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Models\\SavedLibraryUnitViewModel.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Models\\SavedLibraryUnitViewModel.cs",
@@ -910,12 +886,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\SavedLibraryUnitViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAA+wAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T11:35:00.325Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-05T11:35:00.325Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "AddLibraryUnit.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\LibraryUnit\\AddLibraryUnit.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\LibraryUnit\\AddLibraryUnit.cshtml",
@@ -923,25 +898,24 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\AddLibraryUnit.cshtml",
               "ViewState": "AgIAAGMAAAAAAAAAAIBJwHQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-27T06:20:09.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T06:20:09.024Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 1,
               "Title": "ValidateImageAtribute.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Validation\\ValidateImageAtribute.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Validation\\ValidateImageAtribute.cs",
               "ToolTip": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Validation\\ValidateImageAtribute.cs",
               "RelativeToolTip": "LibrarySystem.Validation\\ValidateImageAtribute.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAIBJwBwAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-07T16:06:57.629Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "LibraryUnitViewModel.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Models\\LibraryUnitViewModel.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Models\\LibraryUnitViewModel.cs",
@@ -949,8 +923,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\LibraryUnitViewModel.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAcwC4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T16:02:59.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T16:02:59.856Z"
             },
             {
               "$type": "Document",
@@ -962,8 +935,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAANMAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:21:15.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:21:15.721Z"
             },
             {
               "$type": "Document",
@@ -975,8 +947,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Librarian\\Dashboard.cshtml",
               "ViewState": "AgIAAFwAAAAAAAAAAIBJwHMAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-27T06:41:09.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T06:41:09.509Z"
             },
             {
               "$type": "Document",
@@ -988,12 +959,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\RegisterViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:20:59.704Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:20:59.704Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Program.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Program.cs",
@@ -1001,8 +971,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Program.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAQwEMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:33:24.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:33:24.705Z"
             },
             {
               "$type": "Document",
@@ -1014,8 +983,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Librarian\\UserHistory.cshtml",
               "ViewState": "AgIAAEoBAAAAAAAAAIBJwEMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-07T10:12:09.745Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T10:12:09.745Z"
             },
             {
               "$type": "Document",
@@ -1027,8 +995,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\UserHistoryViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T06:29:10.094Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T06:29:10.094Z"
             },
             {
               "$type": "Document",
@@ -1040,8 +1007,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\ReaderViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T07:25:47.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T07:25:47.9Z"
             },
             {
               "$type": "Document",
@@ -1053,8 +1019,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\MovementWarningViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T06:25:04.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T06:25:04.194Z"
             },
             {
               "$type": "Document",
@@ -1066,8 +1031,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\MovementViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T09:02:56.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T09:02:56.528Z"
             },
             {
               "$type": "Document",
@@ -1079,8 +1043,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\MovementReturningViewModel.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwA8AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T07:46:26.37Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T07:46:26.37Z"
             },
             {
               "$type": "Document",
@@ -1092,8 +1055,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\LogInViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:20:53.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:20:53.034Z"
             },
             {
               "$type": "Document",
@@ -1105,8 +1067,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\LibrarianViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:35:13.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:35:13.866Z"
             },
             {
               "$type": "Document",
@@ -1118,8 +1079,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T06:20:03.071Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-05T06:20:03.071Z"
             },
             {
               "$type": "Document",
@@ -1131,8 +1091,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\EditUserViewModel.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAYwBEAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T10:18:44.438Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:18:44.438Z"
             },
             {
               "$type": "Document",
@@ -1144,8 +1103,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\EditReaderViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T09:38:48.164Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T09:38:48.164Z"
             },
             {
               "$type": "Document",
@@ -1157,8 +1115,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\EditLibrarianViewModel.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBQAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:33:29.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:33:29.882Z"
             },
             {
               "$type": "Document",
@@ -1170,8 +1127,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\EditAdminViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T06:21:00.384Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T06:21:00.384Z"
             },
             {
               "$type": "Document",
@@ -1183,8 +1139,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\ChangePasswordViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T07:08:37.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T07:08:37.429Z"
             },
             {
               "$type": "Document",
@@ -1196,8 +1151,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Models\\ChangeAdminPasswordViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T06:20:23.637Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T06:20:23.637Z"
             },
             {
               "$type": "Document",
@@ -1209,8 +1163,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\SearchController.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAowCsAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T07:01:49.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T07:01:49.941Z"
             },
             {
               "$type": "Document",
@@ -1222,12 +1175,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\MovementController.cs",
               "ViewState": "AgIAAN0AAAAAAAAAAAAwwAMBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T09:04:19.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T09:04:19.773Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LibrarianController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\LibrarianController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\LibrarianController.cs",
@@ -1235,8 +1187,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\LibrarianController.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAuwBAAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T06:40:00.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T06:40:00.586Z"
             },
             {
               "$type": "Document",
@@ -1248,8 +1199,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\HomeController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:18:35.782Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:18:35.782Z"
             },
             {
               "$type": "Document",
@@ -1261,18 +1211,17 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\AuthorController.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAswHMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:18:29.548Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:18:29.548Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "AdminController.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Controllers\\AdminController.cs",
               "ToolTip": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Controllers\\AdminController.cs",
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAMcBAAAAAAAAAAAnwM4BAABtAAAAAAAAAA==",
+              "ViewState": "AgIAACgBAAAAAAAAAAAtwDkBAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-27T06:13:55.328Z",
               "EditorCaption": ""
@@ -1287,8 +1236,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Controllers\\AccountController.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwFoAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:16:18.499Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:16:18.499Z"
             },
             {
               "$type": "Document",
@@ -1300,8 +1248,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Account\\AccessDenied.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T07:27:16.014Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:27:16.014Z"
             },
             {
               "$type": "Document",
@@ -1313,8 +1260,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAJoAAAAAAAAAAAAUwKwAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-26T09:06:13.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T09:06:13.339Z"
             },
             {
               "$type": "Document",
@@ -1326,8 +1272,7 @@
               "RelativeToolTip": "LibrarySystem.Utility\\SD.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:32:07.614Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:32:07.614Z"
             },
             {
               "$type": "Document",
@@ -1339,8 +1284,7 @@
               "RelativeToolTip": "LibrarySystem.Utility\\CloudinarySettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:32:01.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:32:01.121Z"
             },
             {
               "$type": "Document",
@@ -1352,8 +1296,7 @@
               "RelativeToolTip": "LibrarySystem.Shared\\SearchResults.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAA+wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T17:23:46.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T17:23:46.773Z"
             },
             {
               "$type": "Document",
@@ -1365,12 +1308,11 @@
               "RelativeToolTip": "LibrarySystem.Shared\\ExtendedSearchViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAA+wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T17:28:15.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T17:28:15.889Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "SectionService.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Services\\SectionService.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Services\\SectionService.cs",
@@ -1378,12 +1320,11 @@
               "RelativeToolTip": "LibrarySystem.Services\\SectionService.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAiwEAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:31:20.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:31:20.736Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "SearchService.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Services\\SearchService.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Services\\SearchService.cs",
@@ -1391,12 +1332,11 @@
               "RelativeToolTip": "LibrarySystem.Services\\SearchService.cs",
               "ViewState": "AgIAAFcAAAAAAAAAAAAQwH8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T05:57:31.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T05:57:31.142Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "AuthorService.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Services\\AuthorService.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Services\\AuthorService.cs",
@@ -1404,8 +1344,7 @@
               "RelativeToolTip": "LibrarySystem.Services\\AuthorService.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAmwDgAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:30:03.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:30:03.998Z"
             },
             {
               "$type": "Document",
@@ -1417,8 +1356,7 @@
               "RelativeToolTip": "LibrarySystem.Services\\IService\\IService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:29:54.934Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:29:54.934Z"
             },
             {
               "$type": "Document",
@@ -1430,8 +1368,7 @@
               "RelativeToolTip": "LibrarySystem.Services\\IService\\ISectionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:29:50.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:29:50.085Z"
             },
             {
               "$type": "Document",
@@ -1443,8 +1380,7 @@
               "RelativeToolTip": "LibrarySystem.Services\\IService\\ISearchService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T05:39:43.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T05:39:43.825Z"
             },
             {
               "$type": "Document",
@@ -1456,8 +1392,7 @@
               "RelativeToolTip": "LibrarySystem.Services\\IService\\IAuthorService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:29:43.318Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:29:43.318Z"
             },
             {
               "$type": "Document",
@@ -1469,8 +1404,7 @@
               "RelativeToolTip": "LibrarySystem.Models\\User.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:13:13.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:13:13.389Z"
             },
             {
               "$type": "Document",
@@ -1482,8 +1416,7 @@
               "RelativeToolTip": "LibrarySystem.Models\\TitleAuthor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:13:09.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:13:09.288Z"
             },
             {
               "$type": "Document",
@@ -1495,12 +1428,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\Title.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:13:06.113Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:13:06.113Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Section.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\Section.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\Section.cs",
@@ -1508,12 +1440,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\Section.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:13:03.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:13:03.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ScrappedUnit.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\ScrappedUnit.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\ScrappedUnit.cs",
@@ -1521,12 +1452,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\ScrappedUnit.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:12:57.285Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:12:57.285Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "MovementOfLibraryUnit.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\MovementOfLibraryUnit.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\MovementOfLibraryUnit.cs",
@@ -1534,12 +1464,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\MovementOfLibraryUnit.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAA5wBYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T08:08:28.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T08:08:28.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "LibraryUnit.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\LibraryUnit.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\LibraryUnit.cs",
@@ -1547,12 +1476,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\LibraryUnit.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAwwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T06:21:10.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T06:21:10.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Image.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\Image.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\Image.cs",
@@ -1560,12 +1488,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\Image.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:28:49.32Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:28:49.32Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Author.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Models\\Author.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Models\\Author.cs",
@@ -1573,12 +1500,11 @@
               "RelativeToolTip": "LibrarySystem.Models\\Author.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T08:58:10.933Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T08:58:10.933Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "LibrarySystem.Data\\ApplicationDbContext.cs",
@@ -1586,8 +1512,7 @@
               "RelativeToolTip": "LibrarySystem.Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-24T06:08:46.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:08:46.974Z"
             },
             {
               "$type": "Document",
@@ -1599,8 +1524,7 @@
               "RelativeToolTip": "LibrarySystem.Data\\Repository\\IRepository.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAzwBAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T07:28:06.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T07:28:06.696Z"
             },
             {
               "$type": "Document",
@@ -1612,8 +1536,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\EditAdmin.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-28T07:25:19.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:25:19.915Z"
             },
             {
               "$type": "Document",
@@ -1625,8 +1548,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\LibrarianDetails.cshtml",
               "ViewState": "AgIAACoAAAAAAAAAAIBJwDkAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T06:39:53.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:39:53.713Z"
             },
             {
               "$type": "Document",
@@ -1638,8 +1560,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Movement\\RegisterGiving.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-19T09:09:57.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T09:09:57.505Z"
             },
             {
               "$type": "Document",
@@ -1651,8 +1572,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ManageReaders.cshtml",
               "ViewState": "AgIAAFcAAAAAAAAAAIBJwGMAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-10T06:25:53.63Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T06:25:53.63Z"
             },
             {
               "$type": "Document",
@@ -1664,8 +1584,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Movement\\RegisterReturning.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-24T06:42:58.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T06:42:58.352Z"
             },
             {
               "$type": "Document",
@@ -1677,8 +1596,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ManageLibrarians.cshtml",
               "ViewState": "AgIAAF0AAAAAAAAAAIBJwG4AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-10T06:27:18.724Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T06:27:18.724Z"
             },
             {
               "$type": "Document",
@@ -1690,8 +1608,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ManageUsers.cshtml",
               "ViewState": "AgIAAB4AAAAAAAAAAIBJwDkAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-05T06:32:54.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-05T06:32:54.675Z"
             },
             {
               "$type": "Document",
@@ -1703,8 +1620,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Librarian\\AllReaders.cshtml",
               "ViewState": "AgIAABUAAAAAAAAAAIBJwC8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-07T10:16:30.609Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T10:16:30.609Z"
             },
             {
               "$type": "Document",
@@ -1716,8 +1632,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\NoTitlesWarning.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:17:49.113Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:17:49.113Z"
             },
             {
               "$type": "Document",
@@ -1729,8 +1644,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\User\\UserHistory.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T06:44:46.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T06:44:46.351Z"
             },
             {
               "$type": "Document",
@@ -1742,8 +1656,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\ConfirmScrape.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIsAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:29:10.801Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:29:10.801Z"
             },
             {
               "$type": "Document",
@@ -1755,8 +1668,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\ScrappedWarning.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAIBJwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-07T08:25:54.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T08:25:54.142Z"
             },
             {
               "$type": "Document",
@@ -1768,8 +1680,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\ScrappedLibraryUnits.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-17T07:10:21.891Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T07:10:21.891Z"
             },
             {
               "$type": "Document",
@@ -1781,8 +1692,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\SavedUnits.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-05T11:43:34.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-05T11:43:34.315Z"
             },
             {
               "$type": "Document",
@@ -1794,8 +1704,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Movement\\SavedWarning.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-07T05:56:55.867Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T05:56:55.867Z"
             },
             {
               "$type": "Document",
@@ -1807,8 +1716,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\NoAuthorsWarning.cshtml",
               "ViewState": "AgIAADMAAAAAAAAAAADwv0cAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:12:01.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:12:01.179Z"
             },
             {
               "$type": "Document",
@@ -1820,8 +1728,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Movement\\Register.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-24T06:41:42.356Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T06:41:42.356Z"
             },
             {
               "$type": "Document",
@@ -1833,8 +1740,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\User\\Dashboard.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAIBJwDgAAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T10:30:50.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:30:50.259Z"
             },
             {
               "$type": "Document",
@@ -1846,8 +1752,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\AllLibraryUnits.cshtml",
               "ViewState": "AgIAADwAAAAAAAAAAAAUwDQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:29:06.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:29:06.274Z"
             },
             {
               "$type": "Document",
@@ -1859,8 +1764,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Section\\AllSections.cshtml",
               "ViewState": "AgIAABgAAAAAAAAAAIBJwCkAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-14T09:28:07.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T09:28:07.737Z"
             },
             {
               "$type": "Document",
@@ -1872,8 +1776,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Search\\Results.cshtml",
               "ViewState": "AgIAAEUAAAAAAAAAAIBJwF0AAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-27T07:03:35.393Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T07:03:35.393Z"
             },
             {
               "$type": "Document",
@@ -1885,8 +1788,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Section\\ConfirmDelete.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAAAUwCwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:54:21.323Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:54:21.323Z"
             },
             {
               "$type": "Document",
@@ -1898,8 +1800,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Search\\ExtendedSearch.cshtml",
               "ViewState": "AgIAAD8AAAAAAAAAAIBJwFAAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-06T06:22:57.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-06T06:22:57.2Z"
             },
             {
               "$type": "Document",
@@ -1911,8 +1812,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Author\\AllAuthors.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAIBJwDcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-14T09:08:08.774Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T09:08:08.774Z"
             },
             {
               "$type": "Document",
@@ -1924,8 +1824,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Author\\AllAuthorsList.cshtml",
               "ViewState": "AgIAABIAAAAAAAAAAIBJwCMAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-06T11:22:11.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-06T11:22:11.957Z"
             },
             {
               "$type": "Document",
@@ -1937,8 +1836,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\AllTitles.cshtml",
               "ViewState": "AgIAABMAAAAAAAAAAAAUwCcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-14T09:19:24.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T09:19:24.822Z"
             },
             {
               "$type": "Document",
@@ -1950,8 +1848,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Section\\AllSectionsList.cshtml",
               "ViewState": "AgIAAC8AAAAAAAAAAAAwwBsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-06T12:23:51.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-06T12:23:51.255Z"
             },
             {
               "$type": "Document",
@@ -1963,8 +1860,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAABsAAAAAAAAAAIBJwCkAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:10:26.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:10:26.606Z"
             },
             {
               "$type": "Document",
@@ -1976,8 +1872,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\LibraryUnit\\Details.cshtml",
               "ViewState": "AgIAAHoAAAAAAAAAAAAUwIgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:29:15.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:29:15.436Z"
             },
             {
               "$type": "Document",
@@ -1989,8 +1884,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\User\\ChangeUserPassword.cshtml",
               "ViewState": "AgIAAHkAAAAAAAAAAAAUwIAAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T10:24:41.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:24:41.693Z"
             },
             {
               "$type": "Document",
@@ -2002,8 +1896,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\User\\EditUser.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T10:18:01.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:18:01.79Z"
             },
             {
               "$type": "Document",
@@ -2015,8 +1908,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Account\\Register.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:25:47.891Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:25:47.891Z"
             },
             {
               "$type": "Document",
@@ -2028,8 +1920,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\EditReader.cshtml",
               "ViewState": "AgIAAF0AAAAAAAAAAIBJwGgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-12T09:32:49.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T09:32:49.889Z"
             },
             {
               "$type": "Document",
@@ -2041,8 +1932,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\EditLibrarian.cshtml",
               "ViewState": "AgIAAF4AAAAAAAAAAAAUwH0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T06:38:50.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:38:50.642Z"
             },
             {
               "$type": "Document",
@@ -2054,8 +1944,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\ConfirmDelete.cshtml",
               "ViewState": "AgIAADUAAAAAAAAAAAAUwFQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:32:41.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:32:41.172Z"
             },
             {
               "$type": "Document",
@@ -2067,8 +1956,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Search\\ExtendedSearchResults.cshtml",
               "ViewState": "AgIAAJYAAAAAAAAAAIBJwKwAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-06T06:22:14.37Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-06T06:22:14.37Z"
             },
             {
               "$type": "Document",
@@ -2080,8 +1968,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Search\\ExtendedSearchScrapped.cshtml",
               "ViewState": "AgIAAM8AAAAAAAAAAIBJwBIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-19T08:01:28.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T08:01:28.944Z"
             },
             {
               "$type": "Document",
@@ -2093,8 +1980,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\Details.cshtml",
               "ViewState": "AgIAAAwAAAAAAAAAAIBJwBoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:32:46.487Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:32:46.487Z"
             },
             {
               "$type": "Document",
@@ -2106,8 +1992,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\User\\UserInfo.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-26T10:16:02.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:16:02.545Z"
             },
             {
               "$type": "Document",
@@ -2119,8 +2004,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\_ViewImports.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:21:48.366Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:21:48.366Z"
             },
             {
               "$type": "Document",
@@ -2132,8 +2016,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:21:51.419Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:21:51.419Z"
             },
             {
               "$type": "Document",
@@ -2145,8 +2028,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\UpdateTitle.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:13:22.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:13:22.26Z"
             },
             {
               "$type": "Document",
@@ -2158,8 +2040,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\NoSectionsWarning.cshtml",
               "ViewState": "AgIAAAUAAAAAAAAAAAAIwEQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T11:12:43.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T11:12:43.027Z"
             },
             {
               "$type": "Document",
@@ -2171,8 +2052,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\_LoginPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:30:02.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:30:02.257Z"
             },
             {
               "$type": "Document",
@@ -2184,8 +2064,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:31:47.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:31:47.68Z"
             },
             {
               "$type": "Document",
@@ -2197,8 +2076,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Title\\AddTitle.cshtml",
               "ViewState": "AgIAAKEAAAAAAAAAAAAIwLMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:31:56.128Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:31:56.128Z"
             },
             {
               "$type": "Document",
@@ -2210,8 +2088,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Shared\\Error.cshtml",
               "ViewState": "AgIAAAwAAAAAAAAAAIBJwBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:31:50.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:31:50.493Z"
             },
             {
               "$type": "Document",
@@ -2223,8 +2100,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Section\\UpdateSection.cshtml",
               "ViewState": "AgIAAGwAAAAAAAAAAADwv3EAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:55:25.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:55:25.215Z"
             },
             {
               "$type": "Document",
@@ -2236,8 +2112,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Section\\AddSection.cshtml",
               "ViewState": "AgIAAEkAAAAAAAAAAAAiwF0AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:51:55.776Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:51:55.776Z"
             },
             {
               "$type": "Document",
@@ -2249,8 +2124,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Search\\Search.cshtml",
               "ViewState": "AgIAAFUAAAAAAAAAAADwv0cAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-27T07:02:51.749Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T07:02:51.749Z"
             },
             {
               "$type": "Document",
@@ -2262,8 +2136,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Author\\UpdateAuthor.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:28:51.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:28:51.886Z"
             },
             {
               "$type": "Document",
@@ -2275,8 +2148,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Author\\ConfirmDelete.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAADwvy8AAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-24T06:28:49.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-24T06:28:49.576Z"
             },
             {
               "$type": "Document",
@@ -2288,8 +2160,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Author\\AddAuthor.cshtml",
               "ViewState": "AgIAAA8AAAAAAAAAAIBJwCAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-01T10:06:12.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T10:06:12.619Z"
             },
             {
               "$type": "Document",
@@ -2301,8 +2172,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ReaderDetails.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-12T08:15:39.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T08:15:39.539Z"
             },
             {
               "$type": "Document",
@@ -2314,8 +2184,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\AdminInfo.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-28T07:20:03.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:20:03.322Z"
             },
             {
               "$type": "Document",
@@ -2327,8 +2196,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\Dashboard.cshtml",
               "ViewState": "AgIAACwAAAAAAAAAAAAiwD0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-27T06:18:03.077Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T06:18:03.077Z"
             },
             {
               "$type": "Document",
@@ -2340,8 +2208,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\CreateReader.cshtml",
               "ViewState": "AgIAAC4AAAAAAAAAAADwvzkAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-10T07:24:45.162Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T07:24:45.162Z"
             },
             {
               "$type": "Document",
@@ -2353,8 +2220,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\CreateLibrarian.cshtml",
               "ViewState": "AgIAADQAAAAAAAAAAADwvzkAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T06:37:58.95Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:37:58.95Z"
             },
             {
               "$type": "Document",
@@ -2366,12 +2232,11 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ConfirmDeleteReader.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-12T10:57:32.605Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T10:57:32.605Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ConfirmDeleteLibrarian.cshtml",
               "DocumentMoniker": "D:\\LibrarySystem-DiplomenProekt\\LibrarySystem\\LibrarySystem.Web\\Views\\Admin\\ConfirmDeleteLibrarian.cshtml",
               "RelativeDocumentMoniker": "LibrarySystem.Web\\Views\\Admin\\ConfirmDeleteLibrarian.cshtml",
@@ -2379,8 +2244,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ConfirmDeleteLibrarian.cshtml",
               "ViewState": "AgIAACcAAAAAAAAAAAAAAEsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T06:36:43.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:36:43.09Z"
             },
             {
               "$type": "Document",
@@ -2392,8 +2256,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ChangeReaderPassword.cshtml",
               "ViewState": "AgIAAFoAAAAAAAAAAAAiwGAAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T07:08:00.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T07:08:00.176Z"
             },
             {
               "$type": "Document",
@@ -2405,8 +2268,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ChangeLibrarianPassword.cshtml",
               "ViewState": "AgIAAKUBAAAAAAAAAADwv8sBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T07:12:12.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T07:12:12.691Z"
             },
             {
               "$type": "Document",
@@ -2418,8 +2280,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\Views\\Admin\\ChangeAdminPassword.cshtml",
               "ViewState": "AgIAADMAAAAAAAAAAIBJwD0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-13T08:26:34.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T08:26:34.613Z"
             },
             {
               "$type": "Document",
@@ -2431,8 +2292,7 @@
               "RelativeToolTip": "LibrarySystem.Web\\wwwroot\\css\\site.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-27T06:25:24.261Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T06:25:24.261Z"
             },
             {
               "$type": "Document",

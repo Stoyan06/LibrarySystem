@@ -311,7 +311,7 @@ public class AdminController : Controller
         {
             User user = await _userService.GetByIdAsync(userId);
             IdentityUser identityUser = await _userManager.FindByIdAsync(user.IdentityUserId);
-            var savedByUser = _libraryUnitService.GetWhere(x => x.SavedByReaderId == userId);
+            var savedByUser = _libraryUnitService.GetWhere(x => x.SavedByReaderId == userId).ToList();
             foreach (LibraryUnit unit in savedByUser)
             {
                 unit.IsSavedByUser = false;
