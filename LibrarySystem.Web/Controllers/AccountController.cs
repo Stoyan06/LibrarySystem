@@ -84,6 +84,10 @@ public class AccountController : Controller
                 ModelState.AddModelError("", error.Description);
             }
         }
+        else
+        {
+            return View(model);
+        }
 
         var existingUser = await _userManager.FindByEmailAsync(model.Email);
         if (existingUser != null)
